@@ -20,7 +20,7 @@ module.exports = {
   rules: {
     semi:["error","never"],
     "max-len": ["warn", { code:120}],
-    "quotes": ["error, "double"],
-   "react/function-component-definition":"off"
+    "quotes": ["error", "double"],
+    "react/function-component-definition":"off"
   },
 };
