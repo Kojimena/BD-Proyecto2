@@ -40,3 +40,34 @@
 .read-the-docs {
   color: #888;
 }
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #03045E;
+}
+
+.nav-item {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background-color: #555;
+}
