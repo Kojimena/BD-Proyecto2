@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState} from "react"
 import './App.css';
 import { 
   Redirect,
@@ -7,25 +7,33 @@ import {
   Route,
   Link 
   } from "react-router-dom";
-
+import UserLogin from "./components/Login/UserLogin";
+import UserSignIn from "./components/SignIn/SignIn"
 
 function App() {
 
-    const [login, setLogin] = useState(true)
+    const [login, setLogin] = useState('Login')
 
     const logged = () => {
       // Aquí deberías verificar si las credenciales del usuario son correctas
       // y establecer el estado de autenticación en consecuencia
-      setLogin(true);
+      setLogin('Navigation');
     };
 
     const logout = () => {
 
       // Aquí deberías hacer el logout del usuario
-      setLogin(false);
+      setLogin('Login');
     };
-
-    const redirectPath = login ? "/navigation" : "/login";
+    
+    const redirectPath =() => {
+      switch(login){
+        case 'Login': return "/login";
+        case 'SignIn': return "/signin";
+        case 'Navigation': return "/navigation";
+        default: return "/";
+      }
+    }
 
     return(
       <Router>
@@ -37,6 +45,9 @@ function App() {
             <Route exact path="/navigation">
               <Navigation />
             </Route>
+            <Route exact path ="/signin">
+              <SignIn  setLogin={setLogin}/>
+            </Route>
             <Route path="/">
               <Redirect to={redirectPath} />
             </Route>
@@ -46,8 +57,21 @@ function App() {
     )
 }
 
+function SignIn( {setLogin}) {
+  console.log("Hola")
+  setLogin('SignIn')
+  return (
+    <Link to="/signin">
+      <UserSignIn  />
+    </Link>
+  )
+}
+
 function Login(){
-    return <h2>Login</h2>
+    return (
+      <UserLogin SignIn={SignIn}/>
+    )
+            
 }
 
 function Home() {
