@@ -3,7 +3,6 @@ html{
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .nav-menu {
@@ -35,4 +34,8 @@ html{
 
 .nav-link:hover {
   background-color: #555;
+}
+
+.container-navigation{
+  align-self: flex-start;
 }

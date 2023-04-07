@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState,useEffect} from "react"
 import './App.css';
 import { 
   Redirect,
@@ -9,16 +9,31 @@ import {
   } from "react-router-dom";
 import UserLogin from "./components/Login/UserLogin";
 import UserSignIn from "./components/SignIn/SignIn"
+import Account from "./components/Account/Account";
+import Inventory from "./components/Inventory/Inventory";
 
 function App() {
 
     const [login, setLogin] = useState('Login')
+    const [currentPath, setCurrentPath] = useState("/login");
 
-    const logged = () => {
-      // Aquí deberías verificar si las credenciales del usuario son correctas
-      // y establecer el estado de autenticación en consecuencia
-      setLogin('Navigation');
-    };
+    useEffect(() => {
+      const redirectPath = () => {
+        switch (login) {
+          case "Login":
+            return "/login";
+          case "SignIn":
+            return "/signin";
+          case "Navigation":
+            return "/navigation";
+
+          default:
+            return "/";
+        }
+      };
+  
+      setCurrentPath(redirectPath());
+    }, [login]);
 
     const logout = () => {
 
@@ -26,21 +41,13 @@ function App() {
       setLogin('Login');
     };
     
-    const redirectPath =() => {
-      switch(login){
-        case 'Login': return "/login";
-        case 'SignIn': return "/signin";
-        case 'Navigation': return "/navigation";
-        default: return "/";
-      }
-    }
 
     return(
       <Router>
         <div> 
           <Switch>
             <Route exact path="/login">
-              <Login />
+              <Login setLogin={setLogin}/>
             </Route>
             <Route exact path="/navigation">
               <Navigation />
@@ -49,7 +56,7 @@ function App() {
               <SignIn  setLogin={setLogin}/>
             </Route>
             <Route path="/">
-              <Redirect to={redirectPath} />
+              <Redirect to={currentPath} />
             </Route>
           </Switch>
         </div>
@@ -61,25 +68,24 @@ function SignIn( {setLogin}) {
   console.log("Hola")
   setLogin('SignIn')
   return (
-    <Link to="/signin">
       <UserSignIn  />
-    </Link>
+
   )
 }
 
-function Login(){
+function Login({setLogin}){
     return (
-      <UserLogin SignIn={SignIn}/>
+      <UserLogin setLogin={setLogin}/>
     )
             
 }
 
 function Home() {
-  return <h2>INFO USER</h2>;
+  return  <Account />
 }
 
 function About() {
-  return <h2>INVENTORY</h2>;
+  return <Inventory />
 }
 
 function Users() {
@@ -90,41 +96,43 @@ function Users() {
 
 function Navigation(){
   return (
-    <Router>
-      <div>
-        <nav>
-          <ul className="nav-menu">
-            <li className="nav-item">
-              <Link to="/" className="nav-link">Account</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/about" className="nav-link">Search inventory</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/users" className="nav-link">Search record</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/login" className="nav-link">Log out</Link>
-            </li>
-          </ul>
-        </nav>
-  
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-        </Switch>
+    <div className="container-navigation">
+      <Router>
+        <div>
+          <nav>
+            <ul className="nav-menu">
+              <li className="nav-item">
+                <Link to="/" className="nav-link">Account</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/about" className="nav-link">Search inventory</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/users" className="nav-link">Search record</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link">Log out</Link>
+              </li>
+            </ul>
+          </nav>
+    
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+          </Switch>
+        </div>
+        </Router>
       </div>
-    </Router>
   )
 }
 
