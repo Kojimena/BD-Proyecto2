@@ -3,6 +3,8 @@
   text-align: center;
   box-sizing: border-box;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .logo {
@@ -133,4 +135,8 @@ li:hover > ul {
 
 .display2{
   right: 300px; 
+}
+
+.display0{
+  right: 460px;
 }

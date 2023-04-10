@@ -1,0 +1,7 @@
+.binnacle-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly ;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}

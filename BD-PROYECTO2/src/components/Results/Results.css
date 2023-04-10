@@ -1,0 +1,41 @@
+.results-header-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 20px;
+    font-weight: bold;
+    align-self: flex-start;
+    border-radius: 12px;
+
+}
+
+.button-results{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 200px;
+    margin-bottom: 20px;
+    background-color: blue;
+    padding: 20px;
+    font-weight: bold;
+    align-self: flex-start;
+    border-radius: 12px;}
+
+.results-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+}
+
+.results-display{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color : black;
+}

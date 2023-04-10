@@ -14,6 +14,8 @@ import Inventory from "./components/Inventory/Inventory";
 import AddProduct from "./components/AddProduct/AddProduct";
 import Record from "./components/Record/Record";
 import AddRecord from "./components/AddRecord/AddRecord";
+import BinnacleRegister from "./components/Binnacle/Binnacle";
+import ResultsQuerys from "./components/Results/Results";
 
 function App() {
 
@@ -102,11 +104,11 @@ function Addrecord(){
 }
 
 function Binnacle(){
-  return <h2>BINNACLE</h2>
+  return <BinnacleRegister />
 }
 
 function Results(){
-  return <h2>RESULTS</h2>
+  return <ResultsQuerys />
 }
 
 
@@ -117,8 +119,10 @@ function Navigation(){
       <Router>
           <nav>
             <ul className="nav-menu">
-              <li className="nav-item">
-                <Link to="/" className="nav-link">Account</Link>
+              <li className="nav-item"> Users
+                <ul className="display0">
+                  <li> <Link to="/" className="nav-link">My Account</Link> </li>
+                </ul>
               </li>
               <li className="nav-item"> Products 
                 <ul className="display1">

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './Record.css'
 import PersonRecord from '../PersonRecord/PersonRecord'
 
 const Record = () => (
