@@ -4,29 +4,33 @@ import "./Product.css"
 const Product = () => (
     <div className="product-container">
         <div className="product-info">
-            <h1 className="product-title">Nombre del producto</h1>
-            <label className="label-inventory">Stock</label>
-            <input
-            type="text"
-            className="search-input"
-            value="25"
-            readOnly
-            />
-            <label className="label-inventory">Amount</label>
-            <input
-            type="text"
-            className="search-input"
-            readOnly
-            />
-            <label className="label-inventory">Due date</label>
-            <input
-            type="text"
-            className="search-input"
-            readOnly
-            />
-            
-
-            
+            <div>
+                <label className="label-product">Product</label>
+                <input
+                type="text"
+                className="name-input"
+                value="Paracetamol"
+                readOnly
+                />
+            </div>
+            <div>
+                <label className="label-product">Amount</label>
+                <input
+                type="text"
+                className="amount-input"
+                value="25%"
+                readOnly
+                />
+            </div>
+            <div>
+                <label className="label-product">Due date</label>
+                <input
+                type="text"
+                className="date-input"
+                value="03-09-2005"
+                readOnly
+                /> 
+            </div> 
         </div>
     </div>
 )

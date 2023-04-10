@@ -11,6 +11,9 @@ import UserLogin from "./components/Login/UserLogin";
 import UserSignIn from "./components/SignIn/SignIn"
 import Account from "./components/Account/Account";
 import Inventory from "./components/Inventory/Inventory";
+import AddProduct from "./components/AddProduct/AddProduct";
+import Record from "./components/Record/Record";
+import AddRecord from "./components/AddRecord/AddRecord";
 
 function App() {
 
@@ -44,7 +47,6 @@ function App() {
 
     return(
       <Router>
-        <div> 
           <Switch>
             <Route exact path="/login">
               <Login setLogin={setLogin}/>
@@ -59,7 +61,6 @@ function App() {
               <Redirect to={currentPath} />
             </Route>
           </Switch>
-        </div>
       </Router>
     )
 }
@@ -89,50 +90,88 @@ function About() {
 }
 
 function Users() {
-  return <h2>SEARCH RECORD</h2>;
+  return <Record />
 }
+
+function Add() {
+  return <AddProduct />
+}
+
+function Addrecord(){
+  return  <AddRecord />
+}
+
+function Binnacle(){
+  return <h2>BINNACLE</h2>
+}
+
+function Results(){
+  return <h2>RESULTS</h2>
+}
+
 
 
 
 function Navigation(){
   return (
-    <div className="container-navigation">
       <Router>
-        <div>
           <nav>
             <ul className="nav-menu">
               <li className="nav-item">
                 <Link to="/" className="nav-link">Account</Link>
               </li>
-              <li className="nav-item">
-                <Link to="/about" className="nav-link">Search inventory</Link>
+              <li className="nav-item"> Products 
+                <ul className="display1">
+                  <li> <Link to="/about" className="nav-link">Search inventory</Link> </li>
+                  <li><Link to="/add" className="nav-link">Add product</Link></li>
+                </ul>
+              </li>
+              <li className="nav-item"> Records
+                <ul className="display2">
+                  <li><Link to="/users" className="nav-link">Search record</Link> </li>
+                  <li><Link to="/addrecord" className="nav-link">Add record</Link></li>
+                </ul>
               </li>
               <li className="nav-item">
-                <Link to="/users" className="nav-link">Search record</Link>
+                <Link to="/binnacle" className="nav-link">Binnacle</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/results" className="nav-link">Results</Link>
               </li>
               <li className="nav-item">
                 <Link to="/login" className="nav-link">Log out</Link>
               </li>
             </ul>
           </nav>
-    
-          <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/users">
-              <Users />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-          </Switch>
-        </div>
+          <div className="container-navigation">
+            <Switch>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/users">
+                <Users />
+              </Route>
+              <Route path="/add">
+                <Add />
+              </Route>
+              <Route path="/addrecord">
+                <Addrecord />
+              </Route>
+              <Route path="/binnacle">
+                <Binnacle />
+              </Route>
+              <Route path="/results">
+                <Results />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+            </Switch>
+          </div>
         </Router>
-      </div>
   )
 }
 

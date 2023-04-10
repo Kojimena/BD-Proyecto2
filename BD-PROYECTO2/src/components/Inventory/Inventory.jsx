@@ -1,26 +1,27 @@
 import React from "react"
 import "./Inventory.css"
+import Product from "../Product/Product"
 
 const Inventory = () => (
     <div className="inventory-search">
       <div className="search-container">
-        <label className="label-inventory">Search Product</label>
+        <label className="label-inventory">Search health area</label>
         <input
           type="search"
           className="search-input"
-          placeholder="Ingresa el producto a buscar"
+          placeholder="hospital / centro de salud / clínica"
         />
+        <i class="fas fa-search "></i>
       </div>
+      <div className="search-buttons">
+        <button className="button-search">Search by due date</button>
+        <button className="button-search">Search by amount</button>
+      </div>
+
       <div className="inventory-display">
-      <h1> hola</h1>
-      </div>
-      <div className="inventory-add">
-        <input
-          type = "number"
-          className="amount-input"
-          min = "1"
-          />
-        <button className="button-add">Add</button>
+        <Product />
+        <Product />
+        <Product />
       </div>
     </div>
 )

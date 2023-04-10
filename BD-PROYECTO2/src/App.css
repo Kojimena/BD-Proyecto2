@@ -1,9 +1,71 @@
-html{
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
+#root {
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
 }
+
+.logo {
+  height: 14em;
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.main_logo{
+  height: 10em;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+
+
+/* Header */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #353748;
+}
+
+.header-icons {
+  margin-top: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  fill: white;
+}
+
 
 .nav-menu {
   display: flex;
@@ -21,7 +83,7 @@ html{
 
 .nav-item {
   margin: 0;
-  padding: 0;
+  padding: 10px;
 }
 
 .nav-link {
@@ -37,5 +99,38 @@ html{
 }
 
 .container-navigation{
-  align-self: flex-start;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    /* position: initial; */
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+
+nav ul{
+  list-style: none;
+}
+
+li ul{
+  display: none;
+  position: absolute;   
+}
+
+li:hover > ul {
+  display: flex;
+  flex-direction: column;
+  background-color: #03045E;
+  padding: 0;
+}
+
+.display1{
+  right: 380px; 
+}
+
+.display2{
+  right: 300px; 
 }
