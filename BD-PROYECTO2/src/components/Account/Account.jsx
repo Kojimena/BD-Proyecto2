@@ -4,7 +4,7 @@ import './Account.css'
 const Account = () => (
         <div className="form-group">
             <form className='form-login'>
-            <h1 className='signin-title'>My Account</h1>
+            <h1 className='signin-title'>Account</h1>
             <label className="label-login">DPI</label>
             <input 
                 type="text"
@@ -53,10 +53,10 @@ const Account = () => (
                 id="area"
                 required
                 className="input-login" />
-            <label className="label-login">Password</label>
+            <label className="label-login">Work History</label>
             <input 
-                type="password"
-                id="password"
+                type="text"
+                id="history"
                 required
                 className="input-login" />  
                 </form>

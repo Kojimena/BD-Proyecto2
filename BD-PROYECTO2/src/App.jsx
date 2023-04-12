@@ -5,7 +5,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link 
+  Link,
+  useHistory
   } from "react-router-dom";
 import UserLogin from "./components/Login/UserLogin";
 import UserSignIn from "./components/SignIn/SignIn"
@@ -16,11 +17,13 @@ import Record from "./components/Record/Record";
 import AddRecord from "./components/AddRecord/AddRecord";
 import BinnacleRegister from "./components/Binnacle/Binnacle";
 import ResultsQuerys from "./components/Results/Results";
+import ListUsers from "./components/AllUsers/AllUsers";
 
 function App() {
 
     const [login, setLogin] = useState('Login')
     const [currentPath, setCurrentPath] = useState("/login");
+    const history = useHistory();
 
     useEffect(() => {
       const redirectPath = () => {
@@ -36,8 +39,8 @@ function App() {
             return "/";
         }
       };
-  
-      setCurrentPath(redirectPath());
+      console.log(login)
+      history.push(redirectPath());
     }, [login]);
 
     const logout = () => {
@@ -48,7 +51,6 @@ function App() {
     
 
     return(
-      <Router>
           <Switch>
             <Route exact path="/login">
               <Login setLogin={setLogin}/>
@@ -63,7 +65,6 @@ function App() {
               <Redirect to={currentPath} />
             </Route>
           </Switch>
-      </Router>
     )
 }
 
@@ -111,7 +112,9 @@ function Results(){
   return <ResultsQuerys />
 }
 
-
+function AllUsers(){
+  return <ListUsers />
+}
 
 
 function Navigation(){
@@ -122,6 +125,7 @@ function Navigation(){
               <li className="nav-item"> Users
                 <ul className="display0">
                   <li> <Link to="/" className="nav-link">My Account</Link> </li>
+                  <li> <Link to="/allusers" className="nav-link">All Users</Link> </li>
                 </ul>
               </li>
               <li className="nav-item"> Products 
@@ -154,6 +158,9 @@ function Navigation(){
               </Route>
               <Route path="/users">
                 <Users />
+              </Route>
+              <Route path="/allusers">
+                <ListUsers />
               </Route>
               <Route path="/add">
                 <Add />

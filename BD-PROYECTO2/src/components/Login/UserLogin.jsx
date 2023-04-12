@@ -33,10 +33,10 @@ const UserLogin = ({setLogin}) => {
         <div className="buttons-container">
           <button className="button-login" onClick={(event) => {
               event.preventDefault();
-              setLogin("SignIn");
+              setLogin("Navigation");
             }}>Log in</button>
           <Link to = "/signin">
-            <button className="button-login" onClick={ setLogin('SignIn') }>Sign in</button>
+            <button className="button-login">Sign in</button>
           </Link>
         </div>
       </form> 
