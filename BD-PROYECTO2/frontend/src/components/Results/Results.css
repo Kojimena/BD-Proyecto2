@@ -39,3 +39,9 @@
     width: 100%;
     color : black;
 }
+
+.results-asistencia{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
