@@ -2,6 +2,7 @@
 
 import express, { json, urlencoded } from 'express';
 import cors from 'cors';
+import SetOrigin from './services/SetOrigin.js';
 const PORT = 2800;
 
 import db from './services/DBConnection.js';
@@ -11,6 +12,7 @@ import HealthUnitRoute from './routes/healthUnit.route.js';
 const app = express()
 
 app.use(cors())
+//app.use(SetOrigin)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

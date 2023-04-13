@@ -8,8 +8,8 @@ import {
   Link,
   useHistory
   } from "react-router-dom";
-import UserLogin from "./components/Login/UserLogin";
-import UserSignIn from "./components/SignIn/SignIn"
+import UserLogin from "./pages/UserLogin/UserLogin";
+import UserSignIn from "./pages/SignIn/SignIn"
 import Account from "./components/Account/Account";
 import Inventory from "./components/Inventory/Inventory";
 import AddProduct from "./components/AddProduct/AddProduct";

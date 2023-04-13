@@ -3,7 +3,7 @@ import sha256 from 'sha256'
 import generateSessionToken from '../services/jwt.js'
 
 const getUsers = (req, res) => {
-  db.query('SELECT * FROM "prueba"', (err, result) => {
+  db.query('SELECT * FROM "usuario"', (err, result) => {
     if (err) throw err
     res.send({ usuarios: result.rows })
   })
@@ -34,12 +34,12 @@ const signUp = ({ body }, res) => {
 }
 
 const logIn = ({ body }, res) => {
-  const { user, password } = body
+  const { dpi, password } = body
 
-  const passwordEncripted = sha256(password.trim())
-  const query = 'SELECT * FROM "user" WHERE (username=$1 OR email=$1) AND "password" = $2;'
+  //const passwordEncripted = sha256(password.trim())
+  const query = 'SELECT * FROM "usuario" WHERE dpi=$1 AND "contrasena" = $2;'
 
-  db.query(query, [user.trim(), passwordEncripted], (err, result) => {
+  db.query(query, [dpi.trim(), password], (err, result) => {
     if (err || result.rows.length === 0) {
       if (result.rows.length === 0) {
         res.status(404).send({ ok: false, error: "No se han encontrado usuarios con las credenciales indicadas" })
@@ -50,11 +50,11 @@ const logIn = ({ body }, res) => {
     }
 
     const userFound = result.rows[0]
-    const token = generateSessionToken(userFound.id)
+    //const token = generateSessionToken(userFound.id)
 
     res.send({
       ok: true,
-      token,
+      //token,
       userFound
     })
     return

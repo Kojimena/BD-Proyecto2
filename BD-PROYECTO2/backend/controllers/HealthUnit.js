@@ -8,7 +8,7 @@ const getHealthUnit = (req, res) => {
 }
 
 const postHealthUnit = (req, res) => {
-  db.query("INSERT INTO unidad_salud VALUES ('Hospital', 'Hospital San Juan de Dios', 'Zona 11')",  (err, [], result) => {
+  db.query("set my.app_user = '3009746710101';INSERT INTO unidad_salud(tipo, nombre, direccion) VALUES ('Clínica', 'Emergencias Juanito', 'Zona 3');",  (err, result) => {
     if (err) {
       res.status(404).send({ok: false, error: err})
     }
@@ -16,6 +16,7 @@ const postHealthUnit = (req, res) => {
     return
   })
 }
+
 
 export {
   getHealthUnit,
