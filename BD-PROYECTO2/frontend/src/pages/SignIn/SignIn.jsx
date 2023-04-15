@@ -1,6 +1,11 @@
 import React from "react"
 import "./SignIn.css"
 
+//Para Sign In teniendo {Dpi, nombre, direccion, telefono, numero de colegiado, especialidad, area de salud (ejemlo hospital el pilar), contraseña}
+  //Teniendo area de salud, se necesita hacer un get de las areas de salud que hay, y verificar si existe dicha area de salud
+  //Teniendo dpi, se necesita hacer un get de los usuarios que hay, para verificar que no se crea un usuario 2 veces
+//Si area de salud existe y no existe el dpi necesitamos hacer un post del usuario y recibir un response si se creo el usuario o no
+
 const SignIn = (  ) => (
   <div className="signin-container">
     <h1 className="signin-title">Sign in</h1>

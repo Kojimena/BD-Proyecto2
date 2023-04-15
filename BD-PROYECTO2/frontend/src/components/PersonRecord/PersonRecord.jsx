@@ -1,6 +1,7 @@
 import React from "react"
 import "./PersonRecord.css"
 
+
 const PersonRecord = () => (
 
     <div className="person-info-add">

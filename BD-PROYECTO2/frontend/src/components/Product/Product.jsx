@@ -1,6 +1,7 @@
 import React from "react"
 import "./Product.css"
 
+
 const Product = () => (
     <div className="product-container">
         <div className="product-info">

@@ -1,6 +1,8 @@
 import React from 'react'
 import './AddProduct.css'
 
+//Teniendo {area de salud, nombre del producto, cantidad, fecha de vencimiento} necesitamos hacer un insert y  {response si se agrego el producto o no}
+
 const AddProduct = () => (
     <div className="product-container-add">
     <h1 className="title-add">Add product</h1>

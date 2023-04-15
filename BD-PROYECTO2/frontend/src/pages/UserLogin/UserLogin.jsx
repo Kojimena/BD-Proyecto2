@@ -18,6 +18,7 @@ const UserLogin = ({setLogin}) => {
   const [ dpiInput, setDpiInput ] = useState('')
   const [ passInput, setPassInput ] = useState('')
 
+  //Teniendo el DPI y la contraseña,necesitamos que nos devuelva un objeto usuario  
   const logIn = async () => {
     const body = {
       dpi: dpiInput,
