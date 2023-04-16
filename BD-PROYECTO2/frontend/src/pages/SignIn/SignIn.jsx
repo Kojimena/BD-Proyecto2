@@ -15,12 +15,8 @@ const SignIn = (  ) => {
     const response = await fetch('http://3.101.148.58/healthcenter')
     const options = await response.json()
     console.log(options[0])
-    options.forEach((element) => {
-      setOpciones((oldOpciones) => {
-        const newOpciones = [...oldOpciones, element]
-        return newOpciones
-      })
-    });
+    setOpciones(() => options)
+
   }
   useEffect(() => {
     getHealthAreas()

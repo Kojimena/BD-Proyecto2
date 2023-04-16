@@ -2,6 +2,8 @@ import React from 'react'
 import './AllUsers.css'
 import Account from '../../components/Account/Account'
 
+//VER ACCOUNT
+
 const AllUsers = () => (
     <div >
         <div className="search-container">
@@ -18,7 +20,7 @@ const AllUsers = () => (
         </div>
 
         <div>
-        <Account />
+        <Account/>
         </div>
   </div>
 )

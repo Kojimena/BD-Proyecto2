@@ -8,16 +8,16 @@ import Product from "../../components/Product/Product"
 //Si se modifica la cantidad, se tiene que hacer un update del producto y recibir un response si se modifico el producto o no
 const Inventory = () => (
     <div className="inventory-search">
-      <div className="search-container">
+      <div className="inventory-search-container">
         <label className="label-inventory">Search health area</label>
         <input
           type="search"
-          className="search-input"
+          className="search-input-inventory"
           placeholder="hospital / centro de salud / clínica"
         />
         <i class="fas fa-search "></i>
       </div>
-      <div className="search-buttons">
+      <div className="search-buttons-inventory">
         <button className="button-search">Search by due date</button>
         <button className="button-search">Search by amount</button>
       </div>

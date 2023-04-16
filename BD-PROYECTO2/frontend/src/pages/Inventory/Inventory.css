@@ -16,14 +16,14 @@
   }
   
   
-  .search-container {
+  .inventory-search-container {
     width: 100%;
     justify-content: center;
     align-items: center;
     grid-area: 2/2/3/3;
   }
 
-.search-buttons{
+.search-buttons-inventory{
     grid-area: 4/2/5/3;
     display: flex;
     justify-content: space-evenly;
@@ -55,7 +55,7 @@
     color: #000;
   }
   
-  .search-input {
+  .search-input-inventory {
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #fffdfd;

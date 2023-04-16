@@ -29,10 +29,12 @@
     padding: 10px;
 }
 
-input{
+input, select{
     background-color: #fff;
     color: #03055e;
     border-radius: 5px;
+    height: 50px;
+    width: 400px;
 }
 
 .button-add {
@@ -47,3 +49,4 @@ input{
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+

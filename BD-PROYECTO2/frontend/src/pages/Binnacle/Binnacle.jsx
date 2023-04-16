@@ -2,6 +2,8 @@ import React from "react"
 import "./Binnacle.css"
 import BinnacleItem from "../../components/BinnacleItem/BinnacleItem"
 
+//Necesitamos un get de todos los datos de la tabla de bitacora en formato json
+
 const Binnacle = () => (
 
     <div className="table-container">
