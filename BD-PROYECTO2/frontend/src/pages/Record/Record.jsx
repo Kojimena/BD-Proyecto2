@@ -2,7 +2,7 @@ import React from 'react'
 import './Record.css'
 import PersonRecord from '../../components/PersonRecord/PersonRecord'
 
-//Teniendo el dpi en el input necesitamos un get para obtener una lista de objetos de registros de ese paciente. 
+//Teniendo el dpi en el input necesitamos un get para obtener una lista json de objetos de registros de ese paciente. 
 
 const Record = () => (
     <div className="inventory-search">

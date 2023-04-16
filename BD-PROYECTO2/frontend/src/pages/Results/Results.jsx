@@ -2,6 +2,10 @@ import React from "react"
 import "./Results.css"
 import { useState } from "react"
 
+//Necesitamos el top 10 enfermedades (nombre) más mortales (verificar status del paciente como fallecido)
+//Necesitamos el top 10 medicos (dpi, nombre, No. Pacientes) con más pacientes
+//Teniendo la unidad de salud, necesitamos la información de los 5 pacientes con mas asistencias (DPI, nombre, No. Asistencias)
+//Necesitamos las 3 unidades de salud (nombre, cantidad de pacientes) que máspacientes atienden
 const Results = () => {
 
     const [showTopasistence, setShowTopasistence] = useState(false);
