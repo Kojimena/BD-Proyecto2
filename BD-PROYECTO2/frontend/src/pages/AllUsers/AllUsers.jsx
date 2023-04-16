@@ -1,6 +1,6 @@
 import React from 'react'
 import './AllUsers.css'
-import Account from "../Account/Account"
+import Account from '../../components/Account/Account'
 
 const AllUsers = () => (
     <div >

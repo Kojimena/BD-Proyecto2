@@ -1,12 +1,33 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import "./SignIn.css"
+
 
 //Para Sign In teniendo {Dpi, nombre, direccion, telefono, numero de colegiado, especialidad, area de salud (ejemlo hospital el pilar), contraseña}
   //Teniendo area de salud, se necesita hacer un get de las areas de salud que hay, y verificar si existe dicha area de salud
   //Teniendo dpi, se necesita hacer un get de los usuarios que hay, para verificar que no se crea un usuario 2 veces
 //Si area de salud existe y no existe el dpi necesitamos hacer un post del usuario y recibir un response si se creo el usuario o no
 
-const SignIn = (  ) => (
+const SignIn = (  ) => {
+
+  const [ opciones, setOpciones ] = useState([])
+
+  const getHealthAreas = async () => {
+    const response = await fetch('http://3.101.148.58/healthcenter')
+    const options = await response.json()
+    console.log(options[0])
+    options.forEach((element) => {
+      setOpciones((oldOpciones) => {
+        const newOpciones = [...oldOpciones, element]
+        return newOpciones
+      })
+    });
+  }
+  useEffect(() => {
+    getHealthAreas()
+  }, [])
+  
+
+  return(
   <div className="signin-container">
     <h1 className="signin-title">Sign in</h1>
     <form className="form-login">
@@ -49,11 +70,17 @@ const SignIn = (  ) => (
           required
           className="input-login" />
       <label className="label-login">Health area</label>
-      <input 
-          type="text"
+      <select 
           id="area"
+          placeholder="Selecciona un área de salud"
           required
-          className="input-login" />
+          className="input-login">
+          {
+            opciones.map((option) => {
+              return <option value={option} key={option}>{option}</option>
+            } )
+          }
+      </select>
       <label className="label-login">Password</label>
       <input 
           type="password"
@@ -65,7 +92,8 @@ const SignIn = (  ) => (
       </div>
     </form> 
   </div>
-)
+  )
+}
 
 
 export default SignIn

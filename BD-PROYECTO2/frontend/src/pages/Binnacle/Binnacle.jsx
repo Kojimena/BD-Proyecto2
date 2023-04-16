@@ -1,6 +1,6 @@
 import React from "react"
 import "./Binnacle.css"
-import BinnacleItem from "./BinnacleItem"
+import BinnacleItem from "../../components/BinnacleItem/BinnacleItem"
 
 const Binnacle = () => (
 

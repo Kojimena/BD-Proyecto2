@@ -10,14 +10,14 @@ import {
   } from "react-router-dom";
 import UserLogin from "./pages/UserLogin/UserLogin";
 import UserSignIn from "./pages/SignIn/SignIn"
-import Account from "./components/Account/Account";
-import Inventory from "./components/Inventory/Inventory";
-import AddProduct from "./components/AddProduct/AddProduct";
-import Record from "./components/Record/Record";
-import AddRecord from "./components/AddRecord/AddRecord";
-import BinnacleRegister from "./components/Binnacle/Binnacle";
-import ResultsQuerys from "./components/Results/Results";
-import ListUsers from "./components/AllUsers/AllUsers";
+import Inventory from "./pages/Inventory/Inventory";
+import AddProduct from "./pages/AddProduct/AddProduct";
+import Record from "./pages/Record/Record";
+import AddRecord from "./pages/AddRecord/AddRecord";
+import BinnacleRegister from "./pages/Binnacle/Binnacle";
+import ResultsQuerys from "./pages/Results/Results";
+import ListUsers from "./pages/AllUsers/AllUsers";
+import MyAccount from "./pages/MyAccount/MyAccount";
 
 function App() {
 
@@ -85,7 +85,7 @@ function Login({setLogin}){
 }
 
 function Home() {
-  return  <Account />
+  return  <MyAccount />
 }
 
 function About() {
@@ -154,7 +154,7 @@ function Navigation(){
           <div className="container-navigation">
             <Switch>
               <Route path="/about">
-                <About />
+                <Inventory />
               </Route>
               <Route path="/users">
                 <Users />

@@ -1,6 +1,6 @@
 import React from "react"
 import "./Inventory.css"
-import Product from "../Product/Product"
+import Product from "../../components/Product/Product"
 
 // Teniendo el area de salud, necesitamos una lista con objetos producto {nombre del producto, cantidad, fecha de vencimiento}
 //Al darle click a search by due date, se ordena la lista por fecha de vencimiento
