@@ -9,7 +9,7 @@ const MyAccount = () => {
 
     return (
         <div className="account">
-            <Account user = {null}/>
+            <p style={{color: 'black'}}>Pendiente: Mostrar datos del usuario loggeado</p>
         </div>
     )
 

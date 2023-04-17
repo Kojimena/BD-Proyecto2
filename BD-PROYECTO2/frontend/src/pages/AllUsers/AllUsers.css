@@ -11,8 +11,8 @@
 }
 
 .search-container {
-  width: 100%;
-  margin-top: 150px;
+  width: 600px;
+  align-self: center;
 }
 
   .form-group {
@@ -37,10 +37,15 @@
     border-radius: 5px;
   }
 
-  .label-login {
+  .label-users {
     color: #000;
-    font-size: 14px;
-    margin-bottom: 5px;
+    font-size: 25px;
+    margin-bottom: 30px;
+    font-weight: bold;
+  }
+
+  .search-buttons{
+    margin-top: 30px;
   }
 
   .input-login{
@@ -60,4 +65,21 @@
   .input-login:last-child{
     height: 200px;
     overflow-y: auto;
+  }
+
+  .doctors-img {
+   position: absolute;
+   right: 5%;
+   bottom:0;
+   z-index: -1;
+   opacity: 0.7;
+  }
+
+  .main-container{
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
   }

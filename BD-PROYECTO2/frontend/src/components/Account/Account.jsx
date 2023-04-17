@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import './Account.css'
+import doctor_standing from '../../assets/doctor_standing.svg'
+import doctor_standing2 from '../../assets/doctor_standing2.svg'
 
 //Para Account teniendo {DPI (parametro del objeto usuario)} necesitamos {Dpi, nombre, direccion, telefono, numero de colegiado, especialidad, area de salud (ejemlo hospital el pilar), work history}
 //Si se modifica {direccion, telefono} necesitamos hacer un update del usuario y recibir un response si se modifico el usuario o no 
 //Si se modifica area de salud, se tiene que modificar el historial de trabajo. Area anterior tiene como fecha final time.now() y area nueva tiene como fecha inicial time.now()
 
-const Account = ( {user} ) => {
+const Account = ( {user, history} ) => {
 
     const [ usuario, setUsuario ] = useState(user)
+    const [ historial, setHistorial ] = useState(history)
     const [ dpi, setDpi ] = useState('')
     const [ nombre, setNombre ] = useState('')
     const [ direccion, setDireccion ] = useState('')
@@ -16,6 +19,13 @@ const Account = ( {user} ) => {
     const [ especialidad, setEspecialidad ] = useState('')
     const [ unidadSalud, setUnidadSalud ] = useState('')
 
+    useEffect(() => {
+        setUsuario(user)
+    }, [user])
+
+    useEffect(() => {
+        setHistorial(history)
+    }, [history])
 
     useEffect(() => {
         console.log('usuario:', usuario)
@@ -26,20 +36,22 @@ const Account = ( {user} ) => {
         setNombre(user.nombre)
         setDireccion(user.direccion)
         setTelefono(user.telefono)
-        setNumColegiado(user.numColegiado)
-        setEspecialidad(user.num_colegiado)
-        setUnidadSalud(user.unidadSalud)
+        setNumColegiado(user.num_colegiado)
+        setEspecialidad(user.especialidad)
+        setUnidadSalud(user.unidad_salud_id)
         }
         
-    }, [])
+    }, [usuario])
     
 
     console.log('Usuario en account: ', usuario)
+    console.log('Historial en account: ', historial)
 
     return(
+        <div className='account-container'>
         <div className="form-group">
             <form className='form-login'>
-            <h1 className='signin-title'>Account</h1>
+            <h1 className='signin-title'>{nombre}</h1>
             <label className="label-login">DPI</label>
             <input 
                 type="text"
@@ -49,7 +61,7 @@ const Account = ( {user} ) => {
                 className="input-login"
                 value = {dpi} 
                 readOnly/>
-            <label className="label-login">Full Name</label>
+            <label className="label-login">Nombre completo</label>
             <input 
                 type="text"
                 id="name"
@@ -57,14 +69,14 @@ const Account = ( {user} ) => {
                 className="input-login"
                 value = {nombre} 
                 readOnly />
-            <label className="label-login">Address</label>
+            <label className="label-login">Dirección</label>
             <input 
                 type="text"
                 id="adress"
                 required
                 className="input-login"
                 value = {direccion} />
-            <label className="label-login">Phone</label>
+            <label className="label-login">Teléfono</label>
             <input 
                 type="tel"
                 id="phone"
@@ -72,7 +84,7 @@ const Account = ( {user} ) => {
                 pattern="[0-9]{8}"
                 className="input-login"
                 value = {telefono} />
-            <label className="label-login">Collegiate ID</label>
+            <label className="label-login">Número de colegiado</label>
             <input 
                 type="text"
                 id="collegiateid"
@@ -80,7 +92,7 @@ const Account = ( {user} ) => {
                 className="input-login"
                 readOnly 
                 value = {numColegiado} />
-            <label className="label-login">Specialty</label>
+            <label className="label-login">Especialidad</label>
             <input 
                 type="text"
                 id="specialty"
@@ -88,26 +100,33 @@ const Account = ( {user} ) => {
                 className="input-login"
                 readOnly 
                 value = {especialidad} />
-            <label className="label-login">Health area</label>
+            <label className="label-login">Unidad de salud actual</label>
             <input 
                 type="text"
                 id="area"
                 required
                 className="input-login"
                 value = {unidadSalud}  />
-            <label className="label-login">Work History</label>
-            <input 
-                type="text"
-                id="history"
-                required
-                className="input-login"
-                readOnly />  
+            <label className="label-login">Historial de trabajo</label>
+            <div id="history" className="work-history">
+                <p>Unidad de salud</p>
+                <p>Fecha de entrada</p>
+                <p>Fecha de salida</p>
+                {historial.map((entrada) => {
+                    return(
+                        <><div>{entrada.unidad_salud_id}</div><div>{entrada.fecha_entrada}</div><div>{entrada.fecha_salida == 'None'? 'En curso':entrada.fecha_salida}</div></>
+                    )
+                })}
+            </div> 
                 </form>
             <div className="buttons-container">
-                <button className="button-login">Save</button>
+                <button className="button-login" style={{visibility: user === null ? 'hidden' : 'visible'}}>Guardar</button>
             </div>
       </div>
-)
+      <img className='doctor-standing-img' src = {doctor_standing}></img>
+      <img className='doctor-standing2-img' src = {doctor_standing2}></img>
+      </div>
+    )
 }
 
 export default Account

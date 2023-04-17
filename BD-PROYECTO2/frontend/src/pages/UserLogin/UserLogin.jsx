@@ -8,6 +8,8 @@ import {
   Link 
   } from "react-router-dom";
 
+import logo from '../../assets/logo.svg'
+
 const UserLogin = ({setLogin}) => {
 
   const [ dpiInput, setDpiInput ] = useState('')
@@ -43,7 +45,9 @@ const UserLogin = ({setLogin}) => {
   
   return (
     <div className="login-container">
-      <h1 className="login-title">Iniciar sesión</h1>
+      <h1 className="main-title">Sistema de servicios médicos</h1>
+      <img className = "welcome-img" src = {logo}></img>
+      <h2 className="login-title">Iniciar sesión</h2>
       <form className="form-login">
         <label className="label-login">DPI</label>
         <input 

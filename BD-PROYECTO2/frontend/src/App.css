@@ -5,6 +5,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo {
@@ -101,15 +103,14 @@
 }
 
 .container-navigation{
-    align-self: flex-start;
+  margin-top: 20px;
     display: flex;
     flex-direction: column;
     /* position: initial; */
     flex-wrap: wrap;
     align-content: center;
     justify-content: flex-start;
-    margin-bottom: 20px;
-    margin-top: -10px;
+    width: 80%;
 }
 
 
@@ -139,4 +140,10 @@ li:hover > ul {
 
 .display0{
   right: 460px;
+}
+
+nav {
+  display: block;
+  width: auto;
+  height: 76px;
 }
