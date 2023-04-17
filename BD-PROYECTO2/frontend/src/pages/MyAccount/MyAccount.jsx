@@ -9,7 +9,7 @@ const MyAccount = () => {
 
     return (
         <div className="account">
-            <Account />
+            <Account user = {null}/>
         </div>
     )
 

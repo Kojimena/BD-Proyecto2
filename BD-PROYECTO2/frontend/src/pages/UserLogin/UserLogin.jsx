@@ -10,39 +10,36 @@ import {
 
 const UserLogin = ({setLogin}) => {
 
-  const logged = () => {
-    console.log("Hola2")
-    setLogin('Navigation')
-  }
-
   const [ dpiInput, setDpiInput ] = useState('')
   const [ passInput, setPassInput ] = useState('')
+  const [ logged, setLogged ] = useState(false)
 
   //Teniendo el DPI y la contraseña,necesitamos que nos devuelva un objeto usuario  
   const logIn = async () => {
+    console.log('dpi: ', dpiInput)
+    console.log('pass: ', passInput)
     const body = {
       dpi: dpiInput,
       password: passInput
     }
-    const response = await fetch('http://localhost:2800/user/login', {
+    const response = await fetch('http://3.101.148.58/user/login', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    const user = await response.json()
-    console.log(user)
+
+    const datos = await response.json() //Datos del médico
+
+    if (datos.logged){
+      console.log(datos.dpi) 
+      setLogin("Navigation")
+    }
+    else {
+      console.log('Credenciales incorrectas')
+    }
   }
-
-  useEffect(() => {
-    console.log(dpiInput)
-  }, [dpiInput])
-
-  useEffect(() => {
-    console.log(passInput)
-  }, [passInput])
-
   
   return (
     <div className="login-container">
@@ -66,8 +63,6 @@ const UserLogin = ({setLogin}) => {
           <button className="button-login" onClick={(event) => {
               event.preventDefault();
               logIn()
-              setLogin("Navigation") //Navegar
-              ;
             }}>Iniciar sesión</button>
           <Link to = "/signin">
             <button className="button-login">Registrarse</button>
@@ -78,13 +73,6 @@ const UserLogin = ({setLogin}) => {
   )
 
 }
-
-const DpiInput = ({ setDpiInput }) => {
-
-
-
-}
-
 
 
 export default UserLogin
