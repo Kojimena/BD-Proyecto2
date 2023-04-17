@@ -6,39 +6,12 @@ import Select from 'react-select';
 //Teniendo {Nombre del doctor, area de salud, enfermedad, examenes medicos, cirugias, diagnosticos,medicamento y status} necesitamos hacer un insert y  {response si se agrego el producto o no }
 // Necesitamos un json de objetos {Medicine}
 const AddRecord = () => {
-    
-
-  const data1 = [
-    {
-      value: 1,
-      label: "cerulean"
-    },
-    {
-      value: 2,
-      label: "fuchsia rose"
-    },
-    {
-      value: 3,
-      label: "true red"
-    },
-    {
-      value: 4,
-      label: "aqua sky"
-    },
-    {
-      value: 5,
-      label: "tigerlily"
-    },
-    {
-      value: 6,
-      label: "blue turquoise"
-    }
-  ];
+  
 
     const [ opciones, setOpciones ] = useState([])
     const [ medicinas, setMedicinas ] = useState([])
     const [ healthArea, setHealthArea] = useState('Emergencias Juanito')
-    const [data, setData] = useState([]); // Add this line to create a state for 'data'
+    const [data, setData] = useState([]); 
 
 
 
@@ -77,7 +50,6 @@ const AddRecord = () => {
         setData(newData); 
 
         console.log("DATAAAA");
-        console.log(data1)
         console.log(data);
         console.log(medicinas)
 
