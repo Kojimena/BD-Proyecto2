@@ -6,6 +6,10 @@ import './AddProduct.css'
 const AddProduct = () => {
 
     const [ opciones, setOpciones ] = useState([])
+    const [ healthAreaInput, setHealthAreaInput ] = useState('')
+    const [ productInput, setProductInput ] = useState('')
+    const [ amountInput, setAmountInput ] = useState(0)
+    const [ dueDateInput, setDueDateInput ] = useState('')
 
     const getHealthAreas = async () => {
       const response = await fetch('http://3.101.148.58/healthcenter')
@@ -16,6 +20,27 @@ const AddProduct = () => {
     useEffect(() => {
       getHealthAreas()
     }, [])
+
+    const postProduct = async () => {
+      const body = {
+        "id_user_auth": "string",
+        "detalle": "string",
+        "cantidad": 0,
+        "expiracion": "string",
+        "unidad_salud_id": 0
+      }
+      const response = await fetch('http://3.101.148.58/inventory/medicines', {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+      const options = await response.json()
+      console.log(options[0])
+      setOpciones(() => options)
+    }
+
 
     return (
     <div className="product-container-add">
@@ -45,14 +70,14 @@ const AddProduct = () => {
         <div>
             <label className="label-product">Amount</label>
             <input
-            type="text"
+            type="numeric"
             className="name-input"
             />
         </div>
         <div>
             <label className="label-product">Due date</label>
             <input
-            type="text"
+            type="date"
             className="name-input"
             /> 
         </div> 

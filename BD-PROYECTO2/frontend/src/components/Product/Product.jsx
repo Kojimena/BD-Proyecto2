@@ -2,7 +2,7 @@ import React from "react"
 import "./Product.css"
 
 
-const Product = () => (
+const Product = ({name, amount, date}) => (
     <div className="product-container">
         <div className="product-info">
             <div>
@@ -10,7 +10,7 @@ const Product = () => (
                 <input
                 type="text"
                 className="name-input"
-                value="Paracetamol"
+                value={name}
                 readOnly
                 />
             </div>
@@ -19,7 +19,7 @@ const Product = () => (
                 <input
                 type="text"
                 className="amount-input"
-                value="25%"
+                value={amount}
                 readOnly
                 />
             </div>
@@ -28,7 +28,7 @@ const Product = () => (
                 <input
                 type="text"
                 className="date-input"
-                value="03-09-2005"
+                value={date}
                 readOnly
                 /> 
             </div> 

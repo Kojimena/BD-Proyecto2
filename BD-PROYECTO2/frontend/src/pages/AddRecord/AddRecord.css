@@ -37,6 +37,14 @@
     width: 400px;
 }
 
+.dropdown-container {
+    display: flex;
+    width: 600px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .button-add {
     margin-bottom: 10px;
     padding: 10px;
@@ -51,8 +59,13 @@
 }
 
 .dropdown{
-    max-width: 400px;
+    width: 70%;
+    margin-right: 20px;
     height: 250px;
     display: flex;
     flex-direction: column;
+}
+
+.dropdown:options {
+    color: black;
 }
