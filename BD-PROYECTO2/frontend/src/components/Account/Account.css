@@ -11,6 +11,15 @@
   color : #000;
 }
 
+.account-desc {
+  color: #000;
+  font-weight: bold;
+}
+
+.signin-title {
+  margin-bottom: 10px;
+}
+
   .form-group {
   height: fit-content;
   width: 800px;

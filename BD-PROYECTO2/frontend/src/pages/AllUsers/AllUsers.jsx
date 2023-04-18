@@ -93,7 +93,7 @@ const AllUsers = () => {
                 </div>
             </div>}
             <div>
-                {workHistory !== null && <Account user = {doctor} history = {workHistory}/>}
+                {workHistory !== null && <Account user = {doctor} history = {workHistory} myaccount={false}/>}
             </div>
             {workHistory == null && <img className = "doctors-img" src = {doctors}></img>}
       </div>

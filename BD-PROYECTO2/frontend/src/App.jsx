@@ -126,10 +126,10 @@ function Navigation(){
       <Router>
           <nav>
             <ul className="nav-menu">
-              <li className="nav-item"> Users
+              <li className="nav-item"> Usuarios
                 <ul className="display0">
-                  <li> <Link to="/" className="nav-link">My Account</Link> </li>
-                  <li> <Link to="/allusers" className="nav-link">All Users</Link> </li>
+                  <li> <Link to="/" className="nav-link">Mi cuenta</Link> </li>
+                  <li> <Link to="/allusers" className="nav-link">Médicos</Link> </li>
                 </ul>
               </li>
               <li className="nav-item"> Products 
