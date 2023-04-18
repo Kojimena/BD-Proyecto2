@@ -64,6 +64,33 @@ const AddRecord = () => {
     setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
   }
 
+  // custom styles for the dropdown
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: 'white',
+      borderColor: state.isFocused ? 'blue' : 'gray',
+      boxShadow: state.isFocused ? '0 0 0 1px lightblue' : 'none',
+      '&:hover': {
+        borderColor: state.isFocused ? 'blue' : 'gray',
+      },
+    }),
+    option: (base, state) => ({
+      ...base,
+      backgroundColor: state.isSelected ? 'lightblue' : state.isFocused ? 'lightgray' : 'white',
+      color: 'black',
+      width: '420px'
+    }),
+    menu: (base) => ({
+      ...base,
+      width: '420px', // Fixed width for the menu
+      maxHeight: '200px', // Maximum height for the menu
+      overflowY: 'auto', // Add scrollbar if necessary
+      marginTop: '405px'
+    }),
+    // Add more customizations here for other parts of the Select component
+  };
+
     useEffect(() => {
         getHealthAreas()
         getMedicine()
@@ -129,10 +156,18 @@ const AddRecord = () => {
             /> 
         </div> 
         <div>
+            <label className="label-product">Status</label>
+            <input
+            type="text"
+            className="record-input"
+            /> 
+        </div> 
+        <div className='dropdown-container'>
             <label className="label-product">Medicine</label>
             <Select
               className="dropdown"
               placeholder="Select Option"
+              styles={customStyles} // pass the custom styles
               value={data.filter(obj => selectedValue.includes(obj.value))} // set selected values
               options={data} // set list of the data
               onChange={handleChange} // assign onChange function
@@ -140,14 +175,6 @@ const AddRecord = () => {
               isClearable
             />
         </div> 
-        <div>
-            <label className="label-product">Status</label>
-            <input
-            type="text"
-            className="record-input"
-            /> 
-        </div> 
-
     </div>
     <button className="button-add"> Add  </button>
 </div>
