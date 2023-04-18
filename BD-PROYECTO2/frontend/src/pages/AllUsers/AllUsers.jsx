@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './AllUsers.css'
 import Account from '../../components/Account/Account'
+import Popup from '../../components/Popup/Popup'
 import doctors from '../../assets/doctors.svg'
 
 const AllUsers = () => {
@@ -8,6 +9,7 @@ const AllUsers = () => {
     const [ dpiInput, setDpiInput ] = useState('')
     const [ doctor, setDoctor ] = useState(null)
     const [ workHistory, setWorkHistory ] = useState(null)
+    const [ warning, setWarning ] = useState(false)
 
     const getRecord = async () => {
         const body = {
@@ -22,9 +24,15 @@ const AllUsers = () => {
         })
     
         const datos = await response.json() //Datos médico
-        console.log(datos)
-        getWorkHistory(datos.dpi)
-        setDoctor(datos)
+        
+        if (datos.found === true){
+            getWorkHistory(datos.account.dpi)
+            setDoctor(datos.account)
+        }
+        else {
+            console.log('No existe el médico indicado')
+            setWarning(true)
+        }
     
     }
 
@@ -53,7 +61,8 @@ const AllUsers = () => {
     }, [doctor])
 
     return (
-        <div >
+        <div className='allusers-container'>
+            {warning == true && <Popup message='No se encontraron médicos con el dpi indicado' setWarning = {setWarning}/>}
             <div className='main-container'>
                 <div className="search-container">
                     <p className="label-users">Buscar personal médico</p>

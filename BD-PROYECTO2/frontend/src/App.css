@@ -146,4 +146,5 @@ nav {
   display: block;
   width: auto;
   height: 76px;
+  z-index: 2;
 }
