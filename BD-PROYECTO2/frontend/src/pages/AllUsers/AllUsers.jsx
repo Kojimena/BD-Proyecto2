@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import './AllUsers.css'
+import store from '@store/index.js'
 import Account from '../../components/Account/Account'
 import Popup from '../../components/Popup/Popup'
 import doctors from '../../assets/doctors.svg'
 
 const AllUsers = () => {
+
+    //Estados globales
+    const [ loggedUser, setLoggedUser ] = useState(store.get().user)
 
     const [ dpiInput, setDpiInput ] = useState('')
     const [ doctor, setDoctor ] = useState(null)

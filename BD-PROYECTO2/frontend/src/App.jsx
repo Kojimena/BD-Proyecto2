@@ -1,5 +1,7 @@
 import React, {useState,useEffect} from "react"
 import './App.css';
+import { StoreContext } from "storeon/react";
+import store from '@store'
 import { 
   Redirect,
   BrowserRouter as Router,
@@ -51,20 +53,22 @@ function App() {
     
 
     return(
-          <Switch>
-            <Route exact path="/login">
-              <Login setLogin={setLogin}/>
-            </Route>
-            <Route exact path="/navigation">
-              <Navigation />
-            </Route>
-            <Route exact path ="/signin">
-              <SignIn  setLogin={setLogin}/>
-            </Route>
-            <Route path="/">
-              <Redirect to={currentPath} />
-            </Route>
-          </Switch>
+          <StoreContext.Provider value={store}>
+            <Switch>
+              <Route exact path="/login">
+                <Login setLogin={setLogin}/>
+              </Route>
+              <Route exact path="/navigation">
+                <Navigation />
+              </Route>
+              <Route exact path ="/signin">
+                <SignIn  setLogin={setLogin}/>
+              </Route>
+              <Route path="/">
+                <Redirect to={currentPath} />
+              </Route>
+            </Switch>
+          </StoreContext.Provider>
     )
 }
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useStoreon } from 'storeon/react'
 import "./UserLogin.css"
 import { 
   Redirect,
@@ -15,6 +16,8 @@ const UserLogin = ({setLogin}) => {
   const [ dpiInput, setDpiInput ] = useState('')
   const [ passInput, setPassInput ] = useState('')
   const [ logged, setLogged ] = useState(false)
+
+  const { dispatch } = useStoreon('user')
 
   //Teniendo el DPI y la contraseña,necesitamos que nos devuelva un objeto usuario  
   const logIn = async () => {
@@ -35,7 +38,9 @@ const UserLogin = ({setLogin}) => {
     const datos = await response.json() //Datos del médico
 
     if (datos.logged){
-      console.log(datos.dpi) 
+      console.log(datos.user.dpi)
+      //Estado global
+      dispatch('user/login', {dpi: datos.user.dpi, role: datos.user.rol})
       setLogin("Navigation")
     }
     else {
