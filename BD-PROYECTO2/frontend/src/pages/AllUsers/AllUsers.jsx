@@ -14,6 +14,7 @@ const AllUsers = () => {
     const [ doctor, setDoctor ] = useState(null)
     const [ workHistory, setWorkHistory ] = useState(null)
     const [ warning, setWarning ] = useState(false)
+    const [ permission, setPermission ] = useState(false)
 
     const getRecord = async () => {
         const body = {
@@ -64,10 +65,17 @@ const AllUsers = () => {
         console.log('Use effect: ', doctor)
     }, [doctor])
 
+    useEffect(() => {
+        if (loggedUser.role === 'admin'){
+            setPermission(true)
+        }
+    }, [])
+
     return (
         <div className='allusers-container'>
-            {warning == true && <Popup message='No se encontraron médicos con el dpi indicado' setWarning = {setWarning}/>}
-            <div className='main-container'>
+            {permission == false && <Popup message='No cuenta con suficientes permisos para revisar el registro de personal médico' setWarning = {setWarning} closable = {false}/>}
+            {warning == true && <Popup message='No se encontraron médicos con el dpi indicado' setWarning = {setWarning} closable = {true}/>}
+            {permission == true && <div className='main-container'>
                 <div className="search-container">
                     <p className="label-users">Buscar personal médico</p>
                     <input
@@ -83,7 +91,7 @@ const AllUsers = () => {
                     getRecord()
                     }}>Buscar</button>
                 </div>
-            </div>
+            </div>}
             <div>
                 {workHistory !== null && <Account user = {doctor} history = {workHistory}/>}
             </div>

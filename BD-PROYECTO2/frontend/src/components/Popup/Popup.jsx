@@ -4,7 +4,7 @@ import close from '../../assets/close.svg'
 import warning from '../../assets/warning.svg'
 
 
-const Popup = ( {message, setWarning} ) => {
+const Popup = ( {message, setWarning, closable} ) => {
 
     const [ mensaje, setMensaje ] = useState(message)
 
@@ -15,11 +15,11 @@ const Popup = ( {message, setWarning} ) => {
     console.log('Renderizando popup')
 
     return(<div className='popup-container'>
-        <img className='close-img' src = {close} onClick={(event)=>{
+        {closable && <img className='close-img' src = {close} onClick={(event)=>{
                 event.preventDefault()
                 console.log('cerrar popup: ', closed)
                 setWarning(false)
-            }}></img>
+            }}></img>}
         <div className='popup-subcontainer1'>
             
             <h1 className='popup-title'>Advertencia</h1>

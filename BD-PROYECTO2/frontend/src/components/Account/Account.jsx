@@ -18,6 +18,7 @@ const Account = ( {user, history} ) => {
     const [ numColegiado, setNumColegiado ] = useState('')
     const [ especialidad, setEspecialidad ] = useState('')
     const [ unidadSalud, setUnidadSalud ] = useState('')
+    const [ actualizarUnidadSalud, setActualizarUnidadSalud ] = useState('')
 
     useEffect(() => {
         setUsuario(user)
@@ -43,9 +44,53 @@ const Account = ( {user, history} ) => {
         
     }, [usuario])
     
-
     console.log('Usuario en account: ', usuario)
     console.log('Historial en account: ', historial)
+
+    const updateInfo = async () => {
+
+        //Verificar que los campos no estén vacíos
+
+        const updatedAddress = direccion
+        const updatedPhone = telefono
+        const updatedUnidadSalud = unidadSalud
+
+        const bodyInfo = {
+            dpi: dpi,
+            direccion: updatedAddress,
+            telefono: updatedPhone,
+            especialidad: especialidad
+        }
+
+        console.log('bodyInfo: ', bodyInfo)
+
+        const responseInfo = await fetch('http://3.101.148.58/account/', {
+            method: 'PUT',
+            body: JSON.stringify(bodyInfo),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        console.log('telefono enviado: ', updatedPhone)
+
+        if (+actualizarUnidadSalud != unidadSalud){
+            const bodyWork = {
+                dpi: dpi,
+                unidad_salud_id: updatedUnidadSalud
+            }
+    
+            const responseWork = await fetch('http://3.101.148.58/account/workHistory', {
+                method: 'PUT',
+                body: JSON.stringify(bodyWork),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        }
+    }
+
+    console.log('telefono actual: ', telefono)
 
     return(
         <div className='account-container'>
@@ -75,7 +120,8 @@ const Account = ( {user, history} ) => {
                 id="adress"
                 required
                 className="input-login"
-                value = {direccion} />
+                value = {direccion} 
+                onChange={e => setDireccion(e.target.value)}/>
             <label className="label-login">Teléfono</label>
             <input 
                 type="tel"
@@ -83,7 +129,8 @@ const Account = ( {user, history} ) => {
                 required
                 pattern="[0-9]{8}"
                 className="input-login"
-                value = {telefono} />
+                value = {telefono} 
+                onChange={e => setTelefono(e.target.value)}/>
             <label className="label-login">Número de colegiado</label>
             <input 
                 type="text"
@@ -106,7 +153,8 @@ const Account = ( {user, history} ) => {
                 id="area"
                 required
                 className="input-login"
-                value = {unidadSalud}  />
+                value = {unidadSalud}
+                onChange={e => setActualizarUnidadSalud(e.target.value)}  />
             <label className="label-login">Historial de trabajo</label>
             <div id="history" className="work-history">
                 <p>Unidad de salud</p>
@@ -120,7 +168,10 @@ const Account = ( {user, history} ) => {
             </div> 
                 </form>
             <div className="buttons-container">
-                <button className="button-login" style={{visibility: user === null ? 'hidden' : 'visible'}}>Guardar</button>
+                <button className="button-login" onClick={(event) => {
+                    event.preventDefault()
+                    updateInfo()
+                }}>Guardar</button>
             </div>
       </div>
       <img className='doctor-standing-img' src = {doctor_standing}></img>
