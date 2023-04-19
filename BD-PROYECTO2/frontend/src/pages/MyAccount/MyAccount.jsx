@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Account from '../../components/Account/Account'
+import AccountAdmin from '../../components/AccountAdmin/AccountAdmin'
+import AccountInventory from '../../components/AccountInventory/AccountInventory'
 import store from '@store/index.js'
 
 //Para Account teniendo {DPI (parametro del objeto usuario)} necesitamos {Dpi, nombre, direccion, telefono, numero de colegiado, especialidad, area de salud (ejemlo hospital el pilar), work history}
@@ -16,7 +18,7 @@ const MyAccount = () => {
     const [ workHistory, setWorkHistory ] = useState(null)
     const [ warning, setWarning ] = useState(false)
 
-    const getRecord = async () => {
+    const geRecord = async () => {
         const body = {
             dpi: loggedUser.dpi
           }
@@ -28,7 +30,7 @@ const MyAccount = () => {
             }
         })
     
-        const datos = await response.json() //Datos médico
+        const datos = await response.json() //Datos usuario
         
         if (datos.found === true){
             getWorkHistory(datos.account.dpi)
@@ -80,6 +82,8 @@ const MyAccount = () => {
     return (
         <div className="myaccount-container">
             {workHistory !== null && <Account user = {doctor} history = {workHistory}/>}
+            {loggedUser.role == 'admin' && <AccountAdmin user = {loggedUser}/>}
+            {loggedUser.role == 'bodega' && <AccountInventory user = {loggedUser}/>}
         </div>
     )
 
