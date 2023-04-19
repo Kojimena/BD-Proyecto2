@@ -80,7 +80,7 @@ const AddRecord = () => {
           label: item.detalle,
         }));
     
-        setData(newData); 
+        setData(newData);
 
         console.log("DATAAAA");
         console.log(data);
