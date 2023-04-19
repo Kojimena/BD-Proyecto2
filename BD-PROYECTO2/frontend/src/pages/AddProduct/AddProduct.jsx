@@ -56,13 +56,14 @@ const AddProduct = () => {
           "id_user_auth": loggedUser.dpi,
           "detalle": productInput,
           "cantidad": amountInput,
+          "cantidad_minima": null,
           "expiracion": dueDateInput,
           "unidad_salud_id": healthAreaId,
           "id_user_auth": loggedUser.dpi
         }
 
         console.log('body a enviar: ', postBody)
-        const response = await fetch('http://3.101.148.58/inventory/', {
+        const response = await fetch('http://3.101.148.58/inventory/add', {
               method: 'POST',
               body: JSON.stringify(postBody),
               headers: {
@@ -141,6 +142,7 @@ const AddProduct = () => {
             }
             </select>
         </div>
+        <label id='inventory-checkbox'><input type="checkbox" id="cbox1"/> Este es mi primer checkbox</label>
         <div>
             <label className="label-product-inventory">Cantidad</label>
             <input
