@@ -2,21 +2,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-.inventory-search {
+.inventory-search-bodega {
     display: flex;
     grid-template-columns: 20% 60% 20%;
     grid-template-rows: 5% 10% 15% 15% 25% 30%;
     flex-direction: column;
     align-items: center;
-    width: 300%;
+    width: 100%;
   }
 
   .label-header{
     color: #000;
     font-size: 40px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     font-weight: bold;
     display: block;
   }

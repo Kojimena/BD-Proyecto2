@@ -65,7 +65,7 @@ const Inventory = () => {
   return (
     <div className="inventory">
       {permission == false && <Popup message='No cuenta con suficientes permisos para revisar el inventario en bodega' setWarning = {setWarning} closable = {false}/>}
-      {permission == true && <div className='"inventory-search"'><div className="inventory-search-container">
+      {permission == true && <div className="inventory-search-bodega"><div className="inventory-search-container">
         <label className="label-header">Buscar productos en bodega</label>
         <select
           id="area"

@@ -18,7 +18,7 @@ const MyAccount = () => {
     const [ workHistory, setWorkHistory ] = useState(null)
     const [ warning, setWarning ] = useState(false)
 
-    const geRecord = async () => {
+    const getRecord = async () => {
         const body = {
             dpi: loggedUser.dpi
           }
