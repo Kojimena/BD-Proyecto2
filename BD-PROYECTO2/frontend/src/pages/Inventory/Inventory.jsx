@@ -18,6 +18,7 @@ const Inventory = () => {
   const [ healthArea, setHealthArea] = useState('')
   const [ productos, setProductos ] = useState([])
   const [ warning, setWarning ] = useState(false)
+  const [ hasProducts, setHasProducts ] = useState(false)
 
   const getHealthAreas = async () => {
     const response = await fetch('http://3.101.148.58/healthcenter')
@@ -44,6 +45,9 @@ const Inventory = () => {
 
     console.log("DATAAAA");
     console.log(products);
+    if (products == null){
+      setWarning(true)
+    }
     setProductos(() => products)
   }
 
@@ -74,7 +78,8 @@ const Inventory = () => {
           onChange={handleChangeArea}
           className="input">
           <option>Seleccione un área de salud</option>
-          {opciones.map((option) => {
+          { 
+            opciones.map((option) => {
             return <option value={option} key={option}>{option}</option>
           })}
         </select>
@@ -88,9 +93,18 @@ const Inventory = () => {
           >Buscar por fecha de caducidad</button>
           <button className="button-search">Buscar por cantidad</button>
         </div><div className="inventory-display">
-          {productos.map((product) => {
+          {
+          warning == true && <Popup message="No hay productos en esta unidad de salud" setWarning = {setWarning} closable = {true}/> 
+          }
+          {
+           warning == false && productos != null && <div> 
+          {
+          productos.map((product) => {
             return <Product key={product.id} name={product.detalle} amount={product.cantidad} date={product.expiracion} />
-          })}
+          })
+          }
+        </div>
+      }
         </div></div>}
     </div>
   )

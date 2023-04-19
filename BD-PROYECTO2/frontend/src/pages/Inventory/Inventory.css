@@ -37,11 +37,19 @@
     margin-bottom: 10px;
   }
 
+  .inventory-search-container select {
+    background-color: #fff;
+    color: #03055e;
+    border-radius: 5px;
+    height: 50px;
+    width: 500px;
+    max-width: 100%;
+}
+
 .search-buttons-inventory{
     display: flex;
     width: 100%;
     margin-bottom: 20px;
-    align-items: center;
     justify-content: center;
     margin-top: 20px;
 }

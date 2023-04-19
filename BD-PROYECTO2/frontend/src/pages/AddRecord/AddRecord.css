@@ -69,3 +69,14 @@
 .dropdown:options {
     color: black;
 }
+
+.main-container-addRecord{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: #ffffff00;
+    margin-bottom: 20px;
+    font-size: 18px;
+    padding: 15px;
+    border-radius: 10px;
+}

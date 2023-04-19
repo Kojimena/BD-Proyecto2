@@ -1,36 +1,69 @@
 import React, {useState, useEffect} from 'react'
 import './AddRecord.css'
-import Select from 'react-select';
+import store from '@store/index.js'
+import Select from 'react-select'
+import Popup from '../../components/Popup/Popup'
 
-
-//Teniendo {Nombre del doctor, area de salud, enfermedad, examenes medicos, cirugias, diagnosticos,medicamento y status} necesitamos hacer un insert y  {response si se agrego el producto o no }
-// Necesitamos un json de objetos {Medicine}
 const AddRecord = () => {
   
-
-    const [ opciones, setOpciones ] = useState([])
+    //Estados globales
+    const [ loggedUser, setLoggedUser ] = useState(store.get().user)
+    const [ healthArea, setHealthArea ] = useState(0)
+    const [ healthAreaName, setHealthAreaName ] = useState('')
+    const [ patient, setPatient ] = useState()
+    const [ enfermedad, setEnfermedad ] = useState()
+    const [ evolucion, setEvolucion ] = useState()
+    const [ examenes, setExamenes ] = useState()
+    const [ diagnosticos, setDiagnosticos ] = useState()
+    const [ cirugias, setCirugias ] = useState()
     const [ medicinas, setMedicinas ] = useState([])
-    const [ healthArea, setHealthArea] = useState('Emergencias Juanito')
-    const [data, setData] = useState([]); 
+    const [ data, setData ] = useState([]) 
+    const [ warning, setWarning ] = useState(false)
+    const [ permission, setPermission ] = useState(false)
 
+    //verificar si el usuario es medico
+    useEffect(() => {
+      if (loggedUser.role === 'medico'){
+        setPermission(true)
+      }
+       getHealthArea()
+       if (healthArea != 0) getHealthAreaName() 
+       if (healthArea != 0 && healthAreaName != '') getMedicine()
+    }, [])
 
-
-    const getHealthAreas = async () => {
-      const response = await fetch('http://3.101.148.58/healthcenter')
-      const options = await response.json()
-      console.log(options[0])
-      setOpciones(() => options)
-      
+    //Obtener el area de salud del usuario
+    const getHealthArea = async () => {
+        const body = {
+          dpi : loggedUser.dpi
+        }
+      const response = await fetch('http://3.101.148.58/account', {
+          method: 'POST',
+          body: JSON.stringify(body),
+          headers: {
+              'Content-Type': 'application/json'
+          }
+        })
+        const datos = await response.json()
+        setHealthArea(datos.account.unidad_salud_id) 
     }
 
-    const handleChangeArea = (event) => {
-        setHealthArea(event.target.value);
-      };
-    
+    //Obtener el nombre del area de salud
+    const getHealthAreaName = async () => {
+      const response = await fetch(`http://3.101.148.58/healthcenter/${healthArea}`);
+      const datos = await response.json()
+      console.log(datos)
+      setHealthAreaName(datos.healthcenter.nombre) 
+      console.log(healthAreaName, 'healthAreaName')
+
+    }
+
+    //Obteniendo los medicamentos del area de salud
     const getMedicine = async () => {
-        console.log(healthArea)
+        console.log(healthAreaName, 'healthAreaaaaaaaaaa')
+        
+        console.log(healthAreaName)
         const body = {
-            unidad_salud : healthArea
+            unidad_salud : healthAreaName
           }
         const response = await fetch('http://3.101.148.58/inventory/medicines', {
             method: 'POST',
@@ -54,7 +87,31 @@ const AddRecord = () => {
         console.log(medicinas)
 
         setMedicinas(() => medicines)
+  }
+
+  const postRecord = async () => {
+    const body = {
+      paciente_dpi: patient,
+      medico_encargado: loggedUser.dpi,
+      enfermedad: enfermedad,
+      evolucion: evolucion,
+      examenes: examenes,
+      diagnosticos: diagnosticos,
+      cirugias: cirugias,
+      unidad_salud_id: healthArea,
+      medicamentos_id: selectedValue
     }
+
+    const response = await fetch('http://3.101.148.58/record', {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const response_result = await response.json()
+    console.log(response_result)
+  }
 
   // set value for default selection
   const [selectedValue, setSelectedValue] = useState([]);
@@ -86,98 +143,91 @@ const AddRecord = () => {
       width: '420px', // Fixed width for the menu
       maxHeight: '200px', // Maximum height for the menu
       overflowY: 'auto', // Add scrollbar if necessary
-      marginTop: '405px'
+      marginTop: '-185px'
     }),
     // Add more customizations here for other parts of the Select component
   };
 
-    useEffect(() => {
-        getHealthAreas()
-        getMedicine()
-    }, [])
-
-
-  
-    
     return (
-    <div className="product-container-add">
-    <h1 className="title-addrecord">Add Record</h1>
-    <div className="product-info-add">
-        <div>
-            <label className="label-product">Doctor´s Name</label>
+    <div className="product-container-addRecord">
+      {permission == false && <Popup message='No cuenta con suficientes permisos para añadir un registro al expediente de un paciente' setWarning = {setWarning} closable = {false}/>}
+      {warning == true && <Popup message='No se puede agregar un registro a un paciente fallecido' setWarning = {setWarning} closable = {true}/>}
+      {permission == true && <div className='main-container-addRecord'>
+      <h1 className="title-addrecord">Add Record</h1>
+      <div className="product-info-add">
+          <div>
+              <label className="label-product">Patient's DPI</label>
+              <input
+              type="text"
+              className="record-input"
+              onChange={e => setPatient(e.target.value)}
+              />
+          </div>
+          <div>
+              <label className="label-product">Ilness</label>
+              <input
+              type="text"
+              className="record-input"
+              onChange={e => setEnfermedad(e.target.value)}
+              />
+          </div>
+          <div>
+          <label className="label-product"> Evolution </label>
             <input
             type="text"
             className="record-input"
+            onChange={e => setEvolucion(e.target.value)}
             />
-        </div>
-        <div>
-            <label className="label-product">Health area</label>
-                <select 
-                id="area"
-                placeholder="Selecciona un área de salud"
-                required
-                onChange={handleChangeArea}
-                className="name-input">
-                {
-                opciones.map((option) => {
-                    return <option value={option} key={option}>{option}</option>
-                } )
-                }
-                </select>
-        </div>
-        <div>
-            <label className="label-product">Ilness</label>
-            <input
-            type="text"
-            className="record-input"
-            />
-        </div>
-        <div>
-            <label className="label-product">Medical exams </label>
-            <input
-            type="text"
-            className="record-input"
-            pattern="^[a-zA-Z0-9]*(,[a-zA-Z0-9]+)*$"
-            placeholder='feces, urine, triglycerides, endoscopies, etc'
-            />
-        </div>
-        <div>
-            <label className="label-product">Surgeries</label>
-            <input
-            type="text"
-            className="record-input"
-            /> 
-        </div> 
-        <div>
-            <label className="label-product">Diagnoses</label>
-            <input
-            type="text"
-            className="record-input"
-            /> 
-        </div> 
-        <div>
-            <label className="label-product">Status</label>
-            <input
-            type="text"
-            className="record-input"
-            /> 
-        </div> 
-        <div className='dropdown-container'>
-            <label className="label-product">Medicine</label>
-            <Select
-              className="dropdown"
-              placeholder="Select Option"
-              styles={customStyles} // pass the custom styles
-              value={data.filter(obj => selectedValue.includes(obj.value))} // set selected values
-              options={data} // set list of the data
-              onChange={handleChange} // assign onChange function
-              isMulti
-              isClearable
-            />
-        </div> 
+          </div>
+          <div>
+              <label className="label-product">Medical exams </label>
+              <input
+              type="text"
+              className="record-input"
+              pattern="^[a-zA-Z0-9]*(,[a-zA-Z0-9]+)*$"
+              placeholder='feces, urine, triglycerides, endoscopies, etc'
+              onChange={e => setExamenes(e.target.value)}
+              />
+          </div>
+          <div>
+              <label className="label-product">Surgeries</label>
+              <input
+              type="text"
+              className="record-input"
+              onChange={e => setCirugias(e.target.value)}
+              /> 
+          </div> 
+          <div>
+              <label className="label-product">Diagnoses</label>
+              <input
+              type="text"
+              className="record-input"
+              onChange={e => setDiagnosticos(e.target.value)}
+              /> 
+          </div> 
+          <div className='dropdown-container'>
+              <label className="label-product">Medicine</label>
+              <Select
+                className="dropdown"
+                placeholder="Select Option"
+                styles={customStyles} // pass the custom styles
+                value={data.filter(obj => selectedValue.includes(obj.value))} // set selected values
+                options={data} // set list of the data
+                onChange={handleChange} // assign onChange function
+                isMulti
+                isClearable
+              />
+          </div> 
+      </div>
+      <button className="button-add"
+        onClick = {(e) => {
+          e.preventDefault() 
+          postRecord()
+        }
+      }
+      > Add  </button>
+      </div>}
     </div>
-    <button className="button-add"> Add  </button>
-</div>
 )}
 
 export default AddRecord
