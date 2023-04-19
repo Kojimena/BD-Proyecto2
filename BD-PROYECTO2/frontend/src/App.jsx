@@ -132,7 +132,7 @@ function Navigation(){
                   <li> <Link to="/allusers" className="nav-link">Médicos</Link> </li>
                 </ul>
               </li>
-              <li className="nav-item"> Products 
+              <li className="nav-item"> Bodega
                 <ul className="display1">
                   <li> <Link to="/about" className="nav-link">Search inventory</Link> </li>
                   <li><Link to="/add" className="nav-link">Add product</Link></li>
