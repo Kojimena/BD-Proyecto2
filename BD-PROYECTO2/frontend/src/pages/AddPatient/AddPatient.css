@@ -1,0 +1,38 @@
+.patient-info{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: #03055e;
+    margin-bottom: 20px;
+    font-size: 18px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.label-patient{
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+}
+
+.patient-input  {
+    background-color: #fff;
+    color: #03055e;
+    border-radius: 5px;
+    width: 400px;
+}
+
+.button-add {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: #0000ff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}

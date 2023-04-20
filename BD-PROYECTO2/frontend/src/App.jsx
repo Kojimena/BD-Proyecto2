@@ -20,6 +20,7 @@ import BinnacleRegister from "./pages/Binnacle/Binnacle";
 import ResultsQuerys from "./pages/Results/Results";
 import ListUsers from "./pages/AllUsers/AllUsers";
 import MyAccount from "./pages/MyAccount/MyAccount";
+import AddPatient from "./pages/AddPatient/AddPatient";
 
 function App() {
 
@@ -44,12 +45,6 @@ function App() {
       console.log(login)
       history.push(redirectPath());
     }, [login]);
-
-    const logout = () => {
-
-      // Aquí deberías hacer el logout del usuario
-      setLogin('Login');
-    };
     
 
     return(
@@ -63,6 +58,9 @@ function App() {
               </Route>
               <Route exact path ="/signin">
                 <SignIn  setLogin={setLogin}/>
+              </Route>
+              <Route exact path ="/logout">
+                <Login setLogin={setLogin}/>
               </Route>
               <Route path="/">
                 <Redirect to={currentPath} />
@@ -87,6 +85,14 @@ function Login({setLogin}){
     )
             
 }
+
+function Logout({setLogin}){
+  setLogin('Login')
+  return (
+    <UserLogin setLogin={setLogin}/>
+  )
+}
+
 
 function Home() {
   return  <MyAccount />
@@ -127,22 +133,25 @@ function Navigation(){
           <nav>
             <ul className="nav-menu">
               <li className="nav-item"> Usuarios
-                <ul className="display0">
+                <ul className="display">
                   <li> <Link to="/" className="nav-link">Mi cuenta</Link> </li>
                   <li> <Link to="/allusers" className="nav-link">Médicos</Link> </li>
                 </ul>
               </li>
               <li className="nav-item"> Bodega
-                <ul className="display1">
+                <ul className="display">
                   <li> <Link to="/about" className="nav-link">Search inventory</Link> </li>
                   <li><Link to="/add" className="nav-link">Añadir producto</Link></li>
                 </ul>
               </li>
               <li className="nav-item"> Records
-                <ul className="display2">
+                <ul className="display">
                   <li><Link to="/users" className="nav-link">Search record</Link> </li>
                   <li><Link to="/addrecord" className="nav-link">Add record</Link></li>
                 </ul>
+              </li>
+              <li className="nav-item">
+                <Link to="/addpatient" className="nav-link">Patient</Link>
               </li>
               <li className="nav-item">
                 <Link to="/binnacle" className="nav-link">Binnacle</Link>
@@ -151,7 +160,7 @@ function Navigation(){
                 <Link to="/results" className="nav-link">Results</Link>
               </li>
               <li className="nav-item">
-                <Link to="/login" className="nav-link">Log out</Link>
+                <Link to="/logout" className="nav-link">Log out</Link>
               </li>
             </ul>
           </nav>
@@ -181,8 +190,14 @@ function Navigation(){
               <Route path="/">
                 <Home />
               </Route>
+              <Route path="/addpatient">
+                <AddPatient />
+              </Route>
               <Route path="/login">
                 <Login />
+              </Route>
+              <Route path="/logout">
+                <Logout />
               </Route>
             </Switch>
           </div>

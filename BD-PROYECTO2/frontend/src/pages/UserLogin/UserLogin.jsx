@@ -47,6 +47,10 @@ const UserLogin = ({setLogin}) => {
       console.log('Credenciales incorrectas')
     }
   }
+
+  useEffect(()=>{
+    dispatch('user/login', {dpi: '', role: ''})
+  },[])
   
   return (
     <div className="login-container">
