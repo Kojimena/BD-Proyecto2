@@ -135,7 +135,7 @@ function Navigation(){
               <li className="nav-item"> Bodega
                 <ul className="display1">
                   <li> <Link to="/about" className="nav-link">Search inventory</Link> </li>
-                  <li><Link to="/add" className="nav-link">Add product</Link></li>
+                  <li><Link to="/add" className="nav-link">Añadir producto</Link></li>
                 </ul>
               </li>
               <li className="nav-item"> Records

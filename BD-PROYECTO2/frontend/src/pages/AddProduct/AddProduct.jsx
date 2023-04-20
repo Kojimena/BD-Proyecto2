@@ -14,6 +14,8 @@ const AddProduct = () => {
     const [ amountInput, setAmountInput ] = useState(0)
     const [ dueDateInput, setDueDateInput ] = useState('')
     const [ registeredProduct, setRegisteredProduct ] = useState(true)
+    const [ checked, setChecked ] = useState(false)
+    const [ minAmountInput, setMinAmountInput ] = useState('')
     
     //Estados globales
     const [ loggedUser, setLoggedUser ] = useState(store.get().user)
@@ -50,16 +52,18 @@ const AddProduct = () => {
 
       const healthAreaId = respuestaId.healthcenter.id
 
+      let dueDate = dueDateInput
+      dueDate === ''? dueDate = null : dueDate = dueDate
+
       if (registeredProduct){
 
         const postBody = {
           "id_user_auth": loggedUser.dpi,
           "detalle": productInput,
-          "cantidad": amountInput,
+          "cantidad": +amountInput,
           "cantidad_minima": null,
-          "expiracion": dueDateInput,
-          "unidad_salud_id": healthAreaId,
-          "id_user_auth": loggedUser.dpi
+          "expiracion": dueDate,
+          "unidad_salud_id": +healthAreaId
         }
 
         console.log('body a enviar: ', postBody)
@@ -75,9 +79,31 @@ const AddProduct = () => {
 
       }
 
-      /*const options = await response.json()
-      console.log(options[0])
-      setOpcionesUS(() => options)*/
+      else if (!registeredProduct) {
+
+        const postBody = {
+          "id_user_auth": loggedUser.dpi,
+          "detalle": productInput,
+          "cantidad": +amountInput,
+          "cantidad_minima": +minAmountInput,
+          "expiracion": dueDate,
+          "unidad_salud_id": healthAreaId
+        }
+
+        console.log('body a enviar: ', postBody)
+        const response = await fetch('http://3.101.148.58/inventory/add', {
+              method: 'POST',
+              body: JSON.stringify(postBody),
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+        })
+
+        console.log('Producto registrado')
+        console.log(await response.json())
+
+      }
+
     }
 
     const getMedicinesHU = async (e) => {
@@ -99,18 +125,20 @@ const AddProduct = () => {
 
       const medicinasDesplegar = await responseMedicinesHU.json()
 
-      setOpcionesMedicinas(() => medicinasDesplegar)
+      setOpcionesMedicinas(Array.isArray(medicinasDesplegar) ? medicinasDesplegar : null)
 
       console.log(opcionesMedicinas)
 
     }
+
+    useEffect(() => {console.log(productInput)}, [productInput])
 
 
     return (
     <div className="product-container-add-inventory">
     <h1 className="title-add">Añadir producto</h1>
     <div className="product-info-add-inventory">
-        <div>
+        <div className='inventory-form'>
             <label className="label-product-inventory">Unidad de salud</label>
             <select 
             onChange = {e => {
@@ -119,7 +147,8 @@ const AddProduct = () => {
             id="area"
             placeholder="Selecciona un área de salud"
             required
-            className="name-input">
+            className="inventory-select">
+              <option value="" selected disabled hidden>Elija una unidad de salud</option>
             {
               opcionesUS.map((option) => {
                 return <option value={option} key={option}>{option}</option>
@@ -127,31 +156,54 @@ const AddProduct = () => {
             }
             </select>
         </div>
-        <div>
+        {checked == false  && opcionesMedicinas && <div className='inventory-form'>
             <label className="label-product-inventory">Producto</label>
-            <select 
+            <select
             onChange = {e => setProductInput(e.target.value)}
-            id="area"
-            placeholder="Selecciona un área de salud"
+            placeholder="Selecciona un producto"
             required
-            className="name-input">
+            className="inventory-select">
+              <option value="" selected disabled hidden>Elija un producto</option>
             {
-              opcionesMedicinas.map((option) => {
+              opcionesMedicinas?.map((option) => {
                 return <option value={option.detalle} key={option.detalle}>{option.detalle}</option>
               } )
             }
             </select>
+        </div>}
+        {!opcionesMedicinas && <p>Aún no hay medicinas registradas en esta unidad de salud</p>}
+        <div id='inventory-checkbox'>
+          <input type="checkbox" id="cbox1" onClick={() => {
+            setChecked(!checked)
+            setRegisteredProduct(false)}}/>
+          <p id='checkbox-text'>Deseo registrar un nuevo producto en la unidad de salud</p>
         </div>
-        <label id='inventory-checkbox'><input type="checkbox" id="cbox1"/> Este es mi primer checkbox</label>
-        <div>
-            <label className="label-product-inventory">Cantidad</label>
+        {checked == true && <div className='inventory-form'>
+            <label className="label-product-inventory">Detalle</label>
+            <input
+            type="text"
+            className="name-input"
+            onChange = {e => setProductInput(e.target.value)}
+            />
+        </div>}
+        {checked == true && <div className='inventory-form'>
+            <label className="label-product-inventory">Cantidad mínima requerida</label>
+            <input
+            type="text"
+            className="name-input"
+            placeholder='*Se lanzará un aviso si las existencias son menores a esta'
+            onChange = {e => setMinAmountInput(e.target.value)}
+            />
+        </div>}
+        <div className='inventory-form'>
+            <label className="label-product-inventory">Cantidad a guardar</label>
             <input
             type="numeric"
             className="name-input"
             onChange = {e => setAmountInput(e.target.value)}
             />
         </div>
-        <div>
+        <div className='inventory-form'>
             <label className="label-product-inventory">Fecha de caducidad</label>
             <input
             type="date"

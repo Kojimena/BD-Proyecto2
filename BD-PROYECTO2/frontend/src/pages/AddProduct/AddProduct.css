@@ -15,6 +15,21 @@
   color:#000;
 }
 
+.inventory-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.inventory-select {
+    width: 400px;
+    text-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .title-add{
     color: #000;
     font-weight: bold;
@@ -55,5 +70,24 @@ input, select{
     background-color: #0000ff;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#inventory-checkbox {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#cbox1{
+    width: 25px;
+    height: 25px;
+    accent-color:#03055e
+}
+
+#checkbox-text{
+    font-size: 14px;
+    margin-left: 5px;
 }
 
