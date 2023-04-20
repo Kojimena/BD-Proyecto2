@@ -19,8 +19,9 @@ const AllUsers = () => {
     const getRecord = async () => {
         const body = {
             dpi: dpiInput
-          }
-          const response = await fetch('http://3.101.148.58/account/', {
+        }
+        
+        const response = await fetch('http://3.101.148.58/account/', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
