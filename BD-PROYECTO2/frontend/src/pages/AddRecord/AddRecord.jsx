@@ -20,16 +20,35 @@ const AddRecord = () => {
     const [ data, setData ] = useState([]) 
     const [ warning, setWarning ] = useState(false)
     const [ permission, setPermission ] = useState(false)
+    const [time, setTime] = useState(new Date())
 
     //verificar si el usuario es medico
     useEffect(() => {
       if (loggedUser.role === 'medico'){
         setPermission(true)
+        getHealthArea()
+      console.log(healthArea, 'healthAreaya')
       }
-       getHealthArea()
-       if (healthArea != 0) getHealthAreaName() 
-       if (healthArea != 0 && healthAreaName != '') getMedicine()
+
     }, [])
+
+    useEffect(() => {
+      console.log(healthArea, 'healthArea USEEFEECT')
+      if (healthArea !== 0) {
+        getHealthAreaName();
+        console.log(healthAreaName, 'healthAreaName')
+      }
+    }, [healthArea]);
+
+    useEffect(() => {
+      console.log(healthAreaName, 'healthAreaName USEEFEECT')
+      if (healthArea !== 0 && healthAreaName !== '') {
+        getMedicine();
+        console.log(healthAreaName, 'healthAreaName')
+        
+      }
+    }, [healthAreaName]);
+    
 
     //Obtener el area de salud del usuario
     const getHealthArea = async () => {
@@ -45,6 +64,7 @@ const AddRecord = () => {
         })
         const datos = await response.json()
         setHealthArea(datos.account.unidad_salud_id) 
+        console.log(healthArea, 'healthArea')
     }
 
     //Obtener el nombre del area de salud
@@ -97,9 +117,13 @@ const AddRecord = () => {
       evolucion: evolucion,
       examenes: examenes,
       diagnosticos: diagnosticos,
+      fecha_atencion:`${time.getFullYear()}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getDate().toString().padStart(2, '0')}`,
+      fecha_salida: null,
       cirugias: cirugias,
+      status: "Enfermo",
       unidad_salud_id: healthArea,
-      medicamentos_id: selectedValue
+      dpi_auth: loggedUser.dpi,
+      medicamentos: selectedValue
     }
 
     const response = await fetch('http://3.101.148.58/record', {
@@ -109,6 +133,7 @@ const AddRecord = () => {
         'Content-Type': 'application/json'
       }
     })
+    console.log(body)
     const response_result = await response.json()
     console.log(response_result)
   }
@@ -141,8 +166,8 @@ const AddRecord = () => {
     menu: (base) => ({
       ...base,
       width: '420px', // Fixed width for the menu
-      maxHeight: '200px', // Maximum height for the menu
-      overflowY: 'auto', // Add scrollbar if necessary
+      height: '200px', // Maximum height for the menu
+      overflowY: 'scroll', // Add scrollbar if necessary
       marginTop: '-185px'
     }),
     // Add more customizations here for other parts of the Select component
