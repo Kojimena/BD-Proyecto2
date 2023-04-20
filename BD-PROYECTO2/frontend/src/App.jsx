@@ -37,6 +37,8 @@ function App() {
             return "/signin";
           case "Navigation":
             return "/navigation";
+          case "Logout":
+            return "/logout";
 
           default:
             return "/";
@@ -51,10 +53,10 @@ function App() {
           <StoreContext.Provider value={store}>
             <Switch>
               <Route exact path="/login">
-                <Login setLogin={setLogin}/>
+                <UserLogin setLogin={setLogin}/>
               </Route>
               <Route exact path="/navigation">
-                <Navigation />
+                 <Navigation login={login} />
               </Route>
               <Route exact path ="/signin">
                 <SignIn  setLogin={setLogin}/>
@@ -80,6 +82,7 @@ function SignIn( {setLogin}) {
 }
 
 function Login({setLogin}){
+    <Navigation />
     return (
       <UserLogin setLogin={setLogin}/>
     )
@@ -87,7 +90,6 @@ function Login({setLogin}){
 }
 
 function Logout({setLogin}){
-  setLogin('Login')
   return (
     <UserLogin setLogin={setLogin}/>
   )
@@ -114,6 +116,10 @@ function Addrecord(){
   return  <AddRecord />
 }
 
+function Addpatient(){
+  return  <AddPatient />
+}
+
 function Binnacle(){
   return <BinnacleRegister />
 }
@@ -127,10 +133,10 @@ function AllUsers(){
 }
 
 
-function Navigation(){
+function Navigation({login}){
   return (
       <Router>
-          <nav>
+      {login == 'Navigation' && <nav>
             <ul className="nav-menu">
               <li className="nav-item"> Usuarios
                 <ul className="display">
@@ -160,10 +166,10 @@ function Navigation(){
                 <Link to="/results" className="nav-link">Results</Link>
               </li>
               <li className="nav-item">
-                <Link to="/logout" className="nav-link">Log out</Link>
+                <Link to="/login" className="nav-link">Log out</Link>
               </li>
             </ul>
-          </nav>
+          </nav>}
           <div className="container-navigation">
             <Switch>
               <Route path="/about">
@@ -187,17 +193,14 @@ function Navigation(){
               <Route path="/results">
                 <Results />
               </Route>
-              <Route path="/">
-                <Home />
-              </Route>
               <Route path="/addpatient">
-                <AddPatient />
+                <Addpatient />
               </Route>
               <Route path="/login">
                 <Login />
               </Route>
-              <Route path="/logout">
-                <Logout />
+              <Route path="/">
+                <Home />
               </Route>
             </Switch>
           </div>

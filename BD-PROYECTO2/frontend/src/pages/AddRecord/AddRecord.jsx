@@ -109,20 +109,6 @@ const AddRecord = () => {
         setMedicinas(() => medicines)
   }
 
-  /* "paciente_dpi": "string",
-  "medico_encargado": "string",
-  "enfermedad": "string",
-  "evolucion": "string",
-  "examenes": "string",
-  "diagnosticos": "string",
-  "fecha_atencion": "string",
-  "fecha_salida": "string",
-  "cirugias": "string",
-  "status": "string",
-  "unidad_salud_id": 0,
-  "dpi_auth": "string",
-  "medicamentos": [
-    0 */
   const postRecord = async () => {
     const body = {
       paciente_dpi: patient,
@@ -180,8 +166,8 @@ const AddRecord = () => {
     menu: (base) => ({
       ...base,
       width: '420px', // Fixed width for the menu
-      maxHeight: '200px', // Maximum height for the menu
-      overflowY: 'auto', // Add scrollbar if necessary
+      height: '200px', // Maximum height for the menu
+      overflowY: 'scroll', // Add scrollbar if necessary
       marginTop: '-185px'
     }),
     // Add more customizations here for other parts of the Select component
