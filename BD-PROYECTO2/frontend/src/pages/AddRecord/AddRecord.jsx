@@ -20,16 +20,35 @@ const AddRecord = () => {
     const [ data, setData ] = useState([]) 
     const [ warning, setWarning ] = useState(false)
     const [ permission, setPermission ] = useState(false)
+    const [time, setTime] = useState(new Date())
 
     //verificar si el usuario es medico
     useEffect(() => {
       if (loggedUser.role === 'medico'){
         setPermission(true)
+        getHealthArea()
+      console.log(healthArea, 'healthAreaya')
       }
-       getHealthArea()
-       if (healthArea != 0) getHealthAreaName() 
-       if (healthArea != 0 && healthAreaName != '') getMedicine()
+
     }, [])
+
+    useEffect(() => {
+      console.log(healthArea, 'healthArea USEEFEECT')
+      if (healthArea !== 0) {
+        getHealthAreaName();
+        console.log(healthAreaName, 'healthAreaName')
+      }
+    }, [healthArea]);
+
+    useEffect(() => {
+      console.log(healthAreaName, 'healthAreaName USEEFEECT')
+      if (healthArea !== 0 && healthAreaName !== '') {
+        getMedicine();
+        console.log(healthAreaName, 'healthAreaName')
+        
+      }
+    }, [healthAreaName]);
+    
 
     //Obtener el area de salud del usuario
     const getHealthArea = async () => {
@@ -45,6 +64,7 @@ const AddRecord = () => {
         })
         const datos = await response.json()
         setHealthArea(datos.account.unidad_salud_id) 
+        console.log(healthArea, 'healthArea')
     }
 
     //Obtener el nombre del area de salud
@@ -89,6 +109,20 @@ const AddRecord = () => {
         setMedicinas(() => medicines)
   }
 
+  /* "paciente_dpi": "string",
+  "medico_encargado": "string",
+  "enfermedad": "string",
+  "evolucion": "string",
+  "examenes": "string",
+  "diagnosticos": "string",
+  "fecha_atencion": "string",
+  "fecha_salida": "string",
+  "cirugias": "string",
+  "status": "string",
+  "unidad_salud_id": 0,
+  "dpi_auth": "string",
+  "medicamentos": [
+    0 */
   const postRecord = async () => {
     const body = {
       paciente_dpi: patient,
@@ -97,9 +131,13 @@ const AddRecord = () => {
       evolucion: evolucion,
       examenes: examenes,
       diagnosticos: diagnosticos,
+      fecha_atencion:`${time.getFullYear()}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getDate().toString().padStart(2, '0')}`,
+      fecha_salida: null,
       cirugias: cirugias,
+      status: "Enfermo",
       unidad_salud_id: healthArea,
-      medicamentos_id: selectedValue
+      dpi_auth: loggedUser.dpi,
+      medicamentos: selectedValue
     }
 
     const response = await fetch('http://3.101.148.58/record', {
@@ -109,6 +147,7 @@ const AddRecord = () => {
         'Content-Type': 'application/json'
       }
     })
+    console.log(body)
     const response_result = await response.json()
     console.log(response_result)
   }
