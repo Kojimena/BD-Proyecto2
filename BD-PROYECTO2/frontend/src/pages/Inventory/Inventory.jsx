@@ -119,13 +119,13 @@ const Inventory = () => {
               e.preventDefault()
               getProductsByDate()
             } }
-          >Buscar por fecha de caducidad</button>
+          >Por vencer</button>
           <button className="button-search"
           onClick={(e) => {
             e.preventDefault()
             getProductsByAmount()
           } }
-          >Buscar por cantidad</button>
+          >Por cantidad baja</button>
         </div><div className="inventory-display">
           {
           warning == true && <Popup message="No hay productos en esta unidad de salud" setWarning = {setWarning} closable = {true}/> 
