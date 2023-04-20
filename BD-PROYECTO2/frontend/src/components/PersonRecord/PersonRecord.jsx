@@ -4,7 +4,7 @@ import "./PersonRecord.css"
 
 const PersonRecord = () => (
 
-    <div className="person-info-add">
+    <div className="person-record-container">
         <div>
             <label className="label-person">Doctor´s Name</label>
             <input

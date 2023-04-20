@@ -21,6 +21,7 @@ import ResultsQuerys from "./pages/Results/Results";
 import ListUsers from "./pages/AllUsers/AllUsers";
 import MyAccount from "./pages/MyAccount/MyAccount";
 import AddPatient from "./pages/AddPatient/AddPatient";
+import AllPatients from "./pages/AllPatients/AllPatients";
 
 function App() {
 
@@ -37,8 +38,6 @@ function App() {
             return "/signin";
           case "Navigation":
             return "/navigation";
-          case "Logout":
-            return "/logout";
 
           default:
             return "/";
@@ -60,9 +59,6 @@ function App() {
               </Route>
               <Route exact path ="/signin">
                 <SignIn  setLogin={setLogin}/>
-              </Route>
-              <Route exact path ="/logout">
-                <Login setLogin={setLogin}/>
               </Route>
               <Route path="/">
                 <Redirect to={currentPath} />
@@ -87,12 +83,6 @@ function Login({setLogin}){
       <UserLogin setLogin={setLogin}/>
     )
             
-}
-
-function Logout({setLogin}){
-  return (
-    <UserLogin setLogin={setLogin}/>
-  )
 }
 
 
@@ -156,8 +146,11 @@ function Navigation({login}){
                   <li><Link to="/addrecord" className="nav-link">Add record</Link></li>
                 </ul>
               </li>
-              <li className="nav-item">
-                <Link to="/addpatient" className="nav-link">Patient</Link>
+              <li className="nav-item"> Patients
+                <ul className="display">
+                  <li><Link to="/addpatient" className="nav-link">Patient</Link> </li>
+                  <li><Link to="/patients" className="nav-link">Search Patient</Link></li>
+                </ul>
               </li>
               <li className="nav-item">
                 <Link to="/binnacle" className="nav-link">Binnacle</Link>
@@ -195,6 +188,9 @@ function Navigation({login}){
               </Route>
               <Route path="/addpatient">
                 <Addpatient />
+              </Route>
+              <Route path="/patients">
+                <AllPatients />
               </Route>
               <Route path="/login">
                 <Login />
