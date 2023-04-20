@@ -22,6 +22,7 @@ import ListUsers from "./pages/AllUsers/AllUsers";
 import MyAccount from "./pages/MyAccount/MyAccount";
 import AddPatient from "./pages/AddPatient/AddPatient";
 import AllPatients from "./pages/AllPatients/AllPatients";
+import AddUser from "./pages/AddUser/AddUser";
 
 function App() {
 
@@ -132,6 +133,7 @@ function Navigation({login}){
                 <ul className="display">
                   <li> <Link to="/" className="nav-link">Mi cuenta</Link> </li>
                   <li> <Link to="/allusers" className="nav-link">Médicos</Link> </li>
+                  <li> <Link to="/adduser" className="nav-link"> Añadir cuenta </Link> </li>
                 </ul>
               </li>
               <li className="nav-item"> Bodega
@@ -194,6 +196,9 @@ function Navigation({login}){
               </Route>
               <Route path="/login">
                 <Login />
+              </Route>
+              <Route path="/adduser">
+                <AddUser />
               </Route>
               <Route path="/">
                 <Home />

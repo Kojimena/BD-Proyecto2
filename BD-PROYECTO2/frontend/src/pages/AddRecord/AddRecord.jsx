@@ -8,6 +8,7 @@ const AddRecord = () => {
   
     //Estados globales
     const [ loggedUser, setLoggedUser ] = useState(store.get().user)
+    const [ message, setMessage ] = useState()
     const [ healthArea, setHealthArea ] = useState(0)
     const [ healthAreaName, setHealthAreaName ] = useState('')
     const [ patient, setPatient ] = useState()
@@ -136,6 +137,10 @@ const AddRecord = () => {
     console.log(body)
     const response_result = await response.json()
     console.log(response_result)
+    if(response_result.added === false) {
+      setMessage(response_result.message)
+      setWarning(true)
+    }
   }
 
   // set value for default selection
@@ -176,8 +181,8 @@ const AddRecord = () => {
     return (
     <div className="product-container-addRecord">
       {permission == false && <Popup message='No cuenta con suficientes permisos para añadir un registro al expediente de un paciente' setWarning = {setWarning} closable = {false}/>}
-      {warning == true && <Popup message='No se puede agregar un registro a un paciente fallecido' setWarning = {setWarning} closable = {true}/>}
-      {permission == true && <div className='main-container-addRecord'>
+      {warning == true && <Popup message={message} setWarning = {setWarning} closable = {true}/>}
+      {permission == true && warning == false && <div className='main-container-addRecord'>
       <h1 className="title-addrecord">Add Record</h1>
       <div className="product-info-add">
           <div>

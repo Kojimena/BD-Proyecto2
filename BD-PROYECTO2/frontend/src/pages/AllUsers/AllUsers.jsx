@@ -77,7 +77,7 @@ const AllUsers = () => {
             {permission == false && <Popup message='No cuenta con suficientes permisos para revisar el registro de personal médico' setWarning = {setWarning} closable = {false}/>}
             {warning == true && <Popup message='No se encontraron médicos con el dpi indicado' setWarning = {setWarning} closable = {true}/>}
             {permission == true && <div className='main-container'>
-                <div className="search-container">
+                <div className="search-container-allusers">
                     <p className="label-users">Buscar personal médico</p>
                     <input
                         type="search"
