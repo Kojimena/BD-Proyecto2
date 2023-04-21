@@ -21,11 +21,13 @@ const Results = () => {
         setShowTopUnits(false)
     }
 
-    const handleShowTopIllness = () => {
+    const handleShowTopIllness = async () => {
         setShowTopIllness(true)
         setShowTopasistence(false)
         setShowTopDoctors(false)
         setShowTopUnits(false)
+
+        const response = await fetch('http://3.101.148.58/results/deadliest')
     }
 
     const handleShowTopDoctors = () => {
