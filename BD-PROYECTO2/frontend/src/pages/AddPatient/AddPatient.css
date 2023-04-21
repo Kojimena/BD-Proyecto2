@@ -3,15 +3,17 @@
     display:flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #03055e;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
     font-size: 18px;
     padding: 15px;
     border-radius: 10px;
+    color: #000;
 }
 
 .label-patient{
-    color: #fff;
+    color: #000;
     font-size: 18px;
     font-weight: bold;
     display: block;
@@ -35,4 +37,11 @@
     background-color: #0000ff;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.addPatient-main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 }

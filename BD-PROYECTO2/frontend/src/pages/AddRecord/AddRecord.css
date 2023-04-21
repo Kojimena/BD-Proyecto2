@@ -8,19 +8,21 @@
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;
-    background-color: #03055e;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
     font-size: 18px;
     padding: 15px;
     border-radius: 10px;
+    color: #000;
 }
 
 .title-addrecord{
-    color: #060af5;
+    color: #000;
     font-weight: bold;
     display: block;
     padding: 10px;
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 .product-container-add{
@@ -29,7 +31,7 @@
 }
 
 .label-product{
-    color: #fff;
+    color: #000;
     font-size: 18px;
     font-weight: bold;
     display: block;
@@ -41,6 +43,7 @@
     color: #03055e;
     border-radius: 5px;
     width: 400px;
+    padding-left: 10px;
 }
 
 .dropdown-container {
@@ -85,4 +88,16 @@
     font-size: 18px;
     padding: 15px;
     border-radius: 10px;
+}
+
+.addRecord-area{
+    background-color: #fff;
+    color: #03055e;
+    border-radius: 5px;
+    height: 100px;
+    padding: 10px;
+    color-scheme: light dark;
+    border-width: 2px;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    width: 80%;
 }

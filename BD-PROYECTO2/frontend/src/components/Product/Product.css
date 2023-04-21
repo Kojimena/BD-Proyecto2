@@ -7,13 +7,14 @@
     padding: 15px;
     border-radius: 10px;
     width: 100%;
+    color: #fff;
 }
 
 .product-container{
     background-color: rgba(240, 255, 255, 0);
 }
 
-.label-product{
+.product-label-product{
     color: #fff;
     font-size: 18px;
     font-weight: bold;
@@ -21,8 +22,23 @@
     padding: 10px;
 }
 
-input{
+.product-name-input{
     background-color: #fff;
     color: #03055e;
     border-radius: 5px;
+    text-align: center;
+}
+
+.product-amount-input{
+    background-color: #fff;
+    color: #03055e;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.product-date-input{
+    background-color: #fff;
+    color: #03055e;
+    border-radius: 5px;
+    text-align: center;
 }

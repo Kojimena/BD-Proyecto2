@@ -50,11 +50,11 @@ const AddPatient = () => {
     }
 
     return (
-        <div>
+        <div className='addPatient-main-container'>
             {permission == false && <Popup message='No cuenta con suficientes permisos para añadir un paciente' setWarning = {setWarning} closable = {false}/>}
             {permission == true && <div className="patient-info">
 
-                <h1 className='title'>Añadir Paciente</h1>
+                <h1 className='title'>Añadir paciente</h1>
                 <div>
                     <label className="label-patient">DPI</label>
                     <input
@@ -64,7 +64,7 @@ const AddPatient = () => {
                     />
                 </div>
                 <div>
-                    <label className="label-patient">Full Name</label>
+                    <label className="label-patient">Nombre completo</label>
                     <input
                         type="text"
                         className="patient-input"
@@ -72,7 +72,7 @@ const AddPatient = () => {
                     />
                 </div>
                 <div>
-                    <label className="label-patient">Height</label>
+                    <label className="label-patient">Estatura (en metros)</label>
                     <input
                         type="text"
                         className="patient-input"
@@ -80,7 +80,7 @@ const AddPatient = () => {
                     />
                 </div>
                 <div>
-                    <label className="label-patient">Weight</label>
+                    <label className="label-patient">Peso (en kg)</label>
                     <input
                         type="text"
                         className="patient-input"
@@ -88,7 +88,7 @@ const AddPatient = () => {
                     />
                 </div>
                 <div>
-                    <label className="label-patient">Phone Number</label>
+                    <label className="label-patient">Teléfono</label>
                     <input
                         type="text"
                         className="patient-input"
@@ -96,7 +96,7 @@ const AddPatient = () => {
                     />
                 </div>
                 <div>
-                    <label className="label-patient">Addictions</label>
+                    <label className="label-patient">Adicciones</label>
                     <input
                         type="text"
                         className="patient-input"
@@ -104,7 +104,7 @@ const AddPatient = () => {
                     />
                 </div>
                 <div>
-                    <label className="label-patient">Address</label>
+                    <label className="label-patient">Dirección</label>
                     <input
                         type="text"
                         className="patient-input"
@@ -112,7 +112,7 @@ const AddPatient = () => {
                     />
                 </div>
                 <div>
-                    <label className="label-patient">Hereditary Diseases</label>
+                    <label className="label-patient">Enfermedades hereditarias</label>
                     <input
                         type="text"
                         className="patient-input"
@@ -124,7 +124,7 @@ const AddPatient = () => {
                     e.preventDefault() 
                     postPatient()
                   }
-                } > Add </button>
+                } > Añadir </button>
             </div>}
         </div>
     )

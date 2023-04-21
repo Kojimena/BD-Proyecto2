@@ -6,28 +6,28 @@ const Product = ({name, amount, date}) => (
     <div className="product-container">
         <div className="product-info">
             <div>
-                <label className="label-product">Product</label>
+                <label className="product-label-product">Product</label>
                 <input
                 type="text"
-                className="name-input"
+                className="product-name-input"
                 value={name}
                 readOnly
                 />
             </div>
             <div>
-                <label className="label-product">Amount</label>
+                <label className="product-label-product">Amount</label>
                 <input
                 type="text"
-                className="amount-input"
+                className="product-amount-input"
                 value={amount}
                 readOnly
                 />
             </div>
             <div>
-                <label className="label-product">Due date</label>
+                <label className="product-label-product">Due date</label>
                 <input
                 type="text"
-                className="date-input"
+                className="product-date-input"
                 value={date}
                 readOnly
                 /> 

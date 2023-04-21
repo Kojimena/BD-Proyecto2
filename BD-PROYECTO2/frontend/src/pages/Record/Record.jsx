@@ -45,6 +45,7 @@ const Record = () => {
   return (
     <div className='record-search-main-container'>
     {warningPermissions && <Popup message={'No cuenta con suficientes permisos para visualizar los registros médicos'} setWarning={setWarningPermissions} closable={false}/>}
+    
     {permission == true && <div className="record-search">
       {selectedRecord === null && <div className="search-container">
         <p className="label-search-record">Buscar expedientes</p>

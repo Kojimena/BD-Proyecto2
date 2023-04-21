@@ -8,7 +8,7 @@ const AccountInventory = ({ user }) => {
     return(
         <div className='accountinventory'>
             <div className='accountinventory-main-container'>
-                <h1>Bienvenido, {user.dpi}</h1>
+                <h1>Bienvenido</h1>
                 <label className="label-login">DPI</label>
                 <input 
                     type="text"
