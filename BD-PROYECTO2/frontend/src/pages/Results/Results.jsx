@@ -12,51 +12,59 @@ import HealthCenter from "../../components/HealthCenter/HealthCenter"
 //Necesitamos las 3 unidades de salud (nombre, cantidad de pacientes) que máspacientes atienden
 const Results = () => {
 
-    const [showTopasistence, setShowTopasistence] = useState(false);
+    const [ showTopAssistance, setShowTopAssistance ] = useState(false)
     const [showTopIllness, setShowTopIllness] = useState(false);
     const [showTopDoctors, setShowTopDoctors] = useState(false);
+    const [ healthAreaSelect, setHealthAreaSelect ] = useState(null)
     const [showTopUnits, setShowTopUnits] = useState(false);
     const [ queryResult, setQueryResult ] = useState(null);
-    const [ healthAreaId, setHealthAreaId ] = useState(null);
+    const [ opcionesUS, setOpcionesUS ] = useState(null)
+
     let i = 0;
 
-    const handleShowTopAsistence = async () => {
+    const getHealthAreas = async () => {
+        const response = await fetch('http://3.101.148.58/healthcenter')
+        const options = await response.json()
+        console.log(options)
+        setOpcionesUS(() => options)
+      }
+
+    const handleShowTopAsistence = async (healthUnit) => {
         setQueryResult(() => null)
-        const healthAreaName = prompt("Ingrese el nombre de la unidad de salud")
-        setShowTopasistence(() => true)
-        setShowTopIllness(() => false)
-        setShowTopDoctors(() => false)
-        setShowTopUnits(() => false)
 
         const healthUnitBody = {
-            nombre : healthAreaName
+            nombre : healthUnit
         }
 
-        const response = await fetch('http://3.101.148.58/healthcenter/getByName/', {
+        console.log('body a mandar: ', )
+
+        const huIdResponse = await fetch('http://3.101.148.58/healthcenter/getByName/', {
             method: 'POST',
             body: JSON.stringify(healthUnitBody),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        const datos = await response.json()
-        console.log(datos, 'datos') 
-        setHealthAreaId(() => datos.healthcenter.id)
-        console.log(datos.healthcenter.id, 'ID')
+        const respuestaIdUS = await huIdResponse.json()
+        console.log(respuestaIdUS, 'datos')
+        console.log(respuestaIdUS.healthcenter.id, 'ID')
 
-        const response2 = await fetch(`http://3.101.148.58/results/most_records/${datos.healthcenter.id}`)
-        const datos2 = await response2.json()
-        console.log(datos2, 'datos2')
-        setQueryResult(datos2.result)
+        const resultsHUResponse = await fetch(`http://3.101.148.58/results/most_records/${respuestaIdUS.healthcenter.id}`)
+        const resultadosUS = await resultsHUResponse.json()
+        console.log(resultadosUS, 'datos2')
+        setQueryResult(resultadosUS.result)
+        debugger
+        setHealthAreaSelect(() => true)
         
     }
 
     const handleShowTopIllness = async () => {
+        setShowTopAssistance(() => false)
         setQueryResult(() => null)
-        setShowTopIllness(true)
-        setShowTopasistence(false)
-        setShowTopDoctors(false)
-        setShowTopUnits(false)
+        setShowTopIllness(() => true)
+        setHealthAreaSelect(() => null)
+        setShowTopDoctors(() => false)
+        setShowTopUnits(() => false)
 
         const response = await fetch('http://3.101.148.58/results/deadliest')
         const datos = await response.json()
@@ -66,11 +74,12 @@ const Results = () => {
     }
 
     const handleShowTopDoctors = async () => {
+        setShowTopAssistance(() => false)
         setQueryResult(() => null)
-        setShowTopDoctors(true)
-        setShowTopIllness(false)
-        setShowTopasistence(false)
-        setShowTopUnits(false)
+        setShowTopDoctors(() => true)
+        setShowTopIllness(() => false)
+        setHealthAreaSelect(() => null)
+        setShowTopUnits(() => false)
 
         const response = await fetch('http://3.101.148.58/results/most_patients')
         const datos = await response.json()
@@ -78,30 +87,41 @@ const Results = () => {
     }
 
     const handleShowTopUnits = async () => {
+        setShowTopAssistance(() => false)
         setQueryResult(() => null)
-        setShowTopUnits(true)
-        setShowTopIllness(false)
-        setShowTopasistence(false)
-        setShowTopDoctors(false)
+        setShowTopUnits(() => true)
+        setShowTopIllness(() => false)
+        setHealthAreaSelect(() => null)
+        setShowTopDoctors(() => false)
 
         const response = await fetch('http://3.101.148.58/results/most_patients/healthcenters')
         const datos = await response.json()
         setQueryResult(datos.result)
     }
 
+    useEffect(() => {
+        getHealthAreas()
+    },[])
+
 
 
     return (
     <div className="results-container">
         <div className="results-header-buttons">
-            <button className="button-results" onClick={() => handleShowTopIllness() }>Top 10 enfermedades</button>
-            <button className="button-results" onClick={() => handleShowTopDoctors() }>Top 10 médicos con más pacientes</button>
-            <button className="button-results" onClick={() => handleShowTopAsistence()}>Top 5 pacientes con más asistencias</button>
+            <button className="button-results" onClick={() => handleShowTopIllness() }>Enfermedades más mortales</button>
+            <button className="button-results" onClick={() => handleShowTopDoctors() }>Médicos con más pacientes</button>
+            <button className="button-results" onClick={() => {
+                setShowTopAssistance(() => true)
+                setShowTopUnits(() => false)
+                setShowTopDoctors(() => false)
+                setShowTopIllness(() => false)
+                }}>Pacientes con más asistencias</button>
             <button className="button-results" onClick={() => handleShowTopUnits()}>Unidades de salud con más pacientes</button>
         </div>
 
         {showTopIllness && (
                 <div className="results-display">
+                    <h1>Enfermedades más mortales</h1>
                 {
                     
                     queryResult?.map((result) => {
@@ -115,6 +135,7 @@ const Results = () => {
 
         {showTopDoctors && (
                 <div className="results-display">
+                    <h1>Médicos con más pacientes</h1>
                 {
                     queryResult?.map((result) => {
                         i++
@@ -125,9 +146,25 @@ const Results = () => {
             )
         }
 
-        {showTopasistence && (
+        {showTopAssistance && (
                 <div className="results-display">
-                {
+                    <h1>Pacientes con más asistencias</h1>
+                    <select 
+                        onChange = {e => {
+                        handleShowTopAsistence(e.target.value)}
+                        }
+                        id="area"
+                        placeholder="Selecciona un área de salud"
+                        required
+                        className="inventory-select">
+                        <option value="" selected disabled hidden>Elija una unidad de salud</option>
+                    {
+                        opcionesUS.map((option) => {
+                        return <option value={option} key={option}>{option}</option>
+                        } )
+                    }
+                    </select>
+                {healthAreaSelect !== null &&
                     queryResult?.map((result) => {
                         i++
                         return <Patient 
@@ -148,6 +185,7 @@ const Results = () => {
 
         {showTopUnits && (
                 <div className="results-display">
+                    <h1>Unidades de salud con más pacientes</h1>
                 {
                     queryResult?.map((result) => {
                         return <HealthCenter nombre={result.nombre_unidad_salud} tipo={result.tipo} direccion={result.direccion} cantidad={result.cantidad_atendidos}/>

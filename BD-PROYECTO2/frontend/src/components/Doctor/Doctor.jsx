@@ -9,12 +9,12 @@ const Doctor = ({pos, nombre, cantidad}) => {
                 <img src={docicon} alt="doctor-icon" className="doctor-icon"/>
             <div className="doctor-info">
                 <div className="doctor-info-title">
-                    <div className="doctor-info-name">
-                        <p > Doctor </p>
+                    <div>
+                        <p className="doctor-info-header"> Doctor </p>
                         <p className="doctor-info-paragraph"> {nombre} </p>
                     </div>
-                    <div className="doctor-info-quant">
-                        <p > Cantidad </p>
+                    <div>
+                        <p className="doctor-info-header"> Cantidad </p>
                         <p className="doctor-info-paragraph"> {cantidad} </p>
                     </div>
                 </div>

@@ -107,7 +107,7 @@ function Navigation(){
                 <Link to="/binnacle" className="nav-link">Bitácora</Link>
               </li>
               <li className="nav-item">
-                <Link to="/results" className="nav-link">Estadísticas</Link>
+                <Link to="/results" className="nav-link">Reportes</Link>
               </li>
               <li className="nav-item">
                 <Link to="/logout" className="nav-link">Cerrar sesión</Link>

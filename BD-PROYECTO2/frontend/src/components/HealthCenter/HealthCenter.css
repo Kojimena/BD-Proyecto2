@@ -1,7 +1,7 @@
 .healthcenter-info {
     display: flex;
     justify-content: center;
-    width: 400px;
+    width: 80%;
     height: 400px;
     background-color: azure;
     margin-bottom: 12px;
@@ -9,12 +9,15 @@
     background-color: rgba(0, 0, 255, 0.33);
     box-shadow: darkgray 0px 0px 10px;
     color: white;
+    margin-top: 20px;
 }
 
 .healthcenter-info-title {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    width: 80%;
+    margin-top: 20px;
 }
 
 .healthcenter-info-name {
@@ -45,4 +48,11 @@ img.healthcenter-icon {
     width: 50px;
     height: 50px;
     align-self: center;
+}
+
+.healthcenter-info-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

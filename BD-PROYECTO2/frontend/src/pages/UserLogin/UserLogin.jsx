@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useStoreon } from 'storeon/react'
+import Popup from "../../components/Popup/Popup";
 import "./UserLogin.css"
 import { 
   Redirect,
@@ -18,6 +19,7 @@ const UserLogin = () => {
 
   const [ dpiInput, setDpiInput ] = useState('')
   const [ passInput, setPassInput ] = useState('')
+  const [ warning, setWarning ] = useState(false)
 
   const { dispatch } = useStoreon('user')
 
@@ -47,6 +49,7 @@ const UserLogin = () => {
     }
     else {
       console.log('Credenciales incorrectas')
+      setWarning(() => true)
     }
   }
 
@@ -56,6 +59,7 @@ const UserLogin = () => {
   
   return (
     <div className="login-container">
+      {warning && <Popup message = 'Credenciales incorrectas. Inténtelo de nuevo' setWarning={setWarning} closable={true}/>}
       <h1 className="main-title">Sistema de servicios médicos</h1>
       <img className = "welcome-img" src = {logo}></img>
       <h2 className="login-title">Iniciar sesión</h2>
