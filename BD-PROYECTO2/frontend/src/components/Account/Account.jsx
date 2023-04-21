@@ -66,7 +66,8 @@ const Account = ( {user, history, myaccount} ) => {
             dpi: dpi,
             direccion: updatedAddress,
             telefono: updatedPhone,
-            especialidad: especialidad
+            especialidad: especialidad,
+            dpi_auth: loggedUser.dpi
         }
 
         console.log('bodyInfo: ', bodyInfo)
@@ -94,7 +95,8 @@ const Account = ( {user, history, myaccount} ) => {
 
             const bodyWork = {
                 medico_dpi: dpi,
-                unidad_salud_id: +actualizarUnidadSalud
+                unidad_salud_id: +actualizarUnidadSalud,
+                dpi_auth: loggedUser.dpi
             }
 
             console.log('Body a mandar en el PUT: ', bodyWork)

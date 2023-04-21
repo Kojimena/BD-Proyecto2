@@ -86,10 +86,10 @@
 }
 
 .nav-item {
-  margin: 0;
+  margin: 5px;
   display: flex;
   justify-content: center;
-  width: 100px;
+  width: 120px;
 }
 
 .nav-link {
@@ -142,4 +142,8 @@ nav {
 .display {
 top: 30px;
 z-index: 2;
+}
+
+.navbar-logo {
+  align-self: flex-start;
 }

@@ -176,10 +176,10 @@ const AddRecord = () => {
       {permission == false && <Popup message='No cuenta con suficientes permisos para añadir un registro al expediente de un paciente' setWarning = {setWarning} closable = {false}/>}
       {warning == true && <Popup message={message} setWarning = {setWarning} closable = {true}/>}
       {permission == true && warning == false && <div className='main-container-addRecord'>
-      <h1 className="title-addrecord">Add Record</h1>
       <div className="product-info-add">
+      <h1 className="title-addrecord">Añadir registro</h1>
           <div>
-              <label className="label-product">Patient's DPI</label>
+              <label className="label-product">DPI del paciente</label>
               <input
               type="text"
               className="record-input"
@@ -187,7 +187,7 @@ const AddRecord = () => {
               />
           </div>
           <div>
-              <label className="label-product">Ilness</label>
+              <label className="label-product">Enfermedad</label>
               <input
               type="text"
               className="record-input"
@@ -195,44 +195,39 @@ const AddRecord = () => {
               />
           </div>
           <div>
-          <label className="label-product"> Evolution </label>
-            <input
-            type="text"
-            className="record-input"
+          <label className="label-product"> Evolución </label>
+            <textarea
+            className="addRecord-area"
             onChange={e => setEvolucion(e.target.value)}
             />
           </div>
           <div>
-              <label className="label-product">Medical exams </label>
-              <input
-              type="text"
-              className="record-input"
+              <label className="label-product">Exámenes realizados</label>
+              <textarea
+              className="addRecord-area"
               pattern="^[a-zA-Z0-9]*(,[a-zA-Z0-9]+)*$"
-              placeholder='feces, urine, triglycerides, endoscopies, etc'
               onChange={e => setExamenes(e.target.value)}
               />
           </div>
           <div>
-              <label className="label-product">Surgeries</label>
-              <input
-              type="text"
-              className="record-input"
+              <label className="label-product">Cirugías realizadas</label>
+              <textarea
+              className="addRecord-area"
               onChange={e => setCirugias(e.target.value)}
               /> 
           </div> 
           <div>
-              <label className="label-product">Diagnoses</label>
-              <input
-              type="text"
-              className="record-input"
+              <label className="label-product">Diagnósticos</label>
+              <textarea
+              className="addRecord-area"
               onChange={e => setDiagnosticos(e.target.value)}
               /> 
           </div> 
           <div className='dropdown-container'>
-              <label className="label-product">Medicine</label>
+              <label className="label-product">Medicamentos administrados</label>
               <Select
                 className="dropdown"
-                placeholder="Select Option"
+                placeholder="Seleccione los medicamentos administrados"
                 value={data.filter(obj => selectedValue.includes(obj.value))} // set selected values
                 options={data} // set list of the data
                 onChange={handleChange} // assign onChange function
@@ -251,7 +246,7 @@ const AddRecord = () => {
           postRecord()
         }
       }
-      > Add  </button>
+      > Añadir </button>
       </div>}
     </div>
 )}

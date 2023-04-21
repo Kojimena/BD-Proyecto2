@@ -50,7 +50,7 @@ const AddPatient = () => {
     }
 
     return (
-        <div>
+        <div className='addPatient-main-container'>
             {permission == false && <Popup message='No cuenta con suficientes permisos para añadir un paciente' setWarning = {setWarning} closable = {false}/>}
             {permission == true && <div className="patient-info">
 

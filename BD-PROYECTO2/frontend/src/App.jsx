@@ -91,26 +91,26 @@ function Navigation(){
                   <li><Link to="/add" className="nav-link">Añadir producto</Link></li>
                 </ul>
               </li>
-              <li className="nav-item"> Records
+              <li className="nav-item"> Expedientes
                 <ul className="display">
                   <li><Link to="/users" className="nav-link">Search record</Link> </li>
                   <li><Link to="/addrecord" className="nav-link">Add record</Link></li>
                 </ul>
               </li>
-              <li className="nav-item"> Patients
+              <li className="nav-item"> Pacientes
                 <ul className="display">
-                  <li><Link to="/addpatient" className="nav-link">Patient</Link> </li>
-                  <li><Link to="/patients" className="nav-link">Search Patient</Link></li>
+                  <li><Link to="/addpatient" className="nav-link">Añadir paciente</Link> </li>
+                  <li><Link to="/patients" className="nav-link">Buscar paciente</Link></li>
                 </ul>
               </li>
               <li className="nav-item">
-                <Link to="/binnacle" className="nav-link">Binnacle</Link>
+                <Link to="/binnacle" className="nav-link">Bitácora</Link>
               </li>
               <li className="nav-item">
-                <Link to="/results" className="nav-link">Results</Link>
+                <Link to="/results" className="nav-link">Estadísticas</Link>
               </li>
               <li className="nav-item">
-                <Link to="/logout" className="nav-link">Log out</Link>
+                <Link to="/logout" className="nav-link">Cerrar sesión</Link>
               </li>
             </ul>
           </nav>
