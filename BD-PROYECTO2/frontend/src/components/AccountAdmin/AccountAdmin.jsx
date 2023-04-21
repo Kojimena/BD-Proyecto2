@@ -8,7 +8,7 @@ const AccountAdmin = ( {user} ) => {
     return(
         <div className='accountadmin'>
             <div className='accountadmin-main-container'>
-                <h1>Bienvenido, {user.dpi}</h1>
+                <h1>Bienvenido</h1>
                 <label className="label-login">DPI</label>
                 <input 
                     type="text"
