@@ -115,6 +115,7 @@ const AddProduct = () => {
 
     console.log('body a enviar: ', getMedicinesBody)
 
+    //TODO: Cambiar la url de la API POR UN DISTINCT 
       const responseMedicinesHU = await fetch('http://3.101.148.58/inventory/medicines/', {
             method: 'POST',
             body: JSON.stringify(getMedicinesBody),

@@ -7,7 +7,7 @@ import "./SignIn.css"
   //Teniendo dpi, se necesita hacer un get de los usuarios que hay, para verificar que no se crea un usuario 2 veces
 //Si area de salud existe y no existe el dpi necesitamos hacer un post del usuario y recibir un response si se creo el usuario o no
 
-const SignIn = ( {setLogin} ) => {
+const SignIn = ( ) => {
 
   const [ opciones, setOpciones ] = useState([])
   const [ dpiInput, setDpiInput ] = useState('')
@@ -57,7 +57,6 @@ const SignIn = ( {setLogin} ) => {
 
     if (response_result.created) {
       alert("Usuario creado exitosamente")
-      setLogin("Navigation")
     }
     else {
       alert("Error al crear usuario")

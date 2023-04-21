@@ -134,7 +134,7 @@ const Inventory = () => {
            warning == false && productos != null && <div> 
           {
           productos.map((product) => {
-            return <Product key={product.id} name={product.detalle} amount={product.cantidad_en_bodega} date={product.fecha_expiracion} />
+            return <Product key={product.id} name={product.detalle} amount={product.cantidad_en_bodega} date={product.fecha_expiracion == null ? "" : product.fecha_expiracion } />
           })
           }
         </div>

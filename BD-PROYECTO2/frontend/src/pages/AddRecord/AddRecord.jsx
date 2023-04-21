@@ -168,13 +168,6 @@ const AddRecord = () => {
       color: 'black',
       width: '420px'
     }),
-    menu: (base) => ({
-      ...base,
-      width: '420px', // Fixed width for the menu
-      height: '200px', // Maximum height for the menu
-      overflowY: 'scroll', // Add scrollbar if necessary
-      marginTop: '-185px'
-    }),
     // Add more customizations here for other parts of the Select component
   };
 
@@ -240,11 +233,14 @@ const AddRecord = () => {
               <Select
                 className="dropdown"
                 placeholder="Select Option"
-                styles={customStyles} // pass the custom styles
                 value={data.filter(obj => selectedValue.includes(obj.value))} // set selected values
                 options={data} // set list of the data
                 onChange={handleChange} // assign onChange function
                 isMulti
+                menuPosition="fixed"
+                maxMenuHeight={150}
+                styles={customStyles}
+                defaultMenuIsOpen
                 isClearable
               />
           </div> 
