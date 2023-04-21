@@ -1,5 +1,6 @@
 import React from "react"
 import "./HealthCenter.css"
+import hosp from "../../assets/hospital-icon.svg"
 
 const HealthCenter = ({nombre, tipo, direccion, cantidad}) => {
 
@@ -7,21 +8,21 @@ const HealthCenter = ({nombre, tipo, direccion, cantidad}) => {
         <div className="healthcenter-info-container"> 
         <div className="healthcenter-info">
             <div className="healthcenter-info-title">
+            <img src={hosp} alt="hospital-icon" className="healthcenter-icon"/>
                 <div className="healthcenter-info-name"> 
-                <h2 className="healthcenter-info-title-name"> Unidad de Salud: </h2>
-                <p className="healthcenter-info-paragraph"> {nombre} </p>
+                <h2 className="healthcenter-info-paragraph"> { nombre} </h2>
             </div>
             <div className="healthcenter-info-type">
-                <p className="healthcenter-info-title-type"> Tipo: </p>
-                <p className="healthcenter-info-paragraph"> {tipo} </p>
+                <h2 className="healthcenter-info-title-type"> Tipo: </h2>
+                <p className="healthcenter-info-paragraph"> { tipo} </p>
             </div>
             <div className="healthcenter-info-address"> 
-                <p className="healthcenter-info-title-address"> Dirección: </p>
-                <p className="healthcenter-info-paragraph"> {direccion} </p>
+                <h2 className="healthcenter-info-title-address"> Dirección: </h2>
+                <p className="healthcenter-info-paragraph"> { direccion} </p>
             </div>
             <div className="healthcenter-info-quantity">
-                <p className="healthcenter-info-title-quantity"> Cantidad: </p>
-                <p className="healthcenter-info-paragraph"> {cantidad} </p>
+                <h2 className="healthcenter-info-title-quantity"> Cantidad: </h2>
+                <p className="healthcenter-info-paragraph"> { cantidad} </p>
             </div>
             </div>
         </div>

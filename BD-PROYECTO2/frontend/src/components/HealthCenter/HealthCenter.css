@@ -1,13 +1,48 @@
 .healthcenter-info {
-  display: flex;
-  justify-content: space-evenly;
-  width: 400px;
-  height: 200px;
-  background-color: azure;
-  margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+    background-color: azure;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 255, 0.33);
+    box-shadow: darkgray 0px 0px 10px;
+    color: white;
 }
 
-.healthcenter-info-title{
-    display: flex ;
-    
+.healthcenter-info-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.healthcenter-info-name {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.healthcenter-info-type {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.healthcenter-info-address {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.healthcenter-info-quantity {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+img.healthcenter-icon {
+    width: 50px;
+    height: 50px;
+    align-self: center;
 }
