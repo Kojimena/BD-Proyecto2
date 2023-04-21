@@ -56,7 +56,7 @@ const Record = () => {
 
       {patient !== null && selectedRecord !== null && 
         <div className='record-info-container'>
-          <PersonRecord/>
+          <PersonRecord record = {selectedRecord} setSelectedRecord={setSelectedRecord}/>
         </div>}
     </div>
   )

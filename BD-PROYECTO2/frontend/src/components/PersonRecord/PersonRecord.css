@@ -1,7 +1,8 @@
 .person-record-container{
+    display: flex;
+    flex-direction: column;
     width: 800px;
     justify-content: center;
-    align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
     padding: 50px;
@@ -19,34 +20,7 @@
     font-weight: bold;
     display: block;
     padding: 10px;
-}
-
-.label-product div:nth-child(1){
-    grid-area: 1/1/2/2;
-}
-
-.label-product div:nth-child(2){
-    grid-area: 2/1/3/2;
-}
-
-.label-product div:nth-child(3){
-    grid-area: 1/2/3/3;
-}
-
-.label-product div:nth-child(4){
-    grid-area: 1/3/2/4;
-}
-
-.label-product div:nth-child(5){
-    grid-area: 2/3/3/4;
-}
-
-.label-product div:nth-child(6){
-    grid-area: 1/4/3/5;
-}
-
-.label-product div:nth-child(7){
-    grid-area: 2/4/3/5;
+    align-self: flex-start;
 }
 
 .person-input{
@@ -54,4 +28,68 @@
     color: #03055e;
     border-radius: 5px;
     width: 100%;
+}
+
+.person-record-title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.person-record-section{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.person-input {
+    padding-left: 10px;
+}
+
+.person-record-medicines-list {
+    flex-direction: column;
+    display: flex;
+    align-items: start;
+}
+
+.person-record-doctor{
+    align-self: flex-start;
+    padding-left: 10px;
+}
+
+.person-record-back{
+    width: 25px;
+    height: 25px;
+    transform: rotate(180deg);
+    margin-right: 10px;
+}
+
+.person-go-back-container{
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    cursor: pointer;
+}
+
+.person-record-area{
+    background-color: #fff;
+    color: #03055e;
+    border-radius: 5px;
+    height: 100px;
+    width: 100%;
+    padding: 10px;
+    color-scheme: light dark;
+    border-width: 2px;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.person-record-address{
+    align-self: flex-start;
+    padding-left: 10px;
+    margin-top: 0;
+}
+
+.person-record-hu{
+    align-self: flex-start;
+    padding-left: 10px;
+    margin-bottom: 0;
 }

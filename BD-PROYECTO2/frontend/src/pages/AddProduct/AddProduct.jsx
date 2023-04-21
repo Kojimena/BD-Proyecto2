@@ -7,7 +7,7 @@ import './AddProduct.css'
 const AddProduct = () => {
 
     const [ opcionesUS, setOpcionesUS ] = useState([])
-    const [ opcionesMedicinas, setOpcionesMedicinas ] = useState([])
+    const [ opcionesMedicinas, setOpcionesMedicinas ] = useState(null)
     const [ opcionesUSMedicinas, setopcionesUSMedicinas ] = useState([])
     const [ healthAreaInput, setHealthAreaInput ] = useState('')
     const [ productInput, setProductInput ] = useState('')
@@ -109,21 +109,35 @@ const AddProduct = () => {
     const getMedicinesHU = async (e) => {
 
       console.log('unidad a buscar: ', e.target.value)
-      const getMedicinesBody = {
-        unidad_salud: e.target.value
+      const getHUBody = {
+        nombre: e.target.value
       }
 
-    console.log('body a enviar: ', getMedicinesBody)
+      console.log('body a enviar: ', e.target.value)
 
-      const responseMedicinesHU = await fetch('http://3.101.148.58/inventory/medicines/', {
+      const responseHU = await fetch(`http://3.101.148.58/healthcenter/getByName/`, {
             method: 'POST',
-            body: JSON.stringify(getMedicinesBody),
+            body: JSON.stringify(getHUBody),
             headers: {
               'Content-Type': 'application/json'
             }
       })
 
-      const medicinasDesplegar = await responseMedicinesHU.json()
+      const unidadSaludId = await responseHU.json()
+      const id = unidadSaludId.healthcenter.id
+      
+
+      const responseMedicinesHU = await fetch(`http://3.101.148.58/inventory/medicines/${id}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+      })
+
+      const medicinas = await responseMedicinesHU.json()
+      const medicinasDesplegar = medicinas.medicines
+
+      console.log(medicinasDesplegar)
 
       setOpcionesMedicinas(Array.isArray(medicinasDesplegar) ? medicinasDesplegar : null)
 
@@ -166,7 +180,7 @@ const AddProduct = () => {
               <option value="" selected disabled hidden>Elija un producto</option>
             {
               opcionesMedicinas?.map((option) => {
-                return <option value={option.detalle} key={option.detalle}>{option.detalle}</option>
+                return <option value={option} key={option}>{option}</option>
               } )
             }
             </select>
