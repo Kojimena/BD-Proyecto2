@@ -1,49 +1,41 @@
 import React from "react"
 import "./Patient.css"
 
-const Patient = () => (
+const Patient = ({nombre, cantidadExpedientes, estatura, peso, addicciones, enfermedadesHereditarias, imc}) => (
 
-    <div className="patient-info">
-        <label className="label-patient">DPI</label>
-        <input
-            type="text"
-            className="patient-input"
-        />
-        <label className="label-patient">Full Name</label>
-        <input
-            type="text"
-            className="patient-input"
-        />
-        <label className="label-patient">Height</label>
-        <input
-            type="text"
-            className="patient-input"
-        />
-        <label className="label-patient">Weight</label>
-        <input
-            type="text"
-            className="patient-input"
-        />
-        <label className="label-patient">Phone Number</label>
-        <input
-            type="text"
-            className="patient-input"
-        />
-        <label className="label-patient">Addictions</label>
-        <input
-            type="text"
-            className="patient-input"
-        />
-        <label className="label-patient">Address</label>
-        <input
-            type="text"
-            className="patient-input"
-        />
-        <label className="label-patient">Hereditary Diseases</label>
-        <input
-            type="text"
-            className="patient-input"
-        />
+    <div className="patient-info-container">
+        <div className="first-row-patient">
+            <div className="patient-info-separator">
+                <label className="label-patient">Full Name</label>
+                <p>{nombre}</p>
+            </div>
+            <div className="patient-info-separator">
+                <label className="label-patient">Height</label>
+                <p>{estatura}</p>
+            </div>
+            <div className="patient-info-separator">
+                <label className="label-patient">Weight</label>
+                <p>{peso}</p>
+            </div>
+            <div className="patient-info-separator">
+                <label className="label-patient">IMC</label>
+                <p>{imc}</p>
+            </div>
+        </div>
+        <div className="second-row-patient">
+            <div className="patient-info-separator">
+                <label className="label-patient">Cantidad de expedientes</label>
+                <p>{cantidadExpedientes}</p>
+            </div>
+            <div className="patient-info-separator">
+                <label className="label-patient">Addictions</label>
+                <p>{addicciones}</p>
+            </div>
+            <div className="patient-info-separator">
+                <label className="label-patient">Hereditary Diseases</label>
+                <p>{enfermedadesHereditarias}</p>
+            </div>
+        </div>
     </div>
 )
 export default Patient

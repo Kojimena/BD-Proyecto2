@@ -1,6 +1,10 @@
 import React from "react"
 import "./Results.css"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import Disease from "../../components/Disease/Disease"
+import Doctor from "../../components/Doctor/Doctor"
+import Patient from "../../components/Patient/Patient"
+import HealthCenter from "../../components/HealthCenter/HealthCenter"
 
 //Necesitamos el top 10 enfermedades (nombre) más mortales (verificar status del paciente como fallecido)
 //Necesitamos el top 10 medicos (dpi, nombre, No. Pacientes) con más pacientes
@@ -12,14 +16,51 @@ const Results = () => {
     const [showTopIllness, setShowTopIllness] = useState(false);
     const [showTopDoctors, setShowTopDoctors] = useState(false);
     const [showTopUnits, setShowTopUnits] = useState(false);
+    const [ queryResult, setQueryResult ] = useState([]);
+    const [ healthAreaId, setHealthAreaId ] = useState();
+    let i = 0;
 
-    const handleShowTopAsistence = () => {
-        prompt("Ingrese el nombre de la unidad de salud")
+    const handleShowTopAsistence = async () => {
+        const healthAreaName = prompt("Ingrese el nombre de la unidad de salud")
         setShowTopasistence(true)
         setShowTopIllness(false)
         setShowTopDoctors(false)
         setShowTopUnits(false)
+
+        const body = {
+            nombre : healthAreaName
+        }
+
+        const response = await fetch('http://3.101.148.58/healthcenter/getByName/', {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const datos = await response.json()
+        console.log(datos, 'datos') 
+        setHealthAreaId(datos.healthcenter.id)
+        console.log(datos.healthcenter.id, 'ID')
+        
     }
+
+    const getTopAsistence = async () => {
+        const response2 = await fetch(`http://3.101.148.58/results/most_records/${healthAreaId}`)
+        const datos2 = await response2.json()
+        console.log(datos2, 'datos2')
+        setQueryResult(datos2.result)
+    }
+
+
+    useEffect(() => {
+        console.log(healthAreaId, 'healthAreaId USEEFEECT')
+        if (healthAreaId !== undefined) {
+            console.log(healthAreaId, 'healthAreaId')
+            getTopAsistence();
+
+        }
+    }, [healthAreaId]);
 
     const handleShowTopIllness = async () => {
         setShowTopIllness(true)
@@ -28,20 +69,32 @@ const Results = () => {
         setShowTopUnits(false)
 
         const response = await fetch('http://3.101.148.58/results/deadliest')
+        const datos = await response.json()
+        setQueryResult(datos.result)
+        console.log(datos, 'datos')
+        console.log(queryResult, 'queryResult')        
     }
 
-    const handleShowTopDoctors = () => {
+    const handleShowTopDoctors = async () => {
         setShowTopDoctors(true)
         setShowTopIllness(false)
         setShowTopasistence(false)
         setShowTopUnits(false)
+
+        const response = await fetch('http://3.101.148.58/results/most_patients')
+        const datos = await response.json()
+        setQueryResult(datos.result)
     }
 
-    const handleShowTopUnits = () => {
+    const handleShowTopUnits = async () => {
         setShowTopUnits(true)
         setShowTopIllness(false)
         setShowTopasistence(false)
         setShowTopDoctors(false)
+
+        const response = await fetch('http://3.101.148.58/results/most_patients/healthcenters')
+        const datos = await response.json()
+        setQueryResult(datos.result)
     }
 
 
@@ -49,29 +102,53 @@ const Results = () => {
     return (
     <div className="results-container">
         <div className="results-header-buttons">
-            <button className="button-results" onClick={handleShowTopIllness}>Top 10 enfermedades</button>
-            <button className="button-results" onClick={handleShowTopDoctors}>Top 10 médicos con más pacientes</button>
+            <button className="button-results" onClick={handleShowTopIllness }>Top 10 enfermedades</button>
+            <button className="button-results" onClick={handleShowTopDoctors }>Top 10 médicos con más pacientes</button>
             <button className="button-results" onClick={handleShowTopAsistence}>Top 5 pacientes con más asistencias</button>
             <button className="button-results" onClick={handleShowTopUnits}>Unidades de salud con más pacientes</button>
         </div>
 
         {showTopIllness && (
                 <div className="results-display">
-                    <h2>Results 1</h2>
-                    </div>
+                {
+                    
+                    queryResult.map((result) => {
+                        i++
+                        return <Disease pos = {i} nombre={result.nombre_enfermedad} cantidad={result.casos}/>
+                    })
+                }
+                </div>
             )
         }
 
         {showTopDoctors && (
                 <div className="results-display">
-                    <h2>Results 2</h2>
-                    </div>
+                {
+                    queryResult.map((result) => {
+                        i++
+                        return <Doctor pos={i} nombre={result.nombre} cantidad={result.cantidad_atendidos}/>
+                    })
+                }  
+                </div>
             )
         }
 
         {showTopasistence && (
                 <div className="results-display">
-                    <h2>Results 3</h2>
+                {
+                    queryResult.map((result) => {
+                        i++
+                        return <Patient 
+                            nombre={result.nombre} 
+                            cantidadExpedientes={result.cantidad_de_expedientes} 
+                            estatura={result.estatura}
+                            peso={result.peso}
+                            addicciones={result.addicciones}
+                            enfermedadesHereditarias={result.enfermedades_hereditarias}
+                            imc={(result.peso / (result.estatura * result.estatura)).toFixed(2)}
+                        />
+                    })
+                }  
                     
                 </div>
             )
@@ -79,8 +156,12 @@ const Results = () => {
 
         {showTopUnits && (
                 <div className="results-display">
-                    <h2>Results 4</h2>
-                    </div>
+                {
+                    queryResult.map((result) => {
+                        return <HealthCenter nombre={result.nombre_unidad_salud} tipo={result.tipo} direccion={result.direccion} cantidad={result.cantidad_atendidos}/>
+                    })
+                }
+                </div>
             )
         }
 

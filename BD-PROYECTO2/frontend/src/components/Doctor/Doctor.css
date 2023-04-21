@@ -1,0 +1,27 @@
+.doctor-info-title{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(241, 241, 233);
+    width: 300px;
+    height: 100px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+
+}
+
+.doctor-info-container{
+
+    display: flex;
+    justify-content: space-evenly;
+    width: 400px;
+    height: 200px;
+}
+
+img.doctor-icon {
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,13 @@
+.healthcenter-info {
+  display: flex;
+  justify-content: space-evenly;
+  width: 400px;
+  height: 200px;
+  background-color: azure;
+  margin-bottom: 12px;
+}
+
+.healthcenter-info-title{
+    display: flex ;
+    
+}
