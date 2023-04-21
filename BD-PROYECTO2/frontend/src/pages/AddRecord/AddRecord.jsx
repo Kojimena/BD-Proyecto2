@@ -142,6 +142,9 @@ const AddRecord = () => {
       setMessage(response_result.message)
       setWarning(true)
     }
+    else {
+      alert('Se ha añadido el registro correctamente')
+    }
   }
 
   // set value for default selection

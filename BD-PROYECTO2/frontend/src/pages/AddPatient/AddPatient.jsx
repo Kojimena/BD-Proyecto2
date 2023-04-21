@@ -48,6 +48,8 @@ const AddPatient = () => {
             'Content-Type': 'application/json'
           }
         })
+
+        alert('Paciente agregado exitosamente')
     }
 
     return (

@@ -109,7 +109,7 @@ const AddProduct = () => {
               }
         })
 
-        console.log('Producto registrado')
+        alert('Producto registrado')
         console.log(await response.json())
 
       }

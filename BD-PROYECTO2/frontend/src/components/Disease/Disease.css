@@ -3,7 +3,7 @@
     background-color: rgba(0, 0, 255, 0.33);
     box-shadow: darkgray 0px 0px 10px;
     border-radius: 10px;
-    width: 300px;
+    width: 500px;
     height: 160px;
     align-content: center;
     justify-content: center;
@@ -15,7 +15,7 @@
     font-size: 20px;
     font-weight: bold;
     background-color: rgb(241, 241, 233);
-    width: 250px;
+    width: 450px;
     height: 100px;
     border-radius: 10px;
     display: flex;
@@ -27,7 +27,7 @@
 .disease-info-container {
     display: flex;
     justify-content: space-evenly;
-    width: 400px;
+    width: 600px;
     height: 200px;
 }
 

@@ -1,10 +1,12 @@
 import React from "react"
 import "./Results.css"
 import { useState, useEffect } from "react"
+import store from '@store/index.js'
 import Disease from "../../components/Disease/Disease"
 import Doctor from "../../components/Doctor/Doctor"
 import Patient from "../../components/Patient/Patient"
 import HealthCenter from "../../components/HealthCenter/HealthCenter"
+import Popup from '../../components/Popup/Popup'
 import { API_URL } from "../../api"
 
 //Necesitamos el top 10 enfermedades (nombre) más mortales (verificar status del paciente como fallecido)
@@ -13,6 +15,7 @@ import { API_URL } from "../../api"
 //Necesitamos las 3 unidades de salud (nombre, cantidad de pacientes) que máspacientes atienden
 const Results = () => {
 
+    const [ loggedUser, setLoggedUser ] = useState(store.get().user)
     const [ showTopAssistance, setShowTopAssistance ] = useState(false)
     const [showTopIllness, setShowTopIllness] = useState(false);
     const [showTopDoctors, setShowTopDoctors] = useState(false);
@@ -20,6 +23,8 @@ const Results = () => {
     const [showTopUnits, setShowTopUnits] = useState(false);
     const [ queryResult, setQueryResult ] = useState(null);
     const [ opcionesUS, setOpcionesUS ] = useState(null)
+    const [ warning, setWarning ] = useState(false)
+    const [ permission, setPermission ] = useState(false)
 
     let i = 0;
 
@@ -101,6 +106,9 @@ const Results = () => {
     }
 
     useEffect(() => {
+        if (loggedUser.role === 'admin'){
+            setPermission(true)
+        }
         getHealthAreas()
     },[])
 
@@ -108,6 +116,8 @@ const Results = () => {
 
     return (
     <div className="results-container">
+    {permission == false && <Popup message='No cuenta con suficientes permisos para ver reportes' setWarning = {setWarning} closable = {false}/>}
+    {permission == true && warning == false &&
         <div className="results-header-buttons">
             <button className="button-results" onClick={() => handleShowTopIllness() }>Enfermedades más mortales</button>
             <button className="button-results" onClick={() => handleShowTopDoctors() }>Médicos con más pacientes</button>
@@ -118,7 +128,7 @@ const Results = () => {
                 setShowTopIllness(() => false)
                 }}>Pacientes con más asistencias</button>
             <button className="button-results" onClick={() => handleShowTopUnits()}>Unidades de salud con más pacientes</button>
-        </div>
+        </div>}
 
         {showTopIllness && (
                 <div className="results-display">

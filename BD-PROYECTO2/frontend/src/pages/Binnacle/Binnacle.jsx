@@ -12,13 +12,17 @@ const Binnacle = () => {
 
     const [ loggedUser, setLoggedUser ] = useState(store.get().user)
     const [ binnacle , setBinnacle ] = useState([])
+    const [ warning, setWarning ] = useState(false)
+    const [ permission, setPermission ] = useState(false)
 
     //verificar si el usuario es medico
     useEffect(() => {
+      if (loggedUser.role === 'admin'){
+        setPermission(true)
+      }
+      getBinnacle()
 
-        getBinnacle()
-
-      }, [])
+    }, [])
 
     //Obtener la bitacora 
     const getBinnacle = async () => {
@@ -34,24 +38,26 @@ const Binnacle = () => {
     }
 
     return (
-    
-    <div className="table-container">
-        <div className="table-header">
-            <div className="table-header-item">Fecha</div>
-            <div className="table-header-item">Usuario</div>
-            <div className="table-header-item">Registro</div>
-            <div className="table-header-item">Acción</div>
-        </div>
-        <div className="table-body">
-        {binnacle.map((i) => {
-            return <BinnacleItem key={i.fecha} date={i.fecha} user={i.usuario} table={i.tabla} action={i.accion}/>
-            
-          })}
-        
-        </div>
-            
+    <div className='binnacle-container'>
+      {permission == false && <Popup message='No cuenta con suficientes permisos para ver la bitácora' setWarning = {setWarning} closable = {false}/>}
+      {permission == true && warning == false && 
+      <div className="table-container">
 
-    </div>)
+          <div className="table-header">
+              <div className="table-header-item">Fecha</div>
+              <div className="table-header-item">Usuario</div>
+              <div className="table-header-item">Registro</div>
+              <div className="table-header-item">Acción</div>
+          </div>
+          <div className="table-body">
+          {binnacle.map((i) => {
+              return <BinnacleItem key={i.fecha} date={i.fecha} user={i.usuario} table={i.tabla} action={i.accion}/>
+              
+            })}
+          
+          </div>
+        </div>     }
+      </div>)
 }
 
 export default Binnacle
