@@ -87,14 +87,14 @@ function Navigation(){
               </li>
               <li className="nav-item"> Bodega
                 <ul className="display">
-                  <li> <Link to="/about" className="nav-link">Search inventory</Link> </li>
+                  <li> <Link to="/about" className="nav-link">Buscar inventario</Link> </li>
                   <li><Link to="/add" className="nav-link">Añadir producto</Link></li>
                 </ul>
               </li>
               <li className="nav-item"> Expedientes
                 <ul className="display">
-                  <li><Link to="/users" className="nav-link">Search record</Link> </li>
-                  <li><Link to="/addrecord" className="nav-link">Add record</Link></li>
+                  <li><Link to="/users" className="nav-link">Buscar expediente</Link> </li>
+                  <li><Link to="/addrecord" className="nav-link">Añadir expediente</Link></li>
                 </ul>
               </li>
               <li className="nav-item"> Pacientes

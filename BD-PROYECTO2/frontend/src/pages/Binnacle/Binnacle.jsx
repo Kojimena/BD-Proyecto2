@@ -36,10 +36,10 @@ const Binnacle = () => {
     
     <div className="table-container">
         <div className="table-header">
-            <div className="table-header-item">Date</div>
-            <div className="table-header-item">User</div>
-            <div className="table-header-item">Table</div>
-            <div className="table-header-item">Action</div>
+            <div className="table-header-item">Fecha</div>
+            <div className="table-header-item">Usuario</div>
+            <div className="table-header-item">Registro</div>
+            <div className="table-header-item">Acción</div>
         </div>
         <div className="table-body">
         {binnacle.map((i) => {
