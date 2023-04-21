@@ -74,7 +74,7 @@ const AddUser = () => {
         {permission == false && <Popup message='No cuenta con suficientes permisos para crear cuentas' setWarning = {setWarning} closable = {false}/>}
         {warning == true && <Popup message='Error al crear usuario' setWarning = {setWarning} closable = {true}/>}
         {permission == true && warning == false && <div className="addUser-container">
-          <h1 className="addUser-title">Añadir cuenta</h1>
+          <h1 className="addUser-title">Añadir médico</h1>
           <form className="form-addUser">
             <label className="label-addUser">DPI</label>
             <input 
@@ -84,21 +84,21 @@ const AddUser = () => {
                 pattern="[0-9]{13}"
                 className="input-addUser"
                 onChange={e => setDpiInput(e.target.value)} />
-            <label className="label-addUser">Full Name</label>
+            <label className="label-addUser">Nombre completo</label>
             <input 
                 type="text"
                 id="name"
                 required
                 className="input-addUser"
                 onChange={e => setFullNameInput(e.target.value)} />
-            <label className="label-addUser">Address</label>
+            <label className="label-addUser">Dirección</label>
             <input 
                 type="text"
                 id="address"
                 required
                 className="input-addUser"
                 onChange={e => setAddressInput(e.target.value)} />
-            <label className="label-addUser">Phone</label>
+            <label className="label-addUser">Teléfono</label>
             <input 
                 type="tel"
                 id="phone"
@@ -106,21 +106,21 @@ const AddUser = () => {
                 pattern="[0-9]{8}"
                 className="input-addUser"
                 onChange={e => setPhoneInput(e.target.value)} />
-            <label className="label-addUser">Collegiate ID</label>
+            <label className="label-addUser">Número de colegiado</label>
             <input 
                 type="text"
                 id="collegiateid"
                 required
                 className="input-addUser"
                 onChange={e => setCollegiateIdInput(e.target.value)} />
-            <label className="label-addUser">Specialty</label>
+            <label className="label-addUser">Especialidad</label>
             <input 
                 type="text"
                 id="specialty"
                 required
                 className="input-addUser"
                 onChange={e => setSpecialtyInput(e.target.value)} />
-            <label className="label-addUser">Health area</label>
+            <label className="label-addUser">Área de salud</label>
             <select 
                 id="area"
                 placeholder="Selecciona un área de salud"
@@ -134,7 +134,7 @@ const AddUser = () => {
                   } )
                 }
             </select>
-            <label className="label-addUser">Password</label>
+            <label className="label-addUser">Contraseña</label>
             <input 
                 type="password"
                 id="password"
