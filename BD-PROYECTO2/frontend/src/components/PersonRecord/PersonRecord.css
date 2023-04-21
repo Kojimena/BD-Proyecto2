@@ -93,3 +93,28 @@
     padding-left: 10px;
     margin-bottom: 0;
 }
+
+.person-record-dropdown-container{
+    width: 500px;
+    text-align: left;
+    margin-bottom: 10px;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.person-record-buttons-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#person-record-update{
+    background-color: #03055e;
+}
+
+#person-record-checkout{
+    background-color: #21af6a;
+}
+

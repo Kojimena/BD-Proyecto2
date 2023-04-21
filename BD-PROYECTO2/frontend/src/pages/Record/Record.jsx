@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import './Record.css'
+import store from '@store/index.js'
 import PersonRecord from '../../components/PersonRecord/PersonRecord'
 import arrow from '../../assets/arrow_right.svg'
+import Popup from '../../components/Popup/Popup'
 
 //Teniendo el dpi en el input necesitamos un get para obtener una lista json de objetos de registros de ese paciente. 
 
 const Record = () => {
 
+  //Estados globales
+  const [ loggedUser, setLoggedUser ] = useState(store.get().user)
+
   const [ dpiInput, setDpiInput ] = useState('')
   const [ patient, setPatient ] = useState(null)
   const [ records, setRecords ] = useState(null)
   const [ selectedRecord, setSelectedRecord ] = useState(null)
+  const [ warningPermissions, setWarningPermissions ] = useState(false)
+  const [ permission, setPermission ] = useState(false)
 
   const getRecords = async () => {
 
@@ -23,9 +30,22 @@ const Record = () => {
     setPatient(paciente.found? paciente.patient : null)
   }
 
-  return (
-    <div className="record-search">
+  useEffect(() => {
+    getRecords()
+  }, [selectedRecord])
 
+  useEffect(() => {
+    if (loggedUser.role === 'medico'){
+      setPermission(true)
+    } else {
+      setWarningPermissions(true)
+    }
+  },[])
+
+  return (
+    <div className='record-search-main-container'>
+    {warningPermissions && <Popup message={'No cuenta con suficientes permisos para visualizar los registros médicos'} setWarning={setWarningPermissions} closable={false}/>}
+    {permission == true && <div className="record-search">
       {selectedRecord === null && <div className="search-container">
         <p className="label-search-record">Buscar expedientes</p>
         <input
@@ -58,6 +78,7 @@ const Record = () => {
         <div className='record-info-container'>
           <PersonRecord record = {selectedRecord} setSelectedRecord={setSelectedRecord}/>
         </div>}
+    </div>}
     </div>
   )
 }

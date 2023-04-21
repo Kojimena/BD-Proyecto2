@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Select from 'react-select'
+import Popup from "../Popup/Popup"
 import "./PersonRecord.css"
 import arrow from '../../assets/arrow_right.svg'
 
@@ -8,10 +9,19 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
 
     const [ expediente, estExpediente ] = useState(record)
     const [ doctor, setDoctor ] = useState(null)
+    const [ diseaseInput, setDiseaseInput ] = useState(record.enfermedad)
+    const [ surgeriesInput, setSurgeriesInput ] = useState(record.cirugias)
+    const [ examsInput, setExamsInput ] = useState(record.examenes)
+    const [ diagnosesInput, setDiagnosesInput ] = useState(record.diagnosticos)
+    const [ statusInput, setStatusInput ] = useState(record.status)
+    const [ evolutionInput, setEvolutionInput ] = useState(record.evolucion)
     const [ medicines, setMedicines ] = useState(null)
     const [ healthUnit, setHealthUnit ] = useState(null)
     const [ addMedicines, setAddMedicines ] = useState(null)
     const [ checked, setChecked ] = useState(false)
+    const [ warningSuccess, setwarningSuccess ] = useState(false)
+    const [ warningcheckOut, setwarningCheckOut ] = useState(false)
+    const [ warningDied, setWarningDied ] = useState(false)
 
     //dropdown
     // set value for default selection
@@ -22,7 +32,146 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
     setSelectedMedicine(Array.isArray(e) ? e.map(x => x.value) : []);
   }
 
+  //dropdown style
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: 'white',
+      borderColor: state.isFocused ? 'blue' : 'gray',
+      boxShadow: state.isFocused ? '0 0 0 1px lightblue' : 'none',
+      '&:hover': {
+        borderColor: state.isFocused ? 'blue' : 'gray',
+      },
+    }),
+    option: (base, state) => ({
+      ...base,
+      backgroundColor: state.isSelected ? 'lightblue' : state.isFocused ? 'lightgray' : 'white',
+      color: 'black',
+      width: '420px'
+    }),
+    // Add more customizations here for other parts of the Select component
+  };
+
     console.log(expediente)
+
+    const checkOut = async () => {
+
+        let currentDate = new Date().toJSON().slice(0, 10)
+
+        const checkOutBody = {
+            no_expediente: expediente.no_expediente,
+            paciente_dpi: expediente.paciente_dpi,
+            medico_encargado: expediente.medico_encargado,
+            examenes: null,
+            diagnosticos: null,
+            fecha_atencion: null,
+            fecha_salida: currentDate,
+            cirugias: null,
+            status: 'Dado de alta',
+            unidad_salud_id: expediente.unidad_salud_id,
+            enfermedad: null,
+            evolucion: null,
+            dpi_auth: loggedUser.dpi,
+            medicamentos: null
+        }
+
+        console.log('body a enviar: ', checkOutBody)
+
+        const checkOutResponse = await fetch('http://3.101.148.58/record', {
+        method: 'PUT',
+        body: JSON.stringify(checkOutBody),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+        })
+
+        
+
+        const respuestaCheckOut = await checkOutResponse.json()
+        console.log(respuestaCheckOut)
+        if (respuestaCheckOut.updated){
+            setwarningSuccess(() => true)
+        }
+
+    }
+
+    const died = async () => {
+
+        let currentDate = new Date().toJSON().slice(0, 10)
+
+        const checkOutBody = {
+            no_expediente: expediente.no_expediente,
+            paciente_dpi: expediente.paciente_dpi,
+            medico_encargado: expediente.medico_encargado,
+            examenes: null,
+            diagnosticos: null,
+            fecha_atencion: null,
+            fecha_salida: currentDate,
+            cirugias: null,
+            status: 'Fallecido',
+            unidad_salud_id: expediente.unidad_salud_id,
+            enfermedad: null,
+            evolucion: null,
+            dpi_auth: loggedUser.dpi,
+            medicamentos: null
+        }
+
+        console.log('body a enviar: ', checkOutBody)
+
+        const checkOutResponse = await fetch('http://3.101.148.58/record', {
+        method: 'PUT',
+        body: JSON.stringify(checkOutBody),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+        })
+
+        
+
+        const respuestaCheckOut = await checkOutResponse.json()
+        console.log(respuestaCheckOut)
+        if (respuestaCheckOut.updated){
+            setwarningSuccess(() => true)
+        }
+
+    }
+
+    const postChanges = async () => {
+
+        const changesBody = {
+            no_expediente: expediente.no_expediente,
+            paciente_dpi: expediente.paciente_dpi,
+            medico_encargado: expediente.medico_encargado,
+            examenes: examsInput,
+            "diagnosticos": diagnosesInput,
+            "fecha_atencion": expediente.fecha_atencion,
+            "fecha_salida": null,
+            "cirugias": surgeriesInput,
+            "status": statusInput,
+            "unidad_salud_id": expediente.unidad_salud_id,
+            "enfermedad": diseaseInput,
+            "evolucion": evolutionInput,
+            "dpi_auth": loggedUser.dpi,
+            "medicamentos": selectedMedicine
+        }
+
+        console.log('body a enviar: ', changesBody)
+
+        const changesResponse = await fetch('http://3.101.148.58/record', {
+        method: 'PUT',
+        body: JSON.stringify(changesBody),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+        })
+
+        const respuestaCambios = await changesResponse.json()
+        console.log(respuestaCambios)
+        if (respuestaCambios.updated){
+            setwarningSuccess(() => true)
+        }
+
+    }
 
     const getInfo = async () => {
         
@@ -69,7 +218,14 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
 
         const optionsMedicines = await response.json()
         console.log(optionsMedicines)
-        setAddMedicines(optionsMedicines)
+
+        const newData = optionsMedicines.map((item) => ({
+            value: item.id,
+            label: `${item.detalle}, expira en: ${item.expiracion}`
+          }));
+
+
+        setAddMedicines(() => newData)
         console.log('add Medicines:', addMedicines)
 
     }
@@ -84,6 +240,9 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
     return (
 
         <div className="person-record-container">
+            {warningSuccess && <Popup message={'El expediente fue actualizado exitosamente'} setWarning={setwarningSuccess} closable={true}/>}
+            {warningcheckOut && <Popup message={'El paciente fue dado de alta'} setWarning={setwarningCheckOut} closable={true}/>}
+            {warningDied && <Popup message={'Se registró la defunción del paciente'} setWarning={setWarningDied} closable={true}/>}
             <div className="person-go-back-container" onClick={() => setSelectedRecord(null)}>
             <img className= "person-record-back" src = {arrow}></img>
             <p>Regresar</p>
@@ -104,7 +263,8 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
                 <input
                 type="text"
                 className="person-input"
-                value = {expediente.enfermedad}
+                value = {diseaseInput}
+                onChange={e => setDiseaseInput(e.target.value)}
                 />
             </div>
             <div className="person-record-section">
@@ -112,7 +272,8 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
                 <input
                 type="text"
                 className="person-input"
-                value = {expediente.examenes}
+                value = {examsInput}
+                onChange={e => setExamsInput(e.target.value)}
                 />
             </div>
             <div className="person-record-section">
@@ -120,14 +281,16 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
                 <input
                 type="text"
                 className="person-input"
-                value = {expediente.cirugias}
+                value = {surgeriesInput}
+                onChange={e => setSurgeriesInput(e.target.value)}
                 /> 
             </div> 
             <div className="person-record-section">
                 <label className="label-person">Diagnósticos</label>
                 <textarea
                 className="person-record-area"
-                value = {expediente.diagnosticos}
+                value = {diagnosesInput}
+                onChange={e => setDiagnosesInput(e.target.value)}
                 /> 
             </div> 
             <div className="person-record-section">
@@ -143,33 +306,44 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
                     setChecked(!checked)}}/>
                 <p id='checkbox-text'>Deseo administrar nuevos medicamentos</p>
             </div>
-            {checked == true && <div className='dropdown-container'>
-              <label className="label-product">Medicine</label>
+            <div className="person-record-section">
+            {checked == true && <div className='person-record-dropdown-container'>
               <Select
-                className="dropdown"
+                className="record-person-dropdown"
                 placeholder="Elija los medicamentos a administrar"
                 value={addMedicines?.filter(obj => selectedMedicine.includes(obj.value))} // set selected values
                 options={addMedicines} // set list of the data
                 onChange={handleChange} // assign onChange function
                 isMulti
+                menuPosition="fixed"
+                styles={customStyles}
+                defaultMenuIsOpen
                 isClearable
               />
             </div>}
+            </div>
             <div className="person-record-section">
                 <label className="label-person">Status</label>
                 <input
                 type="text"
                 className="person-input"
-                value = {expediente.status}
+                value = {statusInput}
+                onChange={e => setStatusInput(e.target.value)}
                 /> 
             </div>
             <div className="person-record-section">
                 <label className="label-person">Evolución</label>
                 <textarea
                 className="person-record-area"
-                value = {expediente.evolucion}
+                value = {evolutionInput}
+                onChange={e => setEvolutionInput(e.target.value)}
                 /> 
-            </div> 
+            </div>
+            <div className="person-record-buttons-container">
+                <button id = "person-record-update" onClick={() => postChanges()}>Guardar cambios</button>
+                <button id = "person-record-checkout" onClick={() => checkOut()}>Dar de alta</button>
+                <button id = "person-record-died" onClick={() => died()}>El paciente falleció</button>
+            </div>
 
         </div>
     )

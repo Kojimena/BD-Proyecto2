@@ -69,7 +69,7 @@ const AddUser = () => {
     }
     
     return(
-        <div>
+        <div className='addUser-main-container'>
         {permission == false && <Popup message='No cuenta con suficientes permisos para crear cuentas' setWarning = {setWarning} closable = {false}/>}
         {warning == true && <Popup message='Error al crear usuario' setWarning = {setWarning} closable = {true}/>}
         {permission == true && warning == false && <div className="addUser-container">
