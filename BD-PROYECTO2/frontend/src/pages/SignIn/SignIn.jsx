@@ -69,7 +69,7 @@ const SignIn = ( ) => {
 
   return(
   <div className="signin-container">
-    <h1 className="signin-title">Sign in</h1>
+    <h1 className="signin-title">Registrarse como médico</h1>
     <form className="form-login">
       <label className="label-login">DPI</label>
       <input 
@@ -79,21 +79,21 @@ const SignIn = ( ) => {
           pattern="[0-9]{13}"
           className="input-login"
           onChange={e => setDpiInput(e.target.value)} />
-      <label className="label-login">Full Name</label>
+      <label className="label-login">Nombre completo</label>
       <input 
           type="text"
           id="name"
           required
           className="input-login"
           onChange={e => setFullNameInput(e.target.value)} />
-      <label className="label-login">Address</label>
+      <label className="label-login">Dirección</label>
       <input 
           type="text"
           id="address"
           required
           className="input-login"
           onChange={e => setAddressInput(e.target.value)} />
-      <label className="label-login">Phone</label>
+      <label className="label-login">Teléfono</label>
       <input 
           type="tel"
           id="phone"
@@ -101,21 +101,21 @@ const SignIn = ( ) => {
           pattern="[0-9]{8}"
           className="input-login"
           onChange={e => setPhoneInput(e.target.value)} />
-      <label className="label-login">Collegiate ID</label>
+      <label className="label-login">Número de colegiado</label>
       <input 
           type="text"
           id="collegiateid"
           required
           className="input-login"
           onChange={e => setCollegiateIdInput(e.target.value)} />
-      <label className="label-login">Specialty</label>
+      <label className="label-login">Especialidad</label>
       <input 
           type="text"
           id="specialty"
           required
           className="input-login"
           onChange={e => setSpecialtyInput(e.target.value)} />
-      <label className="label-login">Health area</label>
+      <label className="label-login">Unidad de salud</label>
       <select 
           id="area"
           placeholder="Selecciona un área de salud"
@@ -129,7 +129,7 @@ const SignIn = ( ) => {
             } )
           }
       </select>
-      <label className="label-login">Password</label>
+      <label className="label-login">Contraseña</label>
       <input 
           type="password"
           id="password"
@@ -142,7 +142,7 @@ const SignIn = ( ) => {
             e.preventDefault()
             postUser()
           }
-        }>Create account</button>
+        }>Registrarse</button>
       </div>
     </form> 
   </div>
