@@ -33,7 +33,7 @@ const UserLogin = () => {
       dpi: dpiInput,
       password: passInput
     }
-    const response = await fetch(API_URL + '/user/login', {
+    const response = await fetch(API_URL + '/user/login/', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {

@@ -78,7 +78,7 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
 
         console.log('body a enviar: ', checkOutBody)
 
-        const checkOutResponse = await fetch(API_URL + '/record', {
+        const checkOutResponse = await fetch(API_URL + '/record/', {
         method: 'PUT',
         body: JSON.stringify(checkOutBody),
         headers: {
@@ -119,7 +119,7 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
 
         console.log('body a enviar: ', checkOutBody)
 
-        const checkOutResponse = await fetch(API_URL + '/record', {
+        const checkOutResponse = await fetch(API_URL + '/record/', {
         method: 'PUT',
         body: JSON.stringify(checkOutBody),
         headers: {
@@ -158,7 +158,7 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
 
         console.log('body a enviar: ', changesBody)
 
-        const changesResponse = await fetch(API_URL + '/record', {
+        const changesResponse = await fetch(API_URL + '/record/', {
         method: 'PUT',
         body: JSON.stringify(changesBody),
         headers: {
@@ -209,7 +209,7 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
             unidad_salud : unidadSalud.healthcenter.nombre
           }
 
-        const response = await fetch(API_URL + '/inventory/medicines', {
+        const response = await fetch(API_URL + '/inventory/medicines/', {
             method: 'POST',
             body: JSON.stringify(medicinesBody),
             headers: {

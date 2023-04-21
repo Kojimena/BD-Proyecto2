@@ -25,7 +25,7 @@ const AddProduct = () => {
     const [ loggedUser, setLoggedUser ] = useState(store.get().user)
 
     const getHealthAreas = async () => {
-      const response = await fetch(API_URL + '/healthcenter')
+      const response = await fetch(API_URL + '/healthcenter/')
       const options = await response.json()
       console.log(options)
       setOpcionesUS(() => options)
@@ -77,7 +77,7 @@ const AddProduct = () => {
         }
 
         console.log('body a enviar: ', postBody)
-        const response = await fetch(API_URL + '/inventory/add', {
+        const response = await fetch(API_URL + '/inventory/add/', {
               method: 'POST',
               body: JSON.stringify(postBody),
               headers: {
@@ -101,7 +101,7 @@ const AddProduct = () => {
         }
 
         console.log('body a enviar: ', postBody)
-        const response = await fetch(API_URL + '/inventory/add', {
+        const response = await fetch(API_URL + '/inventory/add/', {
               method: 'POST',
               body: JSON.stringify(postBody),
               headers: {

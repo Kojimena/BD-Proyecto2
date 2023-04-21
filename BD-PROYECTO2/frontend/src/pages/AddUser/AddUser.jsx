@@ -23,7 +23,7 @@ const AddUser = () => {
   
   
     const getHealthAreas = async () => {
-      const response = await fetch(API_URL + '/healthcenter')
+      const response = await fetch(API_URL + '/healthcenter/')
       const options = await response.json()
       console.log(options[0])
       setOpciones(() => options)
@@ -50,7 +50,7 @@ const AddUser = () => {
         }
         console.log("HOLAAA")
         console.log(body)
-        const response = await fetch(API_URL + '/user/signup', {
+        const response = await fetch(API_URL + '/user/signup/', {
           method: 'POST',
           body: JSON.stringify(body),
           headers: {

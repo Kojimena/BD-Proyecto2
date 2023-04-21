@@ -24,7 +24,7 @@ const Results = () => {
     let i = 0;
 
     const getHealthAreas = async () => {
-        const response = await fetch(API_URL + '/healthcenter')
+        const response = await fetch(API_URL + '/healthcenter/')
         const options = await response.json()
         console.log(options)
         setOpcionesUS(() => options)

@@ -22,7 +22,7 @@ const Inventory = () => {
   const [ hasProducts, setHasProducts ] = useState(false)
 
   const getHealthAreas = async () => {
-    const response = await fetch(API_URL + '/healthcenter')
+    const response = await fetch(API_URL + '/healthcenter/')
     const options = await response.json()
     console.log(options[0])
     setOpciones(() => options)

@@ -57,7 +57,7 @@ const AddRecord = () => {
         const body = {
           dpi : loggedUser.dpi
         }
-      const response = await fetch(API_URL + '/account', {
+      const response = await fetch(API_URL + '/account/', {
           method: 'POST',
           body: JSON.stringify(body),
           headers: {
@@ -87,7 +87,7 @@ const AddRecord = () => {
         const body = {
             unidad_salud : healthAreaName
           }
-        const response = await fetch(API_URL + '/inventory/medicines', {
+        const response = await fetch(API_URL + '/inventory/medicines/', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
@@ -128,7 +128,7 @@ const AddRecord = () => {
       medicamentos: selectedValue
     }
 
-    const response = await fetch(API_URL + '/record', {
+    const response = await fetch(API_URL + '/record/', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {

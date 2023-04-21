@@ -22,7 +22,7 @@ const Binnacle = () => {
 
     //Obtener la bitacora 
     const getBinnacle = async () => {
-      const response = await fetch(API_URL + '/binnacle', {
+      const response = await fetch(API_URL + '/binnacle/', {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json'

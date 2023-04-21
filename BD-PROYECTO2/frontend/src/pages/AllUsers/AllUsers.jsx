@@ -47,7 +47,7 @@ const AllUsers = () => {
         const body = {
             dpi: dpi_history
         }
-        const response = await fetch(API_URL + '/account/workHistory', {
+        const response = await fetch(API_URL + '/account/workHistory/', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {

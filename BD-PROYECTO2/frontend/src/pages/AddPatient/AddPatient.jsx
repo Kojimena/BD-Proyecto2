@@ -41,7 +41,7 @@ const AddPatient = () => {
 
         console.log('body a mandar: ', body)
     
-        const response = await fetch(API_URL + '/patients', {
+        const response = await fetch(API_URL + '/patients/', {
           method: 'POST',
           body: JSON.stringify(body),
           headers: {

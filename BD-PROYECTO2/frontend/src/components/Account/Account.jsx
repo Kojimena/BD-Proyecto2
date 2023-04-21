@@ -102,7 +102,7 @@ const Account = ( {user, history, myaccount} ) => {
 
             console.log('Body a mandar en el PUT: ', bodyWork)
     
-            const responseWork = await fetch(API_URL + '/account/workHistory', {
+            const responseWork = await fetch(API_URL + '/account/workHistory/', {
                 method: 'PUT',
                 body: JSON.stringify(bodyWork),
                 headers: {
@@ -117,7 +117,7 @@ const Account = ( {user, history, myaccount} ) => {
             const bodyHistory = {
                 dpi: dpi
             }
-            const response = await fetch(API_URL + '/account/workHistory', {
+            const response = await fetch(API_URL + '/account/workHistory/', {
                 method: 'POST',
                 body: JSON.stringify(bodyHistory),
                 headers: {

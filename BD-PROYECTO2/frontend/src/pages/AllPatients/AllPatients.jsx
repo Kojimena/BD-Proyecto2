@@ -62,7 +62,7 @@ const AllPatients = () => {
 
         debugger
 
-        const changesResponse = await fetch(API_URL + '/patients', {
+        const changesResponse = await fetch(API_URL + '/patients/', {
         method: 'PUT',
         body: JSON.stringify(bodyChanges),
         headers: {
