@@ -119,13 +119,13 @@ const Inventory = () => {
               e.preventDefault()
               getProductsByDate()
             } }
-          >Buscar por fecha de caducidad</button>
+          >Por vencer</button>
           <button className="button-search"
           onClick={(e) => {
             e.preventDefault()
             getProductsByAmount()
           } }
-          >Buscar por cantidad</button>
+          >Por cantidad baja</button>
         </div><div className="inventory-display">
           {
           warning == true && <Popup message="No hay productos en esta unidad de salud" setWarning = {setWarning} closable = {true}/> 
@@ -134,7 +134,7 @@ const Inventory = () => {
            warning == false && productos != null && <div> 
           {
           productos.map((product) => {
-            return <Product key={product.id} name={product.detalle} amount={product.cantidad_en_bodega} date={product.fecha_expiracion} />
+            return <Product key={product.id} name={product.detalle} amount={product.cantidad_en_bodega} date={product.fecha_expiracion == null ? "" : product.fecha_expiracion } />
           })
           }
         </div>

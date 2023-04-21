@@ -562,6 +562,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@storeon/localstorage@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@storeon/localstorage/-/localstorage-1.5.0.tgz#63ec7c22ea127654db6d4d86d46d679026aa8039"
+  integrity sha512-FVosJE+DKjd4aYL407i4ZvBmYQ+43Uqud+RLjGlxMYjY3Lpe6MZZljc/1kSn4FFcjbthV/zDmAEjTGRFiThntw==
+
 "@types/json5@^0.0.29":
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"

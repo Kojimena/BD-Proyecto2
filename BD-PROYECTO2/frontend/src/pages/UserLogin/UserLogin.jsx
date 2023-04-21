@@ -6,16 +6,18 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link 
+  Link,
+  useHistory,
   } from "react-router-dom";
 
 import logo from '../../assets/logo.svg'
 
-const UserLogin = ({setLogin}) => {
+const UserLogin = () => {
+
+  const history = useHistory()
 
   const [ dpiInput, setDpiInput ] = useState('')
   const [ passInput, setPassInput ] = useState('')
-  const [ logged, setLogged ] = useState(false)
 
   const { dispatch } = useStoreon('user')
 
@@ -41,7 +43,7 @@ const UserLogin = ({setLogin}) => {
       console.log(datos.user.dpi)
       //Estado global
       dispatch('user/login', {dpi: datos.user.dpi, role: datos.user.rol})
-      setLogin("Navigation")
+      history.push('/')
     }
     else {
       console.log('Credenciales incorrectas')

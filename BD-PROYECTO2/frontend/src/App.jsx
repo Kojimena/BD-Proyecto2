@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from "react"
 import './App.css';
-import { StoreContext } from "storeon/react";
+import { StoreContext, useStoreon  } from "storeon/react";
 import store from '@store'
 import { 
   Redirect,
@@ -23,111 +23,60 @@ import MyAccount from "./pages/MyAccount/MyAccount";
 import AddPatient from "./pages/AddPatient/AddPatient";
 import AllPatients from "./pages/AllPatients/AllPatients";
 import AddUser from "./pages/AddUser/AddUser";
+import LogOut from "./pages/LogOut/LogOut"
+
 
 function App() {
-
-    const [login, setLogin] = useState('Login')
-    const [currentPath, setCurrentPath] = useState("/login");
-    const history = useHistory();
-
-    useEffect(() => {
-      const redirectPath = () => {
-        switch (login) {
-          case "Login":
-            return "/login";
-          case "SignIn":
-            return "/signin";
-          case "Navigation":
-            return "/navigation";
-
-          default:
-            return "/";
-        }
-      };
-      console.log(login)
-      history.push(redirectPath());
-    }, [login]);
-    
 
     return(
           <StoreContext.Provider value={store}>
             <Switch>
               <Route exact path="/login">
-                <UserLogin setLogin={setLogin}/>
+                <UserLogin />
               </Route>
-              <Route exact path="/navigation">
-                 <Navigation login={login} />
+              <Route exact path="/">
+                 <Navigation />
               </Route>
               <Route exact path ="/signin">
-                <SignIn  setLogin={setLogin}/>
-              </Route>
-              <Route path="/">
-                <Redirect to={currentPath} />
+                <SignIn />
               </Route>
             </Switch>
           </StoreContext.Provider>
     )
 }
 
-function SignIn( {setLogin}) {
-  console.log("Hola")
-  setLogin('SignIn')
+function SignIn() {
   return (
-      <UserSignIn setLogin={setLogin} />
-
+      <UserSignIn />
   )
 }
 
-function Login({setLogin}){
-    <Navigation />
+function Login(){
     return (
-      <UserLogin setLogin={setLogin}/>
+      <UserLogin/>
     )
             
 }
 
 
-function Home() {
-  return  <MyAccount />
-}
 
-function About() {
-  return <Inventory />
-}
+function Navigation(){
 
-function Users() {
-  return <Record />
-}
-
-function Add() {
-  return <AddProduct />
-}
-
-function Addrecord(){
-  return  <AddRecord />
-}
-
-function Addpatient(){
-  return  <AddPatient />
-}
-
-function Binnacle(){
-  return <BinnacleRegister />
-}
-
-function Results(){
-  return <ResultsQuerys />
-}
-
-function AllUsers(){
-  return <ListUsers />
-}
+  const history = useHistory()
 
 
-function Navigation({login}){
+  const {user} = useStoreon('user')
+
+  if (user.dpi == ''){
+    console.log ('No hay usuario')
+    history.push('/login')
+    return null 
+  }
+    console.log('Hay usuario')
+  
   return (
       <Router>
-      {login == 'Navigation' && <nav>
+        <nav>
             <ul className="nav-menu">
               <li className="nav-item"> Usuarios
                 <ul className="display">
@@ -161,35 +110,35 @@ function Navigation({login}){
                 <Link to="/results" className="nav-link">Results</Link>
               </li>
               <li className="nav-item">
-                <Link to="/login" className="nav-link">Log out</Link>
+                <Link to="/logout" className="nav-link">Log out</Link>
               </li>
             </ul>
-          </nav>}
+          </nav>
           <div className="container-navigation">
             <Switch>
               <Route path="/about">
                 <Inventory />
               </Route>
               <Route path="/users">
-                <Users />
+                <Record />
               </Route>
               <Route path="/allusers">
                 <ListUsers />
               </Route>
               <Route path="/add">
-                <Add />
+                <AddProduct />
               </Route>
               <Route path="/addrecord">
-                <Addrecord />
+                <AddRecord />
               </Route>
               <Route path="/binnacle">
-                <Binnacle />
+                <BinnacleRegister />
               </Route>
               <Route path="/results">
-                <Results />
+                <ResultsQuerys />
               </Route>
               <Route path="/addpatient">
-                <Addpatient />
+                <AddPatient />
               </Route>
               <Route path="/patients">
                 <AllPatients />
@@ -200,13 +149,18 @@ function Navigation({login}){
               <Route path="/adduser">
                 <AddUser />
               </Route>
+              <Route path="/logout">
+                <LogOut />
+              </Route>
               <Route path="/">
-                <Home />
+                <MyAccount />
               </Route>
             </Switch>
           </div>
         </Router>
+  
   )
+  
 }
 
 export default App
