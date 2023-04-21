@@ -4,6 +4,7 @@ import BinnacleItem from "../../components/BinnacleItem/BinnacleItem"
 import store from '@store/index.js'
 import Select from 'react-select'
 import Popup from '../../components/Popup/Popup'
+import { API_URL } from '../../api'
 
 //Necesitamos un get de todos los datos de la tabla de bitacora en formato json
 
@@ -21,7 +22,7 @@ const Binnacle = () => {
 
     //Obtener la bitacora 
     const getBinnacle = async () => {
-      const response = await fetch('http://3.101.148.58/binnacle', {
+      const response = await fetch(API_URL + '/binnacle', {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json'

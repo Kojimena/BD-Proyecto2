@@ -5,6 +5,7 @@ import Disease from "../../components/Disease/Disease"
 import Doctor from "../../components/Doctor/Doctor"
 import Patient from "../../components/Patient/Patient"
 import HealthCenter from "../../components/HealthCenter/HealthCenter"
+import { API_URL } from "../../api"
 
 //Necesitamos el top 10 enfermedades (nombre) más mortales (verificar status del paciente como fallecido)
 //Necesitamos el top 10 medicos (dpi, nombre, No. Pacientes) con más pacientes
@@ -23,7 +24,7 @@ const Results = () => {
     let i = 0;
 
     const getHealthAreas = async () => {
-        const response = await fetch('http://3.101.148.58/healthcenter')
+        const response = await fetch(API_URL + '/healthcenter')
         const options = await response.json()
         console.log(options)
         setOpcionesUS(() => options)
@@ -38,7 +39,7 @@ const Results = () => {
 
         console.log('body a mandar: ', )
 
-        const huIdResponse = await fetch('http://3.101.148.58/healthcenter/getByName/', {
+        const huIdResponse = await fetch(API_URL + '/healthcenter/getByName/', {
             method: 'POST',
             body: JSON.stringify(healthUnitBody),
             headers: {
@@ -49,7 +50,7 @@ const Results = () => {
         console.log(respuestaIdUS, 'datos')
         console.log(respuestaIdUS.healthcenter.id, 'ID')
 
-        const resultsHUResponse = await fetch(`http://3.101.148.58/results/most_records/${respuestaIdUS.healthcenter.id}`)
+        const resultsHUResponse = await fetch(API_URL + `/results/most_records/${respuestaIdUS.healthcenter.id}`)
         const resultadosUS = await resultsHUResponse.json()
         console.log(resultadosUS, 'datos2')
         setQueryResult(resultadosUS.result)
@@ -66,7 +67,7 @@ const Results = () => {
         setShowTopDoctors(() => false)
         setShowTopUnits(() => false)
 
-        const response = await fetch('http://3.101.148.58/results/deadliest')
+        const response = await fetch(API_URL + '/results/deadliest')
         const datos = await response.json()
         setQueryResult(datos.result)
         console.log(datos, 'datos')
@@ -81,7 +82,7 @@ const Results = () => {
         setHealthAreaSelect(() => null)
         setShowTopUnits(() => false)
 
-        const response = await fetch('http://3.101.148.58/results/most_patients')
+        const response = await fetch(API_URL + '/results/most_patients')
         const datos = await response.json()
         setQueryResult(datos.result)
     }
@@ -94,7 +95,7 @@ const Results = () => {
         setHealthAreaSelect(() => null)
         setShowTopDoctors(() => false)
 
-        const response = await fetch('http://3.101.148.58/results/most_patients/healthcenters')
+        const response = await fetch(API_URL + '/results/most_patients/healthcenters')
         const datos = await response.json()
         setQueryResult(datos.result)
     }

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './AddPatient.css'
 import store from '@store/index.js'
 import Popup from '../../components/Popup/Popup'
+import { API_URL } from '../../api'
 
 const AddPatient = () => {
 
@@ -32,7 +33,7 @@ const AddPatient = () => {
           estatura: estatura,
           peso: peso,
           telefono: telefono,
-          addiciones: addicciones,
+          adicciones: addicciones,
           direccion: direccion,
           enfermedades_hereditarias: enfermedadesHereditarias,
           dpi_auth: loggedUser.dpi,
@@ -40,7 +41,7 @@ const AddPatient = () => {
 
         console.log('body a mandar: ', body)
     
-        const response = await fetch('http://3.101.148.58/patients', {
+        const response = await fetch(API_URL + '/patients', {
           method: 'POST',
           body: JSON.stringify(body),
           headers: {

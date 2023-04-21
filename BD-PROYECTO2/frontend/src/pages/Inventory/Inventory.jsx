@@ -3,6 +3,7 @@ import "./Inventory.css"
 import store from '@store/index.js'
 import Product from "../../components/Product/Product"
 import Popup from '../../components/Popup/Popup'
+import { API_URL } from '../../api'
 
 // Teniendo el area de salud, necesitamos una lista con objetos producto {nombre del producto, cantidad, fecha de vencimiento}
 //Al darle click a search by due date, se ordena la lista por fecha de vencimiento
@@ -21,7 +22,7 @@ const Inventory = () => {
   const [ hasProducts, setHasProducts ] = useState(false)
 
   const getHealthAreas = async () => {
-    const response = await fetch('http://3.101.148.58/healthcenter')
+    const response = await fetch(API_URL + '/healthcenter')
     const options = await response.json()
     console.log(options[0])
     setOpciones(() => options)
@@ -32,7 +33,7 @@ const Inventory = () => {
     const body = {
       nombre : healthArea
     }
-    const response = await fetch('http://3.101.148.58/healthcenter/getByName/', {
+    const response = await fetch(API_URL + '/healthcenter/getByName/', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
@@ -47,7 +48,7 @@ const Inventory = () => {
 
   const getProductsByAmount = async () => {
     console.log(healthArea)
-    const response = await fetch(`http://3.101.148.58/inventory/lowStock/${healthAreaId}`)
+    const response = await fetch(API_URL + `/inventory/lowStock/${healthAreaId}`)
     const products = await response.json()
 
     console.log("DATAAAA");
@@ -60,7 +61,7 @@ const Inventory = () => {
 
   const getProductsByDate = async () => {
     console.log(healthArea)
-    const response = await fetch(`http://3.101.148.58/inventory/toExpire/${healthAreaId}`)
+    const response = await fetch(API_URL + `/inventory/toExpire/${healthAreaId}`)
     const products = await response.json()
 
     console.log("DATAAAA");

@@ -3,6 +3,7 @@ import Select from 'react-select'
 import Popup from "../Popup/Popup"
 import "./PersonRecord.css"
 import arrow from '../../assets/arrow_right.svg'
+import { API_URL } from "../../api"
 
 
 const PersonRecord = ( {record, setSelectedRecord} ) => {
@@ -77,7 +78,7 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
 
         console.log('body a enviar: ', checkOutBody)
 
-        const checkOutResponse = await fetch('http://3.101.148.58/record', {
+        const checkOutResponse = await fetch(API_URL + '/record', {
         method: 'PUT',
         body: JSON.stringify(checkOutBody),
         headers: {
@@ -118,7 +119,7 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
 
         console.log('body a enviar: ', checkOutBody)
 
-        const checkOutResponse = await fetch('http://3.101.148.58/record', {
+        const checkOutResponse = await fetch(API_URL + '/record', {
         method: 'PUT',
         body: JSON.stringify(checkOutBody),
         headers: {
@@ -157,7 +158,7 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
 
         console.log('body a enviar: ', changesBody)
 
-        const changesResponse = await fetch('http://3.101.148.58/record', {
+        const changesResponse = await fetch(API_URL + '/record', {
         method: 'PUT',
         body: JSON.stringify(changesBody),
         headers: {
@@ -181,7 +182,7 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
 
         console.log('body a enviar: ', doctorBody)
 
-        const doctorResponse = await fetch('http://3.101.148.58/account/', {
+        const doctorResponse = await fetch(API_URL + '/account/', {
             method: 'POST',
             body: JSON.stringify(doctorBody),
             headers: {
@@ -194,12 +195,12 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
 
         setDoctor(datosMedico.account.nombre)
 
-        const medicinesResponese = await fetch(`http://3.101.148.58/record/medicine/${expediente.no_expediente}`)
+        const medicinesResponese = await fetch(API_URL + `/record/medicine/${expediente.no_expediente}`)
         const medicamentos = await medicinesResponese.json()
         console.log(medicamentos)
         setMedicines(medicamentos.medicines)
 
-        const healthCenterResponse = await fetch(`http://3.101.148.58/healthcenter/${expediente.unidad_salud_id}`)
+        const healthCenterResponse = await fetch(API_URL + `/healthcenter/${expediente.unidad_salud_id}`)
         const unidadSalud = await healthCenterResponse.json()
         console.log(unidadSalud)
         setHealthUnit(unidadSalud.healthcenter)
@@ -208,7 +209,7 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
             unidad_salud : unidadSalud.healthcenter.nombre
           }
 
-        const response = await fetch('http://3.101.148.58/inventory/medicines', {
+        const response = await fetch(API_URL + '/inventory/medicines', {
             method: 'POST',
             body: JSON.stringify(medicinesBody),
             headers: {

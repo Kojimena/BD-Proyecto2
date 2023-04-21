@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
 import "./SignIn.css"
+import { API_URL } from "../../api"
 
 
 //Para Sign In teniendo {Dpi, nombre, direccion, telefono, numero de colegiado, especialidad, area de salud (ejemlo hospital el pilar), contraseña}
@@ -21,7 +22,7 @@ const SignIn = ( ) => {
 
 
   const getHealthAreas = async () => {
-    const response = await fetch('http://3.101.148.58/healthcenter')
+    const response = await fetch(API_URL + '/healthcenter')
     const options = await response.json()
     console.log(options[0])
     setOpciones(() => options)
@@ -45,7 +46,7 @@ const SignIn = ( ) => {
     }
     console.log("HOLAAA")
     console.log(body)
-    const response = await fetch('http://3.101.148.58/user/signup', {
+    const response = await fetch(API_URL + '/user/signup', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {

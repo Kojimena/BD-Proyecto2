@@ -3,6 +3,7 @@ import './Account.css'
 import store from '@store/index.js'
 import doctor_standing from '../../assets/doctor_standing.svg'
 import doctor_standing2 from '../../assets/doctor_standing2.svg'
+import { API_URL } from '../../api'
 
 //Para Account teniendo {DPI (parametro del objeto usuario)} necesitamos {Dpi, nombre, direccion, telefono, numero de colegiado, especialidad, area de salud (ejemlo hospital el pilar), work history}
 //Si se modifica {direccion, telefono} necesitamos hacer un update del usuario y recibir un response si se modifico el usuario o no 
@@ -72,7 +73,7 @@ const Account = ( {user, history, myaccount} ) => {
 
         console.log('bodyInfo: ', bodyInfo)
 
-        const responseInfo = await fetch('http://3.101.148.58/account/', {
+        const responseInfo = await fetch(API_URL + '/account/', {
             method: 'PUT',
             body: JSON.stringify(bodyInfo),
             headers: {
@@ -101,7 +102,7 @@ const Account = ( {user, history, myaccount} ) => {
 
             console.log('Body a mandar en el PUT: ', bodyWork)
     
-            const responseWork = await fetch('http://3.101.148.58/account/workHistory', {
+            const responseWork = await fetch(API_URL + '/account/workHistory', {
                 method: 'PUT',
                 body: JSON.stringify(bodyWork),
                 headers: {
@@ -116,7 +117,7 @@ const Account = ( {user, history, myaccount} ) => {
             const bodyHistory = {
                 dpi: dpi
             }
-            const response = await fetch('http://3.101.148.58/account/workHistory', {
+            const response = await fetch(API_URL + '/account/workHistory', {
                 method: 'POST',
                 body: JSON.stringify(bodyHistory),
                 headers: {

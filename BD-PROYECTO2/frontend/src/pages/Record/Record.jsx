@@ -4,6 +4,7 @@ import store from '@store/index.js'
 import PersonRecord from '../../components/PersonRecord/PersonRecord'
 import arrow from '../../assets/arrow_right.svg'
 import Popup from '../../components/Popup/Popup'
+import { API_URL } from '../../api'
 
 //Teniendo el dpi en el input necesitamos un get para obtener una lista json de objetos de registros de ese paciente. 
 
@@ -21,8 +22,8 @@ const Record = () => {
 
   const getRecords = async () => {
 
-    const patientResponse = await fetch(`http://3.101.148.58/patients/${dpiInput}`)
-    const recordsResponse = await fetch(`http://3.101.148.58/record/${dpiInput}`)
+    const patientResponse = await fetch(API_URL + `/patients/${dpiInput}`)
+    const recordsResponse = await fetch(API_URL + `/record/${dpiInput}`)
     const paciente = await patientResponse.json()
     const expedientes = await recordsResponse.json()
 

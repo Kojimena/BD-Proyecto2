@@ -3,6 +3,7 @@ import './AddRecord.css'
 import store from '@store/index.js'
 import Select from 'react-select'
 import Popup from '../../components/Popup/Popup'
+import { API_URL } from '../../api'
 
 const AddRecord = () => {
   
@@ -56,7 +57,7 @@ const AddRecord = () => {
         const body = {
           dpi : loggedUser.dpi
         }
-      const response = await fetch('http://3.101.148.58/account', {
+      const response = await fetch(API_URL + '/account', {
           method: 'POST',
           body: JSON.stringify(body),
           headers: {
@@ -70,7 +71,7 @@ const AddRecord = () => {
 
     //Obtener el nombre del area de salud
     const getHealthAreaName = async () => {
-      const response = await fetch(`http://3.101.148.58/healthcenter/${healthArea}`);
+      const response = await fetch(API_URL + `/healthcenter/${healthArea}`);
       const datos = await response.json()
       console.log(datos)
       setHealthAreaName(datos.healthcenter.nombre) 
@@ -86,7 +87,7 @@ const AddRecord = () => {
         const body = {
             unidad_salud : healthAreaName
           }
-        const response = await fetch('http://3.101.148.58/inventory/medicines', {
+        const response = await fetch(API_URL + '/inventory/medicines', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
@@ -127,7 +128,7 @@ const AddRecord = () => {
       medicamentos: selectedValue
     }
 
-    const response = await fetch('http://3.101.148.58/record', {
+    const response = await fetch(API_URL + '/record', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {

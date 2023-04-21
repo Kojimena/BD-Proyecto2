@@ -4,6 +4,7 @@ import store from '@store/index.js'
 import Account from '../../components/Account/Account'
 import Popup from '../../components/Popup/Popup'
 import doctors from '../../assets/doctors.svg'
+import { API_URL } from '../../api'
 
 const AllUsers = () => {
 
@@ -21,7 +22,7 @@ const AllUsers = () => {
             dpi: dpiInput
         }
         
-        const response = await fetch('http://3.101.148.58/account/', {
+        const response = await fetch(API_URL + '/account/', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
@@ -46,7 +47,7 @@ const AllUsers = () => {
         const body = {
             dpi: dpi_history
         }
-        const response = await fetch('http://3.101.148.58/account/workHistory', {
+        const response = await fetch(API_URL + '/account/workHistory', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {

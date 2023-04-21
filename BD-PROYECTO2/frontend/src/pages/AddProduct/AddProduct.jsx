@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import store from '@store/index.js'
 import './AddProduct.css'
 import Popup from '../../components/Popup/Popup'
+import { API_URL } from '../../api'
 
 //Teniendo {area de salud, nombre del producto, cantidad, fecha de vencimiento} necesitamos hacer un insert y  {response si se agrego el producto o no}
 
@@ -24,7 +25,7 @@ const AddProduct = () => {
     const [ loggedUser, setLoggedUser ] = useState(store.get().user)
 
     const getHealthAreas = async () => {
-      const response = await fetch('http://3.101.148.58/healthcenter')
+      const response = await fetch(API_URL + '/healthcenter')
       const options = await response.json()
       console.log(options)
       setOpcionesUS(() => options)
@@ -48,7 +49,7 @@ const AddProduct = () => {
 
       console.log('nombre a enviar: ', idBody)
 
-      const idResponse = await fetch('http://3.101.148.58/healthcenter/getByName/', {
+      const idResponse = await fetch(API_URL + '/healthcenter/getByName/', {
         method: 'POST',
         body: JSON.stringify(idBody),
         headers: {
@@ -76,7 +77,7 @@ const AddProduct = () => {
         }
 
         console.log('body a enviar: ', postBody)
-        const response = await fetch('http://3.101.148.58/inventory/add', {
+        const response = await fetch(API_URL + '/inventory/add', {
               method: 'POST',
               body: JSON.stringify(postBody),
               headers: {
@@ -100,7 +101,7 @@ const AddProduct = () => {
         }
 
         console.log('body a enviar: ', postBody)
-        const response = await fetch('http://3.101.148.58/inventory/add', {
+        const response = await fetch(API_URL + '/inventory/add', {
               method: 'POST',
               body: JSON.stringify(postBody),
               headers: {
@@ -124,7 +125,7 @@ const AddProduct = () => {
 
       console.log('body a enviar: ', e.target.value)
 
-      const responseHU = await fetch(`http://3.101.148.58/healthcenter/getByName/`, {
+      const responseHU = await fetch(API_URL + `/healthcenter/getByName/`, {
             method: 'POST',
             body: JSON.stringify(getHUBody),
             headers: {
@@ -136,7 +137,7 @@ const AddProduct = () => {
       const id = unidadSaludId.healthcenter.id
       
 
-      const responseMedicinesHU = await fetch(`http://3.101.148.58/inventory/medicines/${id}`, {
+      const responseMedicinesHU = await fetch(API_URL + `/inventory/medicines/${id}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'

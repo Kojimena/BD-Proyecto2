@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import store from '@store/index.js'
 import './AllPatients.css'
 import Popup from '../../components/Popup/Popup'
+import { API_URL } from '../../api'
 
 const AllPatients = () => {
 
@@ -29,7 +30,7 @@ const AllPatients = () => {
     },[])
 
     const getInfoPatient = async () => {
-        const getPatient = await fetch(`http://3.101.148.58/patients/${dpiInput}`)
+        const getPatient = await fetch(API_URL + `/patients/${dpiInput}`)
         const patientResponse = await getPatient.json()
         console.log(patientResponse)
 
@@ -61,7 +62,7 @@ const AllPatients = () => {
 
         debugger
 
-        const changesResponse = await fetch('http://3.101.148.58/patients', {
+        const changesResponse = await fetch(API_URL + '/patients', {
         method: 'PUT',
         body: JSON.stringify(bodyChanges),
         headers: {

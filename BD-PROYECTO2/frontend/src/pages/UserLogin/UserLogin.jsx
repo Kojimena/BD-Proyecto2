@@ -12,6 +12,7 @@ import {
   } from "react-router-dom";
 
 import logo from '../../assets/logo.svg'
+import { API_URL } from "../../api";
 
 const UserLogin = () => {
 
@@ -27,11 +28,12 @@ const UserLogin = () => {
   const logIn = async () => {
     console.log('dpi: ', dpiInput)
     console.log('pass: ', passInput)
+    console.log('API URL: ' + API_URL)
     const body = {
       dpi: dpiInput,
       password: passInput
     }
-    const response = await fetch('http://3.101.148.58/user/login', {
+    const response = await fetch(API_URL + '/user/login', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
