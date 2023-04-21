@@ -209,7 +209,7 @@ const PersonRecord = ( {record, setSelectedRecord} ) => {
             unidad_salud : unidadSalud.healthcenter.nombre
           }
 
-        const response = await fetch(API_URL + '/inventory/medicines/', {
+        const response = await fetch(API_URL + '/inventory/medicines', {
             method: 'POST',
             body: JSON.stringify(medicinesBody),
             headers: {
