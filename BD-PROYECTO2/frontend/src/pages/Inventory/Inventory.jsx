@@ -20,6 +20,8 @@ const Inventory = () => {
   const [ productos, setProductos ] = useState([])
   const [ warning, setWarning ] = useState(false)
   const [ hasProducts, setHasProducts ] = useState(false)
+  const [ lowStock, setLowStock ] = useState(false)
+  const [ toExpire, setToExpire ] = useState(false)
 
   const getHealthAreas = async () => {
     const response = await fetch(API_URL + '/healthcenter/')
@@ -47,26 +49,30 @@ const Inventory = () => {
   }
 
   const getProductsByAmount = async () => {
+    setToExpire(() => false)
+    setLowStock(() => true)
     console.log(healthArea)
     const response = await fetch(API_URL + `/inventory/lowStock/${healthAreaId}`)
     const products = await response.json()
 
     console.log("DATAAAA");
     console.log(products);
-    if (products == null){
+    if (products.products_low_stock.length == 0){
       setWarning(true)
     }
     setProductos(() => products.products_low_stock)
   }
 
   const getProductsByDate = async () => {
+    setToExpire(() => true)
+    setLowStock(() => false)
     console.log(healthArea)
     const response = await fetch(API_URL + `/inventory/toExpire/${healthAreaId}`)
     const products = await response.json()
 
     console.log("DATAAAA");
     console.log(products);
-    if (products == null){
+    if (products.products_to_expire.length == 0){
       setWarning(true)
     }
     setProductos(() => products.products_to_expire)
@@ -132,7 +138,9 @@ const Inventory = () => {
           warning == true && <Popup message="No hay productos en esta unidad de salud" setWarning = {setWarning} closable = {true}/> 
           }
           {
-           warning == false && productos != null && <div> 
+           warning == false && productos != null && <div>
+            {lowStock && <p className='inventory-display-title'>Productos con existencias menores al 15% requerido</p>}
+            {toExpire && <p className='inventory-display-title'>Productos a vencer en 30 días o menos</p>}
           {
           productos.map((product) => {
             return <Product key={product.id} name={product.detalle} amount={product.cantidad_en_bodega} date={product.fecha_expiracion == null ? "" : product.fecha_expiracion } />

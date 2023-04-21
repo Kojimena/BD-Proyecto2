@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import store from '@store/index.js'
 import Select from 'react-select'
 import Popup from "../Popup/Popup"
 import "./PersonRecord.css"
@@ -8,7 +9,9 @@ import { API_URL } from "../../api"
 
 const PersonRecord = ( {record, setSelectedRecord} ) => {
 
-    const [ expediente, estExpediente ] = useState(record)
+    const [ loggedUser, setLoggedUser ] = useState(store.get().user)
+
+    const [ expediente, setExpediente ] = useState(record)
     const [ doctor, setDoctor ] = useState(null)
     const [ diseaseInput, setDiseaseInput ] = useState(record.enfermedad)
     const [ surgeriesInput, setSurgeriesInput ] = useState(record.cirugias)
